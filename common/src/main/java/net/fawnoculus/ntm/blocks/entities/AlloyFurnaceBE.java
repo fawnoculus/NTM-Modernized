@@ -2,17 +2,19 @@ package net.fawnoculus.ntm.blocks.entities;
 
 import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.custom.AlloyFurnaceBlock;
-import net.fawnoculus.ntm.gui.NtmMenuType;
+import net.fawnoculus.ntm.gui.NtmMenuProvider;
+import net.fawnoculus.ntm.gui.menus.AlloyFurnaceMenu;
 import net.fawnoculus.ntm.recipe.NtmRecipes;
 import net.fawnoculus.ntm.recipe.custom.AlloyFurnaceRecipe;
 import net.fawnoculus.ntm.recipe.custom.AlloyFurnaceRecipeInput;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -29,7 +31,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
-public class AlloyFurnaceBE extends AbstractInventoryBE implements MenuProvider {
+public class AlloyFurnaceBE extends AbstractInventoryBE implements NtmMenuProvider<BlockPos> {
     public static final int OUTPUT_SLOT_INDEX = 0;
     public static final int FUEL_SLOT_INDEX = 1;
     public static final int INPUT_TOP_SLOT_INDEX = 2;
@@ -180,6 +182,16 @@ public class AlloyFurnaceBE extends AbstractInventoryBE implements MenuProvider 
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
-        return NtmMenuType.ALLOY_FURNACE.get().create(containerId, playerInventory);
+        return new AlloyFurnaceMenu(containerId, playerInventory, this);
+    }
+
+    @Override
+    public StreamCodec<? super FriendlyByteBuf, BlockPos> getCodec() {
+        return BlockPos.STREAM_CODEC;
+    }
+
+    @Override
+    public BlockPos getData() {
+        return this.getBlockPos();
     }
 }

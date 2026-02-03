@@ -3,7 +3,7 @@ package net.fawnoculus.ntm.gui.menus;
 import net.fawnoculus.ntm.blocks.entities.container.energy.SimpleEnergyStorageBE;
 import net.fawnoculus.ntm.gui.NtmMenuType;
 import net.fawnoculus.ntm.gui.slots.BatterySlot;
-import net.fawnoculus.ntm.network.s2c.BlockPosPayload;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,8 +19,8 @@ public class EnergyStorageMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess screenContext;
 
     // Client Constructor
-    public EnergyStorageMenu(int containerId, Inventory playerInventory, @NotNull BlockPosPayload payload) {
-        this(containerId, playerInventory, (SimpleEnergyStorageBE) playerInventory.player.level().getBlockEntity(payload.pos()));
+    public EnergyStorageMenu(int containerId, Inventory playerInventory, BlockPos pos) {
+        this(containerId, playerInventory, (SimpleEnergyStorageBE) playerInventory.player.level().getBlockEntity(pos));
     }
 
     // Common Constructor

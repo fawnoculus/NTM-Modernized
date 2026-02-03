@@ -1,6 +1,7 @@
 {
   	"pack": {
-    	"pack_format": 64,
-    	"description": "Original NTM Resources"
+        "description": "Original NTM Resources",
+        "max_format": [999, 0],
+        "min_format": [65, 0]
   	}
 }

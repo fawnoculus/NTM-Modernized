@@ -1,7 +1,10 @@
 package net.fawnoculus.ntm.neoforge;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.NtmPlatform;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -13,6 +16,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,16 +27,15 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.textures.FluidSpriteCache;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -52,6 +56,7 @@ public class NtmPlatformImpl {
     private static final List<RelativeHudElementInstance> AFTER_HUD_ELEMENTS = new ArrayList<>();
     private static final List<Function<Identifier, ItemModel.@Nullable Unbaked>> ITEM_MODEL_OVERRIDES = new ArrayList<>();
     private static final List<Function<BlockState, BlockStateModel.@Nullable UnbakedRoot>> BLOCK_STATE_MODEL_OVERRIDES = new ArrayList<>();
+    private static final List<ScreenFactoryInstance<?, ?>> SCREEN_FACTORIES = new ArrayList<>();
 
     @SafeVarargs
     public static <T extends BlockEntity> Supplier<BlockEntityType<T>> makeBlockEntityType(
@@ -172,24 +177,6 @@ public class NtmPlatformImpl {
 
     @OnlyIn(Dist.CLIENT)
     public static boolean registerBuiltinResourcePack(Identifier identifier, Component name, NtmPlatform.PackActivationType activationType) {
-        boolean resourcePackValid = ModList.get().getModContainerById(identifier.getPath())
-          .map(modContainer -> modContainer
-            .getModInfo()
-            .getOwningFile()
-            .getFile()
-            .getContents()
-            .containsFile(identifier
-              .withPrefix("resourcepacks/")
-              .withSuffix("/pack.mcmeta")
-              .getPath()
-              .replace('/', File.separatorChar)
-            )
-          ).orElse(false);
-
-        if (!resourcePackValid) {
-            return false;
-        }
-
         RESOURCE_PACKS.add(new ResourcePack(identifier, name, activationType));
         return true;
     }
@@ -203,7 +190,7 @@ public class NtmPlatformImpl {
 
         for (ResourcePack resourcePack : RESOURCE_PACKS) {
             addPackFindersEvent.addPackFinders(
-              resourcePack.identifier,
+              resourcePack.identifier.withPrefix("resourcepacks/"),
               PackType.CLIENT_RESOURCES,
               resourcePack.name,
               PackSource.BUILT_IN,
@@ -258,6 +245,30 @@ public class NtmPlatformImpl {
     }
 
     @OnlyIn(Dist.CLIENT)
+    public static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void registerScreenFactory(
+      RegistrySupplier<MenuType<H>> type,
+      NtmPlatform.ScreenFactory<H, S> factory
+    ) {
+        SCREEN_FACTORIES.add(new ScreenFactoryInstance<>(type, factory));
+    }
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public static void addPackFindersEvent(RegisterMenuScreensEvent menuScreensEvent) {
+        for (var screenFactory : SCREEN_FACTORIES) {
+            addScreenFactory(menuScreensEvent, screenFactory);
+        }
+    }
+
+    // Needed because Generics work Strangely
+    private static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void addScreenFactory(
+      RegisterMenuScreensEvent menuScreensEvent,
+      ScreenFactoryInstance<H, S> screenFactoryInstance
+    ) {
+        menuScreensEvent.register(screenFactoryInstance.type.get(), screenFactoryInstance.factory::create);
+    }
+
+    @OnlyIn(Dist.CLIENT)
     private record ResourcePack(Identifier identifier, Component name, NtmPlatform.PackActivationType activationType) {
     }
 
@@ -268,5 +279,12 @@ public class NtmPlatformImpl {
     @OnlyIn(Dist.CLIENT)
     private record RelativeHudElementInstance(Identifier relative, Identifier hudId,
                                               NtmPlatform.HudElement hudElement) {
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private record ScreenFactoryInstance<H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>>(
+      RegistrySupplier<MenuType<H>> type,
+      NtmPlatform.ScreenFactory<H, S> factory
+    ) {
     }
 }

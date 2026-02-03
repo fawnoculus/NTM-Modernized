@@ -1,6 +1,7 @@
 package net.fawnoculus.ntm.blocks.custom.container.energy;
 
 import com.mojang.serialization.MapCodec;
+import dev.architectury.registry.menu.MenuRegistry;
 import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.custom.HoverTooltipBlock;
 import net.fawnoculus.ntm.blocks.entities.container.energy.SimpleEnergyStorageBE;
@@ -9,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -74,11 +76,11 @@ public class SimpleEnergyStorageBlock extends BaseEntityBlock implements HoverTo
         if (!(world.getBlockEntity(pos) instanceof SimpleEnergyStorageBE energyStorageBE)) {
             return InteractionResult.FAIL;
         }
-        if (world.isClientSide()) {
+        if (!(player instanceof ServerPlayer serverPlayer) || world.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
 
-        player.openMenu(energyStorageBE);
+        MenuRegistry.openExtendedMenu(serverPlayer, energyStorageBE);
 
         return InteractionResult.SUCCESS_SERVER;
     }

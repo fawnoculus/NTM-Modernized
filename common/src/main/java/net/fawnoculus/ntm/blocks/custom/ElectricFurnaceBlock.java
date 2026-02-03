@@ -1,12 +1,14 @@
 package net.fawnoculus.ntm.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
+import dev.architectury.registry.menu.MenuRegistry;
 import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.entities.ElectricFurnaceBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -66,11 +68,11 @@ public class ElectricFurnaceBlock extends BaseEntityBlock {
         if (!(world.getBlockEntity(pos) instanceof ElectricFurnaceBE electricFurnaceBE)) {
             return InteractionResult.FAIL;
         }
-        if (world.isClientSide()) {
+        if (!(player instanceof ServerPlayer serverPlayer) || world.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
 
-        player.openMenu(electricFurnaceBE);
+        MenuRegistry.openExtendedMenu(serverPlayer, electricFurnaceBE);
 
         return InteractionResult.SUCCESS_SERVER;
     }

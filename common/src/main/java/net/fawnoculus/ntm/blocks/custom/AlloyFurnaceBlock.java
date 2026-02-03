@@ -1,12 +1,14 @@
 package net.fawnoculus.ntm.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
+import dev.architectury.registry.menu.MenuRegistry;
 import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.NtmBlockProperties;
 import net.fawnoculus.ntm.blocks.entities.AlloyFurnaceBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -63,11 +65,11 @@ public class AlloyFurnaceBlock extends BaseEntityBlock {
         if (!(world.getBlockEntity(pos) instanceof AlloyFurnaceBE alloyFurnaceBE)) {
             return InteractionResult.FAIL;
         }
-        if (world.isClientSide()) {
+        if (!(player instanceof ServerPlayer serverPlayer) || world.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
 
-        player.openMenu(alloyFurnaceBE);
+        MenuRegistry.openExtendedMenu(serverPlayer, alloyFurnaceBE);
 
         return InteractionResult.SUCCESS_SERVER;
     }

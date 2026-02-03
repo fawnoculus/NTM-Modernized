@@ -27,7 +27,6 @@ public class NtmClient {
 
         NtmClientCommands.init();
 
-        NtmResources.init();
         NtmModelOverrides.init();
 
         NtmBlockEntityRender.init();

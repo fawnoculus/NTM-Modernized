@@ -1,5 +1,6 @@
 package net.fawnoculus.ntm.fabric;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
@@ -13,6 +14,9 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fawnoculus.ntm.NtmPlatform;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -20,6 +24,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -82,18 +88,17 @@ public class NtmPlatformImpl {
 
     @Environment(EnvType.CLIENT)
     public static boolean registerBuiltinResourcePack(Identifier identifier, Component name, NtmPlatform.PackActivationType activationType) {
-        Optional<ModContainer> container = FabricLoader.getInstance().getModContainer(identifier.getPath());
-
-        return container.filter(modContainer -> ResourceLoader.registerBuiltinPack(identifier, modContainer, name, fromNtm(activationType))).isPresent();
+        Optional<ModContainer> container = FabricLoader.getInstance().getModContainer(identifier.getNamespace());
+        return container.filter(modContainer -> ResourceLoader.registerBuiltinPack(identifier, modContainer, name, transformActivationType(activationType))).isPresent();
 
     }
 
     @Environment(EnvType.CLIENT)
-    private static PackActivationType fromNtm(NtmPlatform.PackActivationType type) {
+    private static PackActivationType transformActivationType(NtmPlatform.PackActivationType type) {
         return switch (type) {
-            case ALWAYS_ON -> PackActivationType.NORMAL;
+            case ALWAYS_ON -> PackActivationType.ALWAYS_ENABLED;
             case ON_BY_DEFAULT -> PackActivationType.DEFAULT_ENABLED;
-            case OFF_BY_DEFAULT -> PackActivationType.ALWAYS_ENABLED;
+            case OFF_BY_DEFAULT -> PackActivationType.NORMAL;
         };
     }
 
@@ -119,5 +124,13 @@ public class NtmPlatformImpl {
     @Environment(EnvType.CLIENT)
     public static List<Component> getFluidTooltip(Fluid fluid) {
         return FluidVariantRendering.getTooltip(FluidVariant.of(fluid));
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void registerScreenFactory(
+      RegistrySupplier<MenuType<H>> type,
+      NtmPlatform.ScreenFactory<H, S> factory
+    ) {
+        MenuScreens.register(type.get(), factory::create);
     }
 }

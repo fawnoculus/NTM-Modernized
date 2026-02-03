@@ -6,7 +6,7 @@ import net.fawnoculus.ntm.gui.NtmMenuType;
 import net.fawnoculus.ntm.gui.slots.BatterySlot;
 import net.fawnoculus.ntm.gui.slots.OutputSlot;
 import net.fawnoculus.ntm.gui.slots.UpgradeSlot;
-import net.fawnoculus.ntm.network.s2c.BlockPosPayload;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,23 +18,23 @@ import org.jspecify.annotations.NonNull;
 public class ElectricFurnaceMenu extends AbstractContainerMenu {
     private final ElectricFurnaceBE blockEntity;
     private final ContainerLevelAccess screenContext;
-    private final ContainerData propertyDelegate;
+    private final ContainerData containerData;
 
     // Client Constructor
-    public ElectricFurnaceMenu(int containerId, Inventory playerInventory, @NotNull BlockPosPayload payload) {
-        this(containerId, playerInventory, (ElectricFurnaceBE) playerInventory.player.level().getBlockEntity(payload.pos()), new SimpleContainerData(2));
+    public ElectricFurnaceMenu(int containerId, Inventory playerInventory, BlockPos pos) {
+        this(containerId, playerInventory, (ElectricFurnaceBE) playerInventory.player.level().getBlockEntity(pos), new SimpleContainerData(2));
     }
 
     // Common Constructor
-    public ElectricFurnaceMenu(int containerId, @NotNull Inventory playerInventory, ElectricFurnaceBE blockEntity, ContainerData propertyDelegate) {
+    public ElectricFurnaceMenu(int containerId, @NotNull Inventory playerInventory, ElectricFurnaceBE blockEntity, ContainerData containerData) {
         super(NtmMenuType.ELECTRIC_FURNACE.get(), containerId);
 
         this.blockEntity = blockEntity;
         assert this.blockEntity.getLevel() != null;
         this.screenContext = ContainerLevelAccess.create(this.blockEntity.getLevel(), this.blockEntity.getBlockPos());
-        checkContainerDataCount(propertyDelegate, 2);
-        this.propertyDelegate = propertyDelegate;
-        addDataSlots(this.propertyDelegate);
+        checkContainerDataCount(containerData, 2);
+        this.containerData = containerData;
+        addDataSlots(this.containerData);
 
         SimpleContainer blockInventory = this.blockEntity.getInventory();
         blockInventory.startOpen(playerInventory.player);
@@ -92,6 +92,6 @@ public class ElectricFurnaceMenu extends AbstractContainerMenu {
     }
 
     public ContainerData getPropertyDelegate() {
-        return this.propertyDelegate;
+        return this.containerData;
     }
 }

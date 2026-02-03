@@ -5,14 +5,16 @@ import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.custom.AlloyFurnaceBlock;
 import net.fawnoculus.ntm.blocks.custom.ElectricFurnaceBlock;
 import net.fawnoculus.ntm.blocks.entities.container.energy.EnergyInventoryBE;
-import net.fawnoculus.ntm.gui.NtmMenuType;
+import net.fawnoculus.ntm.gui.NtmMenuProvider;
+import net.fawnoculus.ntm.gui.menus.ElectricFurnaceMenu;
 import net.fawnoculus.ntm.items.custom.container.energy.EnergyContainingItem;
 import net.fawnoculus.ntm.misc.stack.EnergyStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -30,20 +32,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class ElectricFurnaceBE extends EnergyInventoryBE implements MenuProvider {
+public class ElectricFurnaceBE extends EnergyInventoryBE implements NtmMenuProvider<BlockPos> {
     public static final Component NAME = Component.translatable("container.ntm.electric_furnace");
-
     public static final int OUTPUT_SLOT_INDEX = 0;
     public static final int INPUT_SLOT_INDEX = 1;
     public static final int BATTERY_SLOT_INDEX = 2;
     public static final int UPGRADE_SLOT_INDEX = 3;
     public final EnergyStack energy = new EnergyStack(this).setMaxValue(100_000).setConsumes(true).onChange(this::setChanged);
-    private final ContainerData propertyDelegate;
+    private final ContainerData containerData;
     private double progress = 0;
 
     public ElectricFurnaceBE(BlockPos pos, BlockState state) {
         super(NtmBlockEntities.ELECTRIC_FURNACE_BE.get(), pos, state, 4);
-        this.propertyDelegate = new ContainerData() {
+        this.containerData = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
@@ -190,6 +191,16 @@ public class ElectricFurnaceBE extends EnergyInventoryBE implements MenuProvider
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
-        return NtmMenuType.ELECTRIC_FURNACE.get().create(containerId, playerInventory);
+        return new ElectricFurnaceMenu(containerId, playerInventory, this, containerData);
+    }
+
+    @Override
+    public StreamCodec<? super FriendlyByteBuf, BlockPos> getCodec() {
+        return BlockPos.STREAM_CODEC;
+    }
+
+    @Override
+    public BlockPos getData() {
+        return this.getBlockPos();
     }
 }

@@ -5,17 +5,19 @@ import net.fawnoculus.ntm.api.node.NodeValueContainer;
 import net.fawnoculus.ntm.api.node.StorageMode;
 import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.entities.InteractableBE;
-import net.fawnoculus.ntm.gui.NtmMenuType;
+import net.fawnoculus.ntm.gui.NtmMenuProvider;
+import net.fawnoculus.ntm.gui.menus.EnergyStorageMenu;
 import net.fawnoculus.ntm.items.custom.container.energy.EnergyContainingItem;
 import net.fawnoculus.ntm.misc.stack.EnergyStack;
 import net.fawnoculus.ntm.util.TextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -33,7 +35,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.OptionalDouble;
 
-public class SimpleEnergyStorageBE extends EnergyInventoryBE implements MenuProvider, InteractableBE {
+public class SimpleEnergyStorageBE extends EnergyInventoryBE implements NtmMenuProvider<BlockPos>, InteractableBE {
     public static final Component NAME = Component.translatable("container.ntm.energy_storage");
 
     public static final int DISCHARGE_SLOT_INDEX = 0;
@@ -151,7 +153,7 @@ public class SimpleEnergyStorageBE extends EnergyInventoryBE implements MenuProv
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
-        return NtmMenuType.ENERGY_STORAGE.get().create(containerId, playerInventory);
+        return new EnergyStorageMenu(containerId, playerInventory, this);
     }
 
     @Override
@@ -167,5 +169,15 @@ public class SimpleEnergyStorageBE extends EnergyInventoryBE implements MenuProv
             }
             this.unpoweredMode = this.unpoweredMode.cycle();
         }
+    }
+
+    @Override
+    public StreamCodec<? super FriendlyByteBuf, BlockPos> getCodec() {
+        return BlockPos.STREAM_CODEC;
+    }
+
+    @Override
+    public BlockPos getData() {
+        return this.getBlockPos();
     }
 }

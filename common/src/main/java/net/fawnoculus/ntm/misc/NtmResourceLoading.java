@@ -1,4 +1,4 @@
-package net.fawnoculus.ntm.client.render;
+package net.fawnoculus.ntm.misc;
 
 import dev.architectury.registry.ReloadListenerRegistry;
 import net.fawnoculus.ntm.Ntm;
@@ -15,7 +15,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class NtmResources {
+public class NtmResourceLoading {
     public static void init() {
         ReloadListenerRegistry.register(PackType.CLIENT_RESOURCES, new ReloadListener(), Ntm.id("reload_listener"));
 

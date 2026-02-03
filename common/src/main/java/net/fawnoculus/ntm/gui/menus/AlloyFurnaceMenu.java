@@ -5,7 +5,7 @@ import net.fawnoculus.ntm.blocks.entities.AlloyFurnaceBE;
 import net.fawnoculus.ntm.gui.NtmMenuType;
 import net.fawnoculus.ntm.gui.slots.ItemFuelSlot;
 import net.fawnoculus.ntm.gui.slots.OutputSlot;
-import net.fawnoculus.ntm.network.s2c.BlockPosPayload;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,8 +23,8 @@ public class AlloyFurnaceMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess screenContext;
 
     // Client Constructor
-    public AlloyFurnaceMenu(int containerId, Inventory playerInventory, @NotNull BlockPosPayload payload) {
-        this(containerId, playerInventory, (AlloyFurnaceBE) playerInventory.player.level().getBlockEntity(payload.pos()));
+    public AlloyFurnaceMenu(int containerId, Inventory playerInventory, BlockPos blockPos) {
+        this(containerId, playerInventory, (AlloyFurnaceBE) playerInventory.player.level().getBlockEntity(blockPos));
     }
 
     // Common Constructor

@@ -6,6 +6,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -13,6 +15,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -88,6 +93,7 @@ public class NtmPlatform {
 
     /**
      * Register a built-in resource pack
+     * This needs to be called in the common initializer, because on neoforge builtin Resource-Packs are registered before the Client Mod initializer
      *
      * @param identifier     The path represents the mod-id and the path represents the file-path to the resource pack relative to MOD-JAR/resourcepacks
      *                       (or src/main/resources/resourcepacks in a dev environment)
@@ -123,6 +129,34 @@ public class NtmPlatform {
     @Environment(EnvType.CLIENT)
     public static List<Component> getFluidTooltip(Fluid fluid) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.getFluidTooltip(), Something has gone Terribly Wrong");
+    }
+
+    @ExpectPlatform
+    @Environment(EnvType.CLIENT)
+    public static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void registerScreenFactory(
+      RegistrySupplier<MenuType<H>> type,
+      ScreenFactory<H, S> factory
+    ) {
+        throw new AssertionError("Architectury has not remapped NtmPlatform.registerScreenFactory(), Something has gone Terribly Wrong");
+    }
+
+    /**
+     * Creates new screens.
+     *
+     * @param <H> The type of {@link AbstractContainerMenu} for the screen
+     * @param <S> The type for the {@link Screen}
+     */
+    @FunctionalInterface
+    public interface ScreenFactory<H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> {
+        /**
+         * Creates a new {@link S} that extends {@link Screen}
+         *
+         * @param containerMenu The {@link AbstractContainerMenu} that controls the game logic for the screen
+         * @param inventory     The {@link Inventory} for the screen
+         * @param component     The {@link Component} for the screen
+         * @return A new {@link S} that extends {@link Screen}
+         */
+        S create(H containerMenu, Inventory inventory, Component component);
     }
 
     public enum PackActivationType {

@@ -12,10 +12,7 @@ import net.fawnoculus.ntm.entity.NtmStatusEffects;
 import net.fawnoculus.ntm.fluid.NtmFluidData;
 import net.fawnoculus.ntm.fluid.NtmFluids;
 import net.fawnoculus.ntm.items.*;
-import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
-import net.fawnoculus.ntm.misc.NtmDeferredRegistries;
-import net.fawnoculus.ntm.misc.NtmParticles;
-import net.fawnoculus.ntm.misc.NtmSounds;
+import net.fawnoculus.ntm.misc.*;
 import net.fawnoculus.ntm.network.NtmNetworking;
 import net.fawnoculus.ntm.recipe.NtmRecipes;
 import net.fawnoculus.ntm.world.NtmWorldGeneration;
@@ -34,7 +31,7 @@ public final class Ntm {
     public static final NtmProxy PROXY = NtmProxy.getProxy();
 
     public static void init() {
-        LOGGER.debug("Initializing ...");
+        LOGGER.info("Initializing ...");
 
         NtmConfig.init();
         NtmApi.init();
@@ -67,9 +64,10 @@ public final class Ntm {
 
         NtmNetworking.init();
 
+        NtmResourceLoading.init();
         NtmDeferredRegistries.init();
 
-        LOGGER.debug("Finished Initialization");
+        LOGGER.info("Finished Initialization");
     }
 
     @Contract("_ -> new")
