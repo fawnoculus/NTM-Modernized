@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:technetium_steel_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:technetium_steel_ingot"
+  }
+}

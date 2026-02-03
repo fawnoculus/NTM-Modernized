@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": "ntm:titanium_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " M ",
+    " M ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ntm:titanium_sword"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:reactor_grade_plutonium_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:reactor_grade_plutonium_ingot"
+  }
+}

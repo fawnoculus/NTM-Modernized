@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:uranium_fuel_ingot"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:uranium_fuel_nugget"
+  }
+}

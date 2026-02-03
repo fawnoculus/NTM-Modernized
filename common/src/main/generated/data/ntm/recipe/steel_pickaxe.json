@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": "ntm:steel_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "MMM",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ntm:steel_pickaxe"
+  }
+}

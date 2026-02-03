@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "package": "net.fawnoculus.ntm.neoforge.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "minVersion": "0.8",
+    "client": [
+        "ModelBakeryMixin"
+    ],
+    "mixins": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

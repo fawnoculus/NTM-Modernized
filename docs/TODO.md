@@ -1,5 +1,5 @@
 # Misc
-- Rei Compat (would love to also doe JEI & EMI, but they are still stuck on 1.21.1)
+- Recipe Viewer Compatibility (we cant test those, because they either don't support 1.21.11 or use loom 1.14)
 
 # Features
 ## Important Features

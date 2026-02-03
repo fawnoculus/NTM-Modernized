@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 1.0,
+  "group": "lead",
+  "ingredient": "ntm:deepslate_lead_ore",
+  "result": {
+    "id": "ntm:lead_ingot"
+  }
+}

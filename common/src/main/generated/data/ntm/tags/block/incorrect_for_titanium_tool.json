@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#ntm:needs_netherrite_tool",
+    "#minecraft:needs_diamond_tool",
+    "#ntm:needs_schrabidium_tool",
+    "#ntm:needs_bismuth_tool",
+    "#ntm:needs_mese_tool"
+  ]
+}

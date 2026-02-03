@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ntm:depth_rock",
+    "ntm:depth_cinnabar_ore",
+    "ntm:depth_zirconium",
+    "ntm:depth_borax_ore",
+    "ntm:depth_iron_ore_cluster",
+    "ntm:depth_titanium_ore_cluster",
+    "ntm:depth_tungsten_ore_cluster",
+    "ntm:nether_depth_rock",
+    "ntm:nether_depth_neodymium_ore"
+  ]
+}

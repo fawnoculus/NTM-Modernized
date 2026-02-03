@@ -1,12 +1,14 @@
 # gradle
-
 .gradle/
+*/.gradle/
 build/
+*/build/
 out/
+*/out/
 classes/
+*/classes/
 
 # eclipse
-
 eclipse/
 *.pydevproject
 .metadata
@@ -21,7 +23,6 @@ local.properties
 *.launch
 
 # idea
-
 .idea/**
 !.idea/icon.svg
 *.iml
@@ -29,7 +30,6 @@ local.properties
 *.iws
 
 # vscode
-
 .settings/
 .vscode/
 bin/
@@ -37,16 +37,13 @@ bin/
 .project
 
 # macos
-
 *.DS_Store
 
-# fabric
-
-run/
-
 # java
-
-hs_err_*.log
-replay_*.log
 *.hprof
 *.jfr
+
+# generic
+run/
+*/run/
+*.log

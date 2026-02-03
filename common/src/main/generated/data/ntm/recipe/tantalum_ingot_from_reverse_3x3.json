@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:tantalum_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:tantalum_ingot"
+  }
+}

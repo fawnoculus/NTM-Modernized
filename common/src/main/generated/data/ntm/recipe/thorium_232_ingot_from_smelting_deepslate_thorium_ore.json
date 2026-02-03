@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 1.0,
+  "group": "thorium",
+  "ingredient": "ntm:deepslate_thorium_ore",
+  "result": {
+    "id": "ntm:thorium_232_ingot"
+  }
+}

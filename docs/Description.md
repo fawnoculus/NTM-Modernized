@@ -1,11 +1,11 @@
 Mod Description for Modrinth & Curseforge, just copy everything bellow & change modrinth links to Curseforge Links for Curseforge:
 (this is for future me when this mod is released on Modrinth/Curseforge)
 
-# NTM-Fabric
+# NTM-Modernized
 ## About
-NTM-Fabric (short for Nuclear Tech Mod Fabric) is a Recreation of [HBM's Nuclear Tech Mod](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT) for modern Minecraft Versions made in fabric while the original is a forge Mod for 1.7.10.
+NTM-Modernized is a Recreation of [HBM's Nuclear Tech Mod](https://modrinth.com/mod/ntm) for modern Minecraft Versions.
 
-NTM-Fabric is a Mod all about technology, atomic science and nuclear weapons. Features include, and are not limited to:
+NTM-Modernized is a Mod all about technology, atomic science and nuclear weapons. Features include, and are not limited to:
 - A large tech tree, with progression spanning over many machines and different types of reactors
 - Nuclear reactors such as the Chicago Pile, the infamous RBMK and fusion reactors (and more!)
 - Nuclear bombs, missiles and artillery
@@ -17,19 +17,21 @@ NTM-Fabric is a Mod all about technology, atomic science and nuclear weapons. Fe
 For a Better Experience I recommend Installing a Recipe Viewer like [JEI](https://modrinth.com/mod/jei), [REI](https://modrinth.com/mod/rei) or [EMI](https://modrinth.com/mod/emi).
 
 ## Disclaimer
-This mod is in no way associated [HBM's Nuclear Tech Mod](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT), it is simply a recreation of the original for new versions, nothing else!
+This Port is in no way associated [HBM's Nuclear Tech Mod](https://modrinth.com/mod/ntm), it is simply a recreation of the original for new versions, nothing else!
 Please don't bother the creators of the original Mod with issues & bugs of this one.
 
 ## Installation
-NTM-Fabric requires [Fabric-API](https://modrinth.com/mod/fabric-api) and only works on [Fabric](https://fabricmc.net/) or [Quilt](https://quiltmc.org/).
+NTM-Fabric requires [Architectury API](https://modrinth.com/mod/architectury-api)
 
-For Forge Versions you can check out these Projects:
+The Fabric version also requires [Fabric-API](https://modrinth.com/mod/fabric-api)
+
+For other Minecraft Versions check out these projects:
 
 The Original 1.7.10 Forge [HBMs Nuclear Tech Mod](https://modrinth.com/mod/ntm)
 
 For 1.12.2 Forge use one of these Mods:
 - [NTM Reloaded](https://modrinth.com/mod/hbm-reloaded)
 - [NTM Extended Edition](https://modrinth.com/mod/ntm-extended)
-- [NTM Community Edition](https://codeberg.org/MrNorwood/Hbm-s-Nuclear-Tech-CE)
+- [NTM Community Edition](https://modrinth.com/mod/ntm-ce)
 
 For 1.18 Forge try [Martin's Remake](https://codeberg.org/MartinTheDragon/Nuclear-Tech-Mod-Remake)

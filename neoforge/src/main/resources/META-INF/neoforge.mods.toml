@@ -1,0 +1,48 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://github.com/fawnoculus/NTM-Modernized/issues"
+license = "GNU GPL 3.0"
+
+[[mods]]
+modId = "ntm"
+version = "${version}"
+displayName = "NTM-Modernized"
+authors = "fawnoculus"
+credits = "Elo3000, Random_Player_MC, OrdenEnderman"
+description = '''
+A port of "HBM's Nuclear Tech Mod" for modern versions of Minecraft
+'''
+logoFile = "assets/ntm/icon.png"
+logoBlur = false
+displayURL = "https://github.com/fawnoculus/NTM-Modernized"
+
+[[dependencies.ntm]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoforge_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ntm]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version}]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ntm]]
+modId = "architectury"
+type = "required"
+versionRange = "[${architectury_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+
+[[mixins]]
+config = "ntm.mixins.json"
+
+[[mixins]]
+config = "ntm.client.mixins.json"
+
+[[mixins]]
+config = "ntm.mixins.neoforge.json"

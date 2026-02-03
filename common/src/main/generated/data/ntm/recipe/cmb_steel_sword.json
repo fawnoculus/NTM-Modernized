@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": "ntm:cmb_steel_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " M ",
+    " M ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ntm:cmb_steel_sword"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:cobalt_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:cobalt_ingot"
+  }
+}

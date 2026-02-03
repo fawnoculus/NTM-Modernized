@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:advanced_alloy_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:advanced_alloy_ingot"
+  }
+}

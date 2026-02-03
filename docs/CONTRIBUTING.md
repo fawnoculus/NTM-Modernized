@@ -1,6 +1,6 @@
 ## Translations
-If you wish to help translate parts of this mod, please keep in mind that most translations should probably just be copied from the original with small changes,
-so you may instead want to make translations for the original first & then copy them here.
+If you wish to help translate parts of this mod, please keep in mind that most translations should probably just be copied from the original with small changes.
+If you want to add translations may instead want to make them for the original first & then copy them here.
 
 Please also keep in mind that all translations that have been changed should be made available in their original form in the built-in legacy resource pack.
 
@@ -9,7 +9,7 @@ Since the [NTM Wiki](https://nucleartech.wiki/) is only made for the original ve
 see [Changes from Original](./Changes.md).
 
 If you want to make documentation for features from the original mod I would recommend contributing to the [NTM Wiki](https://nucleartech.wiki/) instead of doing work here,
-if instead you wish to document code of this mod for future contributors of addon developers, you can either just write some more MarkDown files here or add Javadocs to some classes.
+if instead you wish to document code of this mod for future contributors of addon developers, you can either just write some more Markdown files here or add Javadocs to some classes.
 
 ## Code Changes
 Some basic principles to follow for code changes
@@ -20,5 +20,4 @@ Some basic principles to follow for code changes
 
 ## Footnote
 Please don't shy away from correcting me as I am (as all humans are) a very stupid idiot that cannot see through all possible scenarios of how to develop something to achieve the best outcome.
-If you believe that you have a better way to make something work then the way it currently works, please propose that idea to me, considering that most things currently here could likely be heavily improved.
-You could also just implement the better way yourself, but that comes with the risk that your version may not get merged & nobody want's to do a bunch of work for nothing.
+If you believe that you have a better way to make something work then the way it currently works, please propose that idea, open a GitHub issue or just make a complete Pull Request.

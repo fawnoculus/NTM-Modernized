@@ -1,0 +1,22 @@
+{
+    "required": true,
+    "package": "net.fawnoculus.ntm.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "minVersion": "0.8",
+    "mixins": [
+        "ChunkAccessMixin",
+        "EntityMixin",
+        "ItemEntityMixin",
+        "LevelChunkMixin",
+        "MinecraftServerMixin",
+        "PlayerListMixin",
+        "SerializableChunkDataMixin",
+        "ServerLevelMixin",
+        "ServerPlayerGameModeMixin",
+        "accessor.DimensionDataStorageAccessor",
+        "accessor.MinecraftServerAccessor"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

@@ -1,183 +1,145 @@
 plugins {
-    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
-    id 'maven-publish'
+    id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
+    id 'architectury-plugin' version "${architectury_plugin_version}"
+    id 'com.github.johnrengelman.shadow' version "${shadow_gradle_version}" apply false
 }
 
-version = mod_version
-group = maven_group
-
-base {
-  archivesName = archives_base_name
+architectury {
+    minecraft = minecraft_version
 }
 
-// Splitting Client & main Sources
-loom {
-    splitEnvironmentSourceSets()
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-    mods {
-        "ntm" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
+    archivesBaseName = archives_name
+    version = mod_version
+    group = maven_group
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'maven-publish'
+
+    base {
+        // Set up a suffixed format for the mod jar names, e.g. `example-1.21.11-fabric`.
+        archivesName = "${archives_name}-${minecraft_version}-${project.name}"
     }
-}
 
-fabricApi {
-    configureDataGeneration {
-        client = true
-    }
-    /* I'll use this once it would actually be usefully (maybe)
-    configureTests {
-      createSourceSet = true
-      modId = name
-      eula = true
-    }
-     */
-}
-
-repositories {
-    // REI
-    exclusiveContent {
-        forRepository {
-            repositories.maven {
-                name = "Shedaniel's Maven"
-                url = "https://maven.shedaniel.me/"
+    repositories {
+        // Parchment
+        exclusiveContent {
+            forRepository {
+                repositories.maven {
+                    name = 'ParchmentMC'
+                    url = 'https://maven.parchmentmc.org'
+                }
+            } filter {
+                includeGroup "org.parchmentmc.data"
             }
-        } filter {
-            includeGroup "me.shedaniel"
-            includeGroup "me.shedaniel.cloth"
-            includeGroup "dev.architectury"
         }
-    }
-    // JEI
-    exclusiveContent {
-        forRepository {
-            // JEI
-            repositories.maven {
-                name = "Jared's maven"
-                url = "https://maven.blamejared.com/"
+
+        // REI
+        exclusiveContent {
+            forRepository {
+                repositories.maven {
+                    name = "Shedaniel's Maven"
+                    url = "https://maven.shedaniel.me/"
+                }
+            } filter {
+                includeGroup "me.shedaniel"
+                includeGroup "me.shedaniel.cloth"
             }
-        } filter {
-            includeGroup "mezz.jei"
         }
-    }
-    // EMI & Modmenu
-    exclusiveContent {
-        forRepository {
-            repositories.maven {
-                name = "Terraformers"
-                url = "https://maven.terraformersmc.com/"
+
+        // JEI
+        exclusiveContent {
+            forRepository {
+                // JEI
+                repositories.maven {
+                    name = "Jared's maven"
+                    url = "https://maven.blamejared.com/"
+                }
+            } filter {
+                includeGroup "mezz.jei"
             }
-        } filter {
-            includeGroup "dev.emi"
-            includeGroup "com.terraformersmc"
         }
-    }
-    // Jade & Sodium
-    exclusiveContent {
-        forRepository {
-            repositories.maven {
-                name = "Modrinth Maven"
-                url = "https://api.modrinth.com/maven"
+
+        // EMI & Modmenu
+        exclusiveContent {
+            forRepository {
+                repositories.maven {
+                    name = "Terraformers"
+                    url = "https://maven.terraformersmc.com/"
+                }
+            } filter {
+                includeGroup "dev.emi"
+                includeGroup "com.terraformersmc"
             }
-        } filter {
-            includeGroup "maven.modrinth"
+        }
+
+        // Jade & Sodium
+        exclusiveContent {
+            forRepository {
+                repositories.maven {
+                    name = "Modrinth Maven"
+                    url = "https://api.modrinth.com/maven"
+                }
+            } filter {
+                includeGroup "maven.modrinth"
+            }
+        }
+    }
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${minecraft_version}"
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
+        }
+    }
+
+    java {
+        // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+        // if it is present.
+        // If you remove this line, sources will not be generated.
+        withSourcesJar()
+
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    jar {
+        from rootProject.file("LICENSE.txt")
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = "UTF-8"
+        it.options.release = 21
+    }
+
+    // Configure Maven publishing.
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = base.archivesName.get()
+                from components.java
+            }
+        }
+
+        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+        repositories {
+            // Add repositories to publish to here.
+            // Notice: This block does NOT have the same function as the block in the top level.
+            // The repositories here will be used for publishing your artifact, not for
+            // retrieving dependencies.
         }
     }
 }
 
-dependencies {
-  // The important Stuff
-  minecraft "com.mojang:minecraft:${minecraft_version}"
-  mappings loom.officialMojangMappings()
-  modImplementation "net.fabricmc:fabric-loader:${loader_version}"
-  modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
-  testImplementation "net.fabricmc:fabric-loader-junit:${loader_version}"
-
-  // Libraries required by REI
-  // modApi "dev.architectury:architectury-fabric:${architectury_version}"
-  // modApi "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
-
-  // Compatibility Tests & better Dev Environment
-  modLocalRuntime "com.terraformersmc:modmenu:${modmenu_version}"           // ModMenu
-  modLocalRuntime "maven.modrinth:jade:${jade_version}"                     // Jade
-  modLocalRuntime "maven.modrinth:sodium:${sodium_version}"                 // Sodium
-  modLocalRuntime "mezz.jei:jei-${jei_mc_version}-fabric:${jei_version}"    // JEI
-  //modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"   // REI (there is no version for 1.21.11 yet)
-  //modLocalRuntime "dev.emi:emi-fabric:${emi_version}+${emi_mc_version}"     // EMI (there is no version for 1.21.11 yet)
-
-  // Compile Time Stuff
-  modCompileOnly "com.terraformersmc:modmenu:${modmenu_version}"                        // ModMenu
-  modCompileOnly "maven.modrinth:jade:${jade_version}"                                  // Jade
-  modCompileOnly "mezz.jei:jei-${jei_mc_version}-fabric-api:${jei_version}"             // JEI
-  modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"            // REI
-  modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}" // REI default Plugins
-  modCompileOnly "dev.emi:emi-fabric:${emi_version}+${emi_mc_version}:api"              // EMI
-}
-
-processResources {
-  inputs.property "mod_version", mod_version
-  inputs.property "minecraft_version", minecraft_version
-  inputs.property "loader_version", loader_version
-  inputs.property "fabric_api_version", fabric_api_version
-  filteringCharset "UTF-8"
-
-  filesMatching("fabric.mod.json") {
-    expand "version": inputs.properties.mod_version,
-      "minecraft_version": inputs.properties.minecraft_version,
-      "loader_version": inputs.properties.loader_version,
-      "fabric_api_version": inputs.properties.fabric_api_version
-  }
-}
-
-def targetJavaVersion = 21
-tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release.set(targetJavaVersion)
-    }
-}
-
-test {
-    beforeTest {
-        setWorkingDir(getWorkingDir().toPath().resolve("run"))
-    }
-    useJUnitPlatform()
-    afterTest {
-        // some test really like creating unnecessary directories
-        // this is here as a (hopefully) "temporary" fix
-        try {
-            projectDir.toPath().resolve("config").toFile().deleteDir()
-            projectDir.toPath().resolve("logs").toFile().deleteDir()
-            projectDir.toPath().resolve("mods").toFile().deleteDir()
-            projectDir.toPath().resolve("world").toFile().deleteDir()
-        } catch (Throwable ignored) {
-        }
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
-}
-
-java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
-
-    sourceCompatibility = targetJavaVersion
-    targetCompatibility = targetJavaVersion
-}
-
-jar {
-    inputs.property "archivesName", base.archivesName
-
-    from("LICENSE") {
-        rename { "${it}_${inputs.properties.archivesName}" }
-    }
-}

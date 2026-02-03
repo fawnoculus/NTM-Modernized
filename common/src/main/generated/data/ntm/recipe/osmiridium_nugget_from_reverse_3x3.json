@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:osmiridium_ingot"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:osmiridium_nugget"
+  }
+}

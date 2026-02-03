@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:white_phosphorus_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:white_phosphorus_bar"
+  }
+}

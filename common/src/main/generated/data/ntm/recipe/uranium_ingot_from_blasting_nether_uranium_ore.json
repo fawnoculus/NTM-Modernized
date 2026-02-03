@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 150,
+  "experience": 1.0,
+  "group": "uranium",
+  "ingredient": "ntm:nether_uranium_ore",
+  "result": {
+    "id": "ntm:uranium_ingot"
+  }
+}

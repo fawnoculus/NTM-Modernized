@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "ntm:americium_241_ingot"
+  ],
+  "result": {
+    "count": 9,
+    "id": "ntm:americium_241_nugget"
+  }
+}
