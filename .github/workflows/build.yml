@@ -4,7 +4,27 @@
 # against bad commits.
 
 name: build
-on: [pull_request, push]
+on:
+    pull_request:
+        paths:
+            - 'common/**'
+            - 'fabric/**'
+            - 'neoforge/**'
+            - 'gradle/**'
+            - 'build.gradle'
+            - 'gradle.properties'
+            - 'settings.gradle'
+            - '.github/workflows/build.yml'
+    push:
+        paths:
+            - 'common/**'
+            - 'fabric/**'
+            - 'neoforge/**'
+            - 'gradle/**'
+            - 'build.gradle'
+            - 'gradle.properties'
+            - 'settings.gradle'
+            - '.github/workflows/build.yml'
 
 jobs:
   build:
