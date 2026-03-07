@@ -1,8 +1,7 @@
 package net.fawnoculus.ntm.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fawnoculus.ntm.Ntm;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.fawnoculus.ntm.client.api.NtmClientApi;
 import net.fawnoculus.ntm.client.commands.NtmClientCommands;
 import net.fawnoculus.ntm.client.gui.NtmHandledScreens;
@@ -13,7 +12,7 @@ import net.fawnoculus.ntm.gui.NtmMenuType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class NtmClient {
     public static final Logger LOGGER = LoggerFactory.getLogger(Ntm.MOD_NAME + "/Client");
 

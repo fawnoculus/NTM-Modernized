@@ -1,7 +1,7 @@
 package net.fawnoculus.ntm.client.render.wavefront;
 
 import net.fawnoculus.ntm.client.NtmClientConfig;
-import net.fawnoculus.ntm.client.util.RenderUtil;
+import net.fawnoculus.ntm.client.util.NtmRenderUtil;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -131,7 +131,7 @@ public class Polygon {
             throw new IllegalStateException("Can't bake Polygon to quad, texture coordinate count must be either 3 or 4");
         }
 
-        return RenderUtil.makeQuad(
+        return NtmRenderUtil.makeQuad(
           baker.parts(),
           corners,
           textureCords,

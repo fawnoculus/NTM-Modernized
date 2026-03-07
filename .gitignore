@@ -1,12 +1,6 @@
 # gradle
-.gradle/
-*/.gradle/
-build/
-*/build/
-out/
-*/out/
-classes/
-*/classes/
+.gradle
+build
 
 # eclipse
 eclipse/
@@ -23,11 +17,12 @@ local.properties
 *.launch
 
 # idea
-.idea/**
-!.idea/icon.png
 *.iml
 *.ipr
 *.iws
+.idea/*
+!.idea/icon.*
+!.idea/scopes
 
 # vscode
 .settings/
@@ -44,6 +39,6 @@ bin/
 *.jfr
 
 # generic
-run/
-*/run/
+run
+runs
 *.log

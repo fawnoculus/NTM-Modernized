@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import io.netty.buffer.ByteBuf;
 import net.fawnoculus.ntm.Ntm;
-import net.fawnoculus.ntm.util.JsonUtil;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -35,7 +35,7 @@ public record RadiationInformationPayload(RadiationInfo info) implements CustomP
         public static final StreamCodec<ByteBuf, RadiationInfo> STREAM_CODEC = new StreamCodec<>() {
             public RadiationInfo decode(ByteBuf byteBuf) {
                 String string = new String(FriendlyByteBuf.readByteArray(byteBuf), StandardCharsets.UTF_8);
-                return RadiationInfo.decode(JsonUtil.jsonFromString(string));
+                return RadiationInfo.decode(NtmCodecUtil.jsonFromString(string));
             }
 
             public void encode(ByteBuf byteBuf, RadiationInfo message) {

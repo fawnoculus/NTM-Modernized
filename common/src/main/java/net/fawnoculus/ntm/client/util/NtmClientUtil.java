@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class ClientUtil {
+public class NtmClientUtil {
     @NotNull
     public static Minecraft getClient() {
         return Objects.requireNonNull(Minecraft.getInstance(), "Tried to get client before it was initialized");

@@ -1,7 +1,7 @@
 package net.fawnoculus.ntm.client.render.hud;
 
 import net.fawnoculus.ntm.blocks.custom.HoverTooltipBlock;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,15 +17,14 @@ import java.util.List;
 
 public class BlockHoverTooltipRender {
     private static boolean shouldDraw() {
-        return ClientUtil.getFont() != null
-          && ClientUtil.getPlayer() != null;
+        return NtmClientUtil.hasPlayer();
     }
 
     public static void drawBlockHoverTooltip(GuiGraphics guiGraphics, DeltaTracker ignored) {
         if (!shouldDraw()) return;
-        ClientLevel world = ClientUtil.getLevel();
+        ClientLevel world = NtmClientUtil.getLevel();
 
-        if (!(ClientUtil.getClient().hitResult instanceof BlockHitResult result)) return;
+        if (!(NtmClientUtil.getClient().hitResult instanceof BlockHitResult result)) return;
         if (result.getType() == HitResult.Type.MISS) return;
 
         BlockPos pos = result.getBlockPos();
@@ -33,7 +32,7 @@ public class BlockHoverTooltipRender {
         if (!(state.getBlock() instanceof HoverTooltipBlock hoverTooltipBlock)) return;
         if (!hoverTooltipBlock.shouldDisplayTooltip(world, pos, state)) return;
 
-        Font textRenderer = ClientUtil.getFont();
+        Font textRenderer = NtmClientUtil.getFont();
         List<Component> tooltip = hoverTooltipBlock.getTooltip(world, pos, state);
 
         int y = (guiGraphics.guiHeight() / 2) - (textRenderer.lineHeight * tooltip.size() / 2);

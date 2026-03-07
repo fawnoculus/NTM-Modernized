@@ -1,9 +1,8 @@
 package net.fawnoculus.ntm.fabric.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.fawnoculus.ntm.fabric.client.datagen.NtmAdvancementProvider;
 import net.fawnoculus.ntm.fabric.client.datagen.NtmEnchantmentProvider;
 import net.fawnoculus.ntm.fabric.client.datagen.NtmModelProvider;
@@ -22,7 +21,7 @@ import net.fawnoculus.ntm.world.NtmPlacedFeatures;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class NtmDataGenerator implements DataGeneratorEntrypoint {
 
     @Override

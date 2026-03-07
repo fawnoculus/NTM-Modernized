@@ -5,7 +5,7 @@ import net.fawnoculus.ntm.client.render.wavefront.Polygon.GeometryVertex;
 import net.fawnoculus.ntm.client.render.wavefront.Polygon.TextureCoordinate;
 import net.fawnoculus.ntm.client.render.wavefront.Polygon.VertexNormal;
 import net.fawnoculus.ntm.client.render.wavefront.model.WavefrontModel;
-import net.fawnoculus.ntm.util.ExceptionUtil;
+import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
@@ -35,9 +35,9 @@ public class WavefrontModelLoader {
         try {
             toBeReturned = ofWavefrontObj(resource.get().openAsReader(), resourceIdentifier.toString());
         } catch (IOException e) {
-            NtmClient.LOGGER.warn("Exception occurred while reading '{}' Wavefront File\nException: {}", resourceIdentifier, ExceptionUtil.makePretty(e));
+            NtmClient.LOGGER.warn("Exception occurred while reading '{}' Wavefront File\nException: {}", resourceIdentifier, NtmJavaUtil.makePretty(e));
         } catch (IndexOutOfBoundsException e) {
-            NtmClient.LOGGER.warn("Exception occurred while parsing '{}' Wavefront File\nException: {}", resourceIdentifier, ExceptionUtil.makePretty(e));
+            NtmClient.LOGGER.warn("Exception occurred while parsing '{}' Wavefront File\nException: {}", resourceIdentifier, NtmJavaUtil.makePretty(e));
         }
 
         return toBeReturned;

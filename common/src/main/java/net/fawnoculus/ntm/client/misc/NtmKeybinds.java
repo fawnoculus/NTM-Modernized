@@ -11,7 +11,7 @@ import net.fawnoculus.ntm.client.api.events.custom.OnMouseClickEvent;
 import net.fawnoculus.ntm.client.api.qmaw.QmawManager;
 import net.fawnoculus.ntm.client.gui.screen.ToolAbilityCustomizationScreen;
 import net.fawnoculus.ntm.client.mixin.accessor.AbstractContainerScreenInvoker;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -60,7 +60,7 @@ public class NtmKeybinds {
         KeyMappingRegistry.register(OPEN_TOOL_ABILITY_GUI);
 
         onKeyPressedTick(OPEN_TOOL_ABILITY_GUI, client -> {
-            ItemStack stack = ClientUtil.getPlayer().getMainHandItem();
+            ItemStack stack = NtmClientUtil.getPlayer().getMainHandItem();
 
             if (client.screen == null
               && stack.getItem() instanceof SpecialTool specialTool

@@ -11,6 +11,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import dev.architectury.event.events.client.ClientCommandRegistrationEvent;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -107,12 +108,14 @@ public class ConfigOption<T> {
           );
     }
 
+    @ClientOnly
     public ArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack, ?> getGetClientCommand() {
         return ClientCommandRegistrationEvent.literal(NAME).executes(
           context -> getOptionInfo(component -> context.getSource().arch$sendSuccess(() -> component, false))
         );
     }
 
+    @ClientOnly
     public ArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack, ?> getSetClientCommand(ConfigFile file) {
         return ClientCommandRegistrationEvent.literal(NAME)
           .then(ClientCommandRegistrationEvent.argument("value", StringArgumentType.greedyString())
@@ -159,7 +162,7 @@ public class ConfigOption<T> {
         if (this.setValueFrom(element, JsonOps.INSTANCE)) {
             onSuccess.accept(Component.translatable("command.ntm.set_config_value", this.NAME, value));
             file.writeFile();
-            return 1;
+            return 0;
         }
 
         onFailure.accept(Component.translatable("command.ntm.set_config_value.failed", this.NAME, value));

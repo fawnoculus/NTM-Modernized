@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
-public class EntityUtil {
+public class NtmEntityUtil {
     @Contract("_, _ -> new")
     public static @NotNull DamageSource newDamageSource(Level world, ResourceKey<DamageType> damageTypeKey) {
         return newDamageSource(world, damageTypeKey, null, null);

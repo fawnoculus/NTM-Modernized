@@ -34,12 +34,12 @@ public class NtmResourceLoading {
         ) {
             return CompletableFuture.runAsync(() -> {
                     ProfilerFiller profiler = Profiler.get();
-                    profiler.push("[NTM] Loading Wavefront Models");
+                    profiler.push("ntm_loading_wavefront_models");
                     NtmClient.LOGGER.info("Loading Wavefront Models");
                     ResourceLoadingEvent.LOAD_WAVEFRONT_MODELS.invoker().load();
                     profiler.pop();
 
-                    profiler.push("[NTM] Loading Wavefront Model Textures");
+                    profiler.push("ntm_Loading_wavefront_model_textures");
                     NtmClient.LOGGER.info("Loading Wavefront Model Textures");
                     ResourceLoadingEvent.LOAD_WAVEFRONT_MODEL_TEXTURES.invoker().load();
                     profiler.pop();

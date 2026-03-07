@@ -7,9 +7,8 @@ dependencies {
 }
 
 dependencies {
-    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
-    // which get remapped to the correct annotations on each platform.
-    // Do NOT use other classes from Fabric Loader.
+    // Not compiling against Fabric-Loader will cause Compiler warnings
+    // I'm honestly not sure why, but it's probably because architectury uses @Environment from Fabric-Loader internally
     modCompileOnly "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modApi "dev.architectury:architectury:${architectury_api_version}"
+    modImplementation "dev.architectury:architectury:${architectury_api_version}"
 }

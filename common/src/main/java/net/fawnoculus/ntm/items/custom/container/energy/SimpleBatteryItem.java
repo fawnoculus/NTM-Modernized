@@ -1,7 +1,7 @@
 package net.fawnoculus.ntm.items.custom.container.energy;
 
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
-import net.fawnoculus.ntm.util.TextUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -73,10 +73,10 @@ public class SimpleBatteryItem extends Item implements EnergyContainingItem {
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
-        Component energy = TextUtil.unit(getEnergy(stack));
-        Component maxEnergy = TextUtil.unit(getMaxEnergy(stack), "generic.ntm.energy");
-        Component chargeRate = TextUtil.unit(getChargeRate(stack), "generic.ntm.energy_t");
-        Component dischargeRate = TextUtil.unit(getDischargeRate(stack), "generic.ntm.energy_t");
+        Component energy = NtmTextUtil.unit(getEnergy(stack));
+        Component maxEnergy = NtmTextUtil.unit(getMaxEnergy(stack), "generic.ntm.energy");
+        Component chargeRate = NtmTextUtil.unit(getChargeRate(stack), "generic.ntm.energy_t");
+        Component dischargeRate = NtmTextUtil.unit(getDischargeRate(stack), "generic.ntm.energy_t");
         tooltip.accept(Component.translatable("tooltip.ntm.energy.stored", energy, maxEnergy).withStyle(ChatFormatting.GRAY));
         tooltip.accept(Component.translatable("tooltip.ntm.energy.charge", chargeRate).withStyle(ChatFormatting.GRAY));
         tooltip.accept(Component.translatable("tooltip.ntm.energy.discharge", dischargeRate).withStyle(ChatFormatting.GRAY));

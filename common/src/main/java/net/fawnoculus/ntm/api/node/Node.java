@@ -3,7 +3,7 @@ package net.fawnoculus.ntm.api.node;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.node.network.NetworkType;
 import net.fawnoculus.ntm.api.node.network.NodeNetwork;
-import net.fawnoculus.ntm.util.ExceptionUtil;
+import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
@@ -67,7 +67,7 @@ public interface Node {
 
             this.setNetwork(detectedNetwork);
         } catch (Throwable throwable) {
-            Ntm.LOGGER.error("Failed assigning Network to Node at {}\nException: {}", this.getBlockPos().toShortString(), ExceptionUtil.makePretty(throwable));
+            Ntm.LOGGER.error("Failed assigning Network to Node at {}\nException: {}", this.getBlockPos().toShortString(), NtmJavaUtil.makePretty(throwable));
         }
     }
 

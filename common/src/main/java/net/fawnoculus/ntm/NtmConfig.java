@@ -7,7 +7,7 @@ import net.fawnoculus.ntm.api.config.ConfigOption;
 import net.fawnoculus.ntm.api.config.PerWorldConfigFile;
 import net.fawnoculus.ntm.api.config.PerWorldConfigOption;
 import net.fawnoculus.ntm.api.config.encoder.JsonConfigEncoder;
-import net.fawnoculus.ntm.util.CodecUtil;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -82,7 +82,7 @@ public class NtmConfig {
     );
     public static final PerWorldConfigOption<Boolean> DISABLE_CHUNK_RADIATION = WORLD_CONFIG.newOption(
       "disable_chunk_radiation", Codec.BOOL, false,
-      "Disables Chunks having Radioactivity (Requires restating the world or server) [default: false]"
+      "Disables Chunks having Radioactivity (Requires restating the level or server) [default: false]"
     );
 
     public static void init() {
@@ -95,7 +95,7 @@ public class NtmConfig {
         Fahrenheit(celsius -> Component.literal(String.format("%,.1f", (celsius * 9 / 5) + 32)).append(Component.translatable("generic.ntm.temp.f"))),
         Kelvin(celsius -> Component.literal(String.format("%,.1f", celsius - 273.15)).append(Component.translatable("generic.ntm.temp.k")));
 
-        public static final Codec<TempUnit> CODEC = CodecUtil.getEnumCodec(TempUnit.class);
+        public static final Codec<TempUnit> CODEC = NtmCodecUtil.getEnumCodec(TempUnit.class);
         public final Function<Double, MutableComponent> CELSIUS_TO_TEXT;
 
 
@@ -108,6 +108,6 @@ public class NtmConfig {
         MilliBuckets,
         Droplets;
 
-        public static final Codec<FluidUnit> CODEC = CodecUtil.getEnumCodec(FluidUnit.class);
+        public static final Codec<FluidUnit> CODEC = NtmCodecUtil.getEnumCodec(FluidUnit.class);
     }
 }

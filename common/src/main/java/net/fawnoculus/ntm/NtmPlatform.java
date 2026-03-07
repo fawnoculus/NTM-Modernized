@@ -2,8 +2,7 @@ package net.fawnoculus.ntm;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -67,26 +66,26 @@ public class NtmPlatform {
         throw new AssertionError("Architectury has not remapped NtmPlatform.modifyCreativeTab(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static void addHudElementFirst(Identifier hudId, HudElement hudElement) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerBlockModelOverride(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static void addHudElementLast(Identifier hudId, HudElement hudElement) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerBlockModelOverride(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static void addHudElementBefore(Identifier before, Identifier hudId, HudElement hudElement) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerBlockModelOverride(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static void addHudElementAfter(Identifier after, Identifier hudId, HudElement hudElement) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerBlockModelOverride(), Something has gone Terribly Wrong");
     }
@@ -101,38 +100,38 @@ public class NtmPlatform {
      * @param activationType decides if the resource pack is enabled by default and if you can disable it
      * @return if the resourceful was successfully added (it just checks if the path to the resource pack is valid)
      */
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static boolean registerBuiltinResourcePack(Identifier identifier, Component name, PackActivationType activationType) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerBuiltinResourcePack(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static void registerItemModelOverride(Function<Identifier, ItemModel.@Nullable Unbaked> override) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerItemModelOverride(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static void registerBlockModelOverride(Function<BlockState, BlockStateModel.@Nullable UnbakedRoot> override) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerBlockModelOverride(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static @Nullable TextureAtlasSprite getFluidSprites(Fluid fluid) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.getFluidSprite(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static List<Component> getFluidTooltip(Fluid fluid) {
         throw new AssertionError("Architectury has not remapped NtmPlatform.getFluidTooltip(), Something has gone Terribly Wrong");
     }
 
+    @ClientOnly
     @ExpectPlatform
-    @Environment(EnvType.CLIENT)
     public static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void registerScreenFactory(
       RegistrySupplier<MenuType<H>> type,
       ScreenFactory<H, S> factory
@@ -190,8 +189,8 @@ public class NtmPlatform {
         }
     }
 
+    @ClientOnly
     @FunctionalInterface
-    @Environment(EnvType.CLIENT)
     public interface HudElement {
         void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker);
     }

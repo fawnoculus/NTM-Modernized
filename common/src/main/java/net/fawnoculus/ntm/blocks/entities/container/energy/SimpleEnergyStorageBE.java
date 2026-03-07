@@ -9,7 +9,7 @@ import net.fawnoculus.ntm.gui.NtmMenuProvider;
 import net.fawnoculus.ntm.gui.menus.EnergyStorageMenu;
 import net.fawnoculus.ntm.items.custom.container.energy.EnergyContainingItem;
 import net.fawnoculus.ntm.misc.stack.EnergyStack;
-import net.fawnoculus.ntm.util.TextUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -100,13 +100,13 @@ public class SimpleEnergyStorageBE extends EnergyInventoryBE implements NtmMenuP
         OptionalDouble optional = Arrays.stream(energyChange).average();
         long energyPerSec = (long) optional.orElse(0);
         if (energyPerSec < 0) {
-            return TextUtil.unit(energyPerSec, "generic.ntm.energy_s").withStyle(ChatFormatting.RED);
+            return NtmTextUtil.unit(energyPerSec, "generic.ntm.energy_s").withStyle(ChatFormatting.RED);
         }
 
         ChatFormatting formatting = ChatFormatting.YELLOW;
         if (energyPerSec > 0) formatting = ChatFormatting.GREEN;
 
-        return Component.literal("+").append(TextUtil.unit(energyPerSec, "generic.ntm.energy_s")).withStyle(formatting);
+        return Component.literal("+").append(NtmTextUtil.unit(energyPerSec, "generic.ntm.energy_s")).withStyle(formatting);
     }
 
     @Override

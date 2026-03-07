@@ -7,8 +7,8 @@ import net.fawnoculus.ntm.api.tool.ItemAbility;
 import net.fawnoculus.ntm.api.tool.SpecialTool;
 import net.fawnoculus.ntm.client.gui.widget.HoverButtonWidget;
 import net.fawnoculus.ntm.client.gui.widget.ToolAbilityWidget;
-import net.fawnoculus.ntm.client.util.ClientUtil;
-import net.fawnoculus.ntm.client.util.RenderUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
+import net.fawnoculus.ntm.client.util.NtmRenderUtil;
 import net.fawnoculus.ntm.network.c2s.ToolAbilityPresetPayload;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -54,7 +54,7 @@ public class ToolAbilityCustomizationScreen extends Screen {
         this.presetIndex = stackData.selectedPreset();
 
 
-        if (ClientUtil.getPlayer().getMainHandItem() != stack || stack.getItem() != TOOL) {
+        if (NtmClientUtil.getPlayer().getMainHandItem() != stack || stack.getItem() != TOOL) {
             this.onClose();
         }
     }
@@ -191,7 +191,7 @@ public class ToolAbilityCustomizationScreen extends Screen {
             return;
         }
 
-        RenderUtil.drawVariableWidthRect(
+        NtmRenderUtil.drawVariableWidthRect(
           guiGraphics, TEXTURE,
           this.x, this.y,
           0, 0,
@@ -206,7 +206,7 @@ public class ToolAbilityCustomizationScreen extends Screen {
             int messageWidth = Math.max(6, this.font.width(message));
             int messageX = this.x + (this.BACKGROUND_WIDTH / 2) - (messageWidth / 2);
             int messageY = this.y + this.BACKGROUND_HEIGHT + 5;
-            RenderUtil.drawVariableWidthRect(
+            NtmRenderUtil.drawVariableWidthRect(
               guiGraphics, TEXTURE,
               messageX - 5, messageY - 4,
               0, 76,

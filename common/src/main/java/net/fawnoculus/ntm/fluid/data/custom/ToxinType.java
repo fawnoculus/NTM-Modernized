@@ -1,7 +1,7 @@
 package net.fawnoculus.ntm.fluid.data.custom;
 
 import com.mojang.serialization.Codec;
-import net.fawnoculus.ntm.util.CodecUtil;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
 import net.minecraft.network.chat.Component;
 
 public enum ToxinType {
@@ -12,7 +12,7 @@ public enum ToxinType {
     AEROSOLS(Component.translatable("fluid_tooltip.ntm.toxin_type.aerosols")),
     CARBON_MONOXIDE(Component.translatable("fluid_tooltip.ntm.toxin_type.carbon_monoxide"));
 
-    public static final Codec<ToxinType> CODEC = CodecUtil.getEnumCodec(ToxinType.class);
+    public static final Codec<ToxinType> CODEC = NtmCodecUtil.getEnumCodec(ToxinType.class);
     public final Component NAME;
 
     ToxinType(Component name) {

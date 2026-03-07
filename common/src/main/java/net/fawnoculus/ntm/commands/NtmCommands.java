@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@SuppressWarnings("SameReturnValue")
 public class NtmCommands {
     public static void init() {
         CommandRegistrationEvent.EVENT.register((dispatcher, buildContext, commandSelection) -> dispatcher.register(
@@ -55,7 +56,7 @@ public class NtmCommands {
             .then(Commands.literal("config")
               .requires(NtmCommands::allowCommands)
               .then(NtmConfig.COMMON_CONFIG_FILE.getCommand("common"))
-              .then(NtmConfig.WORLD_CONFIG.getCommand("per-world"))
+              .then(NtmConfig.WORLD_CONFIG.getCommand("per-level"))
             )
             .then(Commands.literal("message")
               .requires(NtmCommands::allowCommands)
@@ -163,7 +164,7 @@ public class NtmCommands {
     }
 
     private static int version(CommandContext<CommandSourceStack> context) {
-        if (context.getSource().getServer().isSingleplayer()) {
+        if (!context.getSource().getServer().isSingleplayer()) {
             context.getSource().sendSuccess(() -> Component.translatableEscape("message.ntm.version.server", Ntm.MOD_VERSION), false);
             return 0;
         }
@@ -177,7 +178,7 @@ public class NtmCommands {
             NetworkManager.sendToPlayer(player, new RemoveMessagePayload(identifier));
         }
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.message.cleared_specific", identifier.toString(), targets.size()), true);
-        return 1;
+        return 0;
     }
 
     private static int removeAllMessages(CommandContext<CommandSourceStack> context, Collection<ServerPlayer> targets) {
@@ -185,7 +186,7 @@ public class NtmCommands {
             NetworkManager.sendToPlayer(player, new RemoveAllMessagesPayload());
         }
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.message.cleared_all", targets.size()), true);
-        return 1;
+        return 0;
     }
 
     private static int sendMessage(CommandContext<CommandSourceStack> context, Collection<ServerPlayer> targets, Identifier identifier, Component text, float millis) {
@@ -193,19 +194,19 @@ public class NtmCommands {
             NetworkManager.sendToPlayer(player, new AdvancedMessagePayload(new AdvancedMessage(identifier, text, millis)));
         }
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.message.sent", targets.size()), true);
-        return 1;
+        return 0;
     }
 
     private static int funny(CommandContext<CommandSourceStack> context) {
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.the_funny"), false);
         // This doesn't actually do anything
-        return 1;
+        return 0;
     }
 
     private static int setDevConstant(CommandContext<CommandSourceStack> context, boolean value) {
         SharedConstants.IS_RUNNING_IN_IDE = value;
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.set_dev_constant", value), false);
-        return 1;
+        return 0;
     }
 
     private static int giveAllEffects(CommandContext<CommandSourceStack> context, Collection<? extends Entity> targets) {
@@ -239,7 +240,7 @@ public class NtmCommands {
             context.getSource().sendSuccess(() -> Component.translatable("message.ntm.all_effects.immune_targets", finalImmuneTargets), true);
         }
 
-        return 1;
+        return 0;
     }
 
     private static int setEnergy(CommandContext<CommandSourceStack> context, long energy) {
@@ -252,7 +253,7 @@ public class NtmCommands {
         if (stack.getItem() instanceof EnergyContainingItem energyContainingItem) {
             energyContainingItem.setEnergy(stack, energy);
             context.getSource().sendSuccess(() -> Component.translatable("message.ntm.set_energy.success", stack.getItem().getName(), energy), true);
-            return 1;
+            return 0;
         } else {
             context.getSource().sendSuccess(() -> Component.translatable("message.ntm.set_energy.fail", stack.getItem().getName()), true);
             return -1;
@@ -270,14 +271,14 @@ public class NtmCommands {
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.network_debug.network_type", network.TYPE.getName().withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.network_debug.node_count", Component.literal(String.valueOf(network.LOADED_NODES.size())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
 
-        return 1;
+        return 0;
     }
 
     private static int getNodeNetworks(CommandContext<CommandSourceStack> context) {
         for (NetworkType type : NodeNetworkManager.getAllTypes()) {
             context.getSource().sendSuccess(() -> Component.translatableEscape("message.ntm.get_node_networks", type.getName(), type.getId()).append(Component.literal(" " + type.getAllNetworks().size())), false);
         }
-        return 1;
+        return 0;
     }
 
     private static int getNodeNetworks(CommandContext<CommandSourceStack> context, NetworkType type) {
@@ -285,7 +286,7 @@ public class NtmCommands {
         for (NodeNetwork network : type.getAllNetworks()) {
             context.getSource().sendSuccess(() -> Component.literal(network.ID.toString()), false);
         }
-        return 1;
+        return 0;
     }
 
     private static int deleteLogs(CommandContext<CommandSourceStack> context) {
@@ -302,10 +303,10 @@ public class NtmCommands {
                 }
             }
         }
-        long finalFiles = files;
-        long finalData = data;
+        final long finalFiles = files;
+        final long finalData = data;
         context.getSource().sendSuccess(() -> Component.translatable("message.ntm.clean_logs", finalFiles, finalData), true);
-        return 1;
+        return 0;
     }
 
     private static int getDataComponents(CommandContext<CommandSourceStack> context, int maxSize) {
@@ -328,6 +329,6 @@ public class NtmCommands {
             feedback.append(Component.literal(value).withStyle(ChatFormatting.WHITE));
             context.getSource().sendSuccess(() -> feedback, false);
         }
-        return 1;
+        return 0;
     }
 }

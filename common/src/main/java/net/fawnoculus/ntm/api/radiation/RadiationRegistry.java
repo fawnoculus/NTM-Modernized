@@ -6,8 +6,8 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import io.netty.buffer.ByteBuf;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.items.NtmItems;
-import net.fawnoculus.ntm.util.ExceptionUtil;
-import net.fawnoculus.ntm.util.JsonUtil;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
+import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -55,22 +55,22 @@ public class RadiationRegistry {
                         fileWriter.write("\t\"example:these_overrides_are_for_items_blocks_and_dimensions\": 0\n");
                         fileWriter.write("}");
                     } catch (Exception e) {
-                        Ntm.LOGGER.error("An Exception occurred while trying write Examples to Radiation Overrides File\nException:{}", ExceptionUtil.makePretty(e));
+                        Ntm.LOGGER.error("An Exception occurred while trying write Examples to Radiation Overrides File\nException:{}", NtmJavaUtil.makePretty(e));
                     }
                 } else {
                     Ntm.LOGGER.warn("Failed to crate Radiation Overrides File");
                 }
             } catch (Exception e) {
-                Ntm.LOGGER.error("An Exception occurred while trying to crate Radiation Overrides File\nException:{}", ExceptionUtil.makePretty(e));
+                Ntm.LOGGER.error("An Exception occurred while trying to crate Radiation Overrides File\nException:{}", NtmJavaUtil.makePretty(e));
             }
             return;
         }
         JsonObject overrides = new JsonObject();
         try {
             FileReader fileReader = new FileReader(file);
-            overrides = JsonUtil.jsonFromReader(fileReader);
+            overrides = NtmCodecUtil.jsonFromReader(fileReader);
         } catch (Exception e) {
-            Ntm.LOGGER.error("An Exception occurred while trying read Radiation Overrides File\nException:{}", ExceptionUtil.makePretty(e));
+            Ntm.LOGGER.error("An Exception occurred while trying read Radiation Overrides File\nException:{}", NtmJavaUtil.makePretty(e));
         }
 
         for (String key : overrides.keySet()) {
@@ -79,7 +79,7 @@ public class RadiationRegistry {
                 Double value = overrides.get(key).getAsDouble();
                 radioactivityOverrides.put(identifier, value);
             } catch (Exception e) {
-                Ntm.LOGGER.error("An Exception occurred while trying parse Radiation Overrides for {}\nException:{}", key, ExceptionUtil.makePretty(e));
+                Ntm.LOGGER.error("An Exception occurred while trying parse Radiation Overrides for {}\nException:{}", key, NtmJavaUtil.makePretty(e));
             }
         }
 

@@ -3,7 +3,7 @@ package net.fawnoculus.ntm.client.gui.widget;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.tool.ItemAbility;
 import net.fawnoculus.ntm.client.gui.screen.ToolAbilityCustomizationScreen.ModifiablePreset;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.fawnoculus.ntm.misc.NtmSounds;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -168,7 +168,7 @@ public class ToolAbilityWidget extends AbstractWidget {
         }
 
         if (previousLevel != currentLevel) {
-            ClientUtil.playSound(SimpleSoundInstance.forUI(NtmSounds.TECH_BOOP, 2));
+            NtmClientUtil.playSound(SimpleSoundInstance.forUI(NtmSounds.TECH_BOOP, 2));
         }
     }
 }

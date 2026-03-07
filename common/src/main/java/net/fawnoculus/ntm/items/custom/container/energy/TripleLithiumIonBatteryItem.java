@@ -1,12 +1,13 @@
 package net.fawnoculus.ntm.items.custom.container.energy;
 
-import net.fawnoculus.ntm.util.TextUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jspecify.annotations.NonNull;
 
 import java.util.function.Consumer;
 
@@ -39,11 +40,11 @@ public class TripleLithiumIonBatteryItem extends SimpleBatteryItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> tooltip, TooltipFlag type) {
-        Component energy = TextUtil.unit(getEnergy(stack));
-        Component maxEnergy = TextUtil.unit(getMaxEnergy(stack), "generic.ntm.energy");
+    public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
+        Component energy = NtmTextUtil.unit(getEnergy(stack));
+        Component maxEnergy = NtmTextUtil.unit(getMaxEnergy(stack), "generic.ntm.energy");
         Component chargeRate = unitWithExtraDigit(getChargeRate(stack)).append(Component.translatable("generic.ntm.energy_t"));
-        Component dischargeRate = TextUtil.unit(getDischargeRate(stack), "generic.ntm.energy_t");
+        Component dischargeRate = NtmTextUtil.unit(getDischargeRate(stack), "generic.ntm.energy_t");
         tooltip.accept(Component.translatable("tooltip.ntm.energy.stored", energy, maxEnergy).withStyle(ChatFormatting.GRAY));
         tooltip.accept(Component.translatable("tooltip.ntm.energy.charge", chargeRate).withStyle(ChatFormatting.GRAY));
         tooltip.accept(Component.translatable("tooltip.ntm.energy.discharge", dischargeRate).withStyle(ChatFormatting.GRAY));

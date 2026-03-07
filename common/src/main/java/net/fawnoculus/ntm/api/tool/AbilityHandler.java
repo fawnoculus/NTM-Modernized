@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
-import net.fawnoculus.ntm.util.WorldUtil;
+import net.fawnoculus.ntm.util.NtmWorldUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -162,7 +162,7 @@ public record AbilityHandler(List<Tuple<ItemAbility, @NotNull @Range(from = 1, t
         for (BlockPos breakingPos : blocksToBreak) {
             boolean doDrops1 = currentPreset.topAbility.onBreakBlock(stack, world, breakingPos, miner, currentPreset.topAbilityLevel);
             boolean doDrops2 = currentPreset.bottomAbility.onBreakBlock(stack, world, breakingPos, miner, currentPreset.bottomAbilityLevel);
-            WorldUtil.removeBlock(world, breakingPos, miner, doDrops1 && doDrops2);
+            NtmWorldUtil.breakBlock(world, breakingPos, miner, doDrops1 && doDrops2);
         }
     }
 

@@ -3,7 +3,7 @@ package net.fawnoculus.ntm.client.render.hud;
 import net.fawnoculus.ntm.api.tool.AbilityHandler;
 import net.fawnoculus.ntm.api.tool.SpecialTool;
 import net.fawnoculus.ntm.client.NtmClientConfig;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -17,12 +17,12 @@ public class ToolAbilityRender {
     private static final int HEIGHT = 16;
 
     private static boolean shouldDraw() {
-        return ClientUtil.hasPlayer();
+        return NtmClientUtil.hasPlayer();
     }
 
     public static void drawToolAbility(GuiGraphics guiGraphics, DeltaTracker ignored) {
         if (!shouldDraw()) return;
-        ItemStack stack = ClientUtil.getPlayer().getMainHandItem();
+        ItemStack stack = NtmClientUtil.getPlayer().getMainHandItem();
         if (!(stack.getItem() instanceof SpecialTool specialTool)) return;
 
         final int xOffset = NtmClientConfig.TOOL_ABILITY_DISPLAY_X_OFFSET.getValue();

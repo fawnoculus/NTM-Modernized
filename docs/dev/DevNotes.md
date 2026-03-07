@@ -1,6 +1,7 @@
 # Coding Documentation
 I'm going to be honest, this is not really coding documentation, this is more just a recording of decisions that I made during development that I wrote down so that I remember them.
 But it may also be helpful to anyone trying to understand my absolute insanity.
+Tho to be fair all the other files in this directory just seem like an insane person rambling.
 
 So is everything in this directory, all files here are just me trying to remember things, don't think too much about them.
 

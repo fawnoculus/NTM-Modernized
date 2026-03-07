@@ -5,10 +5,9 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.serialization.Codec;
 import dev.architectury.event.events.client.ClientCommandRegistrationEvent;
 import dev.architectury.platform.Platform;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fawnoculus.ntm.Ntm;
-import net.fawnoculus.ntm.util.ExceptionUtil;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
+import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -60,7 +59,7 @@ public class ConfigFile {
         try {
             this.ENCODING.readPath(this.PATH, this);
         } catch (Exception e) {
-            Ntm.LOGGER.warn("Failed to read config file '{}'\nException: {}", this.PATH, ExceptionUtil.makePretty(e));
+            Ntm.LOGGER.warn("Failed to read config file '{}'\nException: {}", this.PATH, NtmJavaUtil.makePretty(e));
         }
     }
 
@@ -73,7 +72,7 @@ public class ConfigFile {
             }
             this.ENCODING.writePath(this.PATH, this);
         } catch (Exception e) {
-            Ntm.LOGGER.warn("Failed to write config file '{}'\nException: {}", this.PATH, ExceptionUtil.makePretty(e));
+            Ntm.LOGGER.warn("Failed to write config file '{}'\nException: {}", this.PATH, NtmJavaUtil.makePretty(e));
         }
     }
 
@@ -96,7 +95,7 @@ public class ConfigFile {
           ).then(set).then(get);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public ArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack, ?> getClientCommand(String commandName) {
         LiteralArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack> get = ClientCommandRegistrationEvent.literal("get");
         LiteralArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack> set = ClientCommandRegistrationEvent.literal("set");

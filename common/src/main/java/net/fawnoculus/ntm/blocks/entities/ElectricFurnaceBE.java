@@ -69,17 +69,22 @@ public class ElectricFurnaceBE extends EnergyInventoryBE implements NtmMenuProvi
     }
 
     public static void tick(Level ignored, BlockPos ignored2, BlockState ignored3, ElectricFurnaceBE entity) {
-        entity.processBattery();
+       entity.processBattery();
+
         if (entity.canCraft()) {
             entity.addProgress();
             if (entity.progressFinished()) {
                 entity.craftOutput();
                 entity.resetProgress();
             }
-        } else {
-            entity.resetProgress();
+            entity.setChanged();
+            return;
         }
-        entity.setChanged();
+
+        if (entity.progress > 0) {
+            entity.resetProgress();
+            entity.setChanged();
+        }
     }
 
     private Optional<RecipeHolder<SmeltingRecipe>> getRecipe() {

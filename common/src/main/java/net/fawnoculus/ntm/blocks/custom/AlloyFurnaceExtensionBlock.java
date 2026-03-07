@@ -34,7 +34,9 @@ public class AlloyFurnaceExtensionBlock extends Block implements EntityBlock {
     @Override
     public void setPlacedBy(Level world, BlockPos pos, @NonNull BlockState state, @Nullable LivingEntity placer, @NonNull ItemStack itemStack) {
         BlockState bellowState = world.getBlockState(pos.below());
-        if (bellowState.getBlock() != NtmBlocks.ALLOY_FURNACE) return;
+        if (bellowState.getBlock() != NtmBlocks.ALLOY_FURNACE.get()) {
+            return;
+        }
 
         bellowState = bellowState.setValue(AlloyFurnaceBlock.EXTENSION, true);
         world.setBlockAndUpdate(pos.below(), bellowState);
@@ -43,8 +45,9 @@ public class AlloyFurnaceExtensionBlock extends Block implements EntityBlock {
     @Override
     public @NonNull BlockState playerWillDestroy(Level world, BlockPos pos, @NonNull BlockState state, @NonNull Player player) {
         BlockState bellowState = world.getBlockState(pos.below());
-        if (bellowState.getBlock() != NtmBlocks.ALLOY_FURNACE)
+        if (bellowState.getBlock() != NtmBlocks.ALLOY_FURNACE.get()) {
             return super.playerWillDestroy(world, pos, state, player);
+        }
 
         bellowState = bellowState.setValue(AlloyFurnaceBlock.EXTENSION, false);
         world.setBlockAndUpdate(pos.below(), bellowState);

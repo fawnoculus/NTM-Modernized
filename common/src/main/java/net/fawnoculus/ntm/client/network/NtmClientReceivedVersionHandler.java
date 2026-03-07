@@ -10,7 +10,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.login.ClientboundLoginFinishedPacket;
 
-public class ClientReceivedVersionHandler {
+public class NtmClientReceivedVersionHandler {
     public static final String clientVersion = Ntm.MOD_VERSION;
     public static boolean hasReceivedVersion = false;
     public static String serverVersion = null;

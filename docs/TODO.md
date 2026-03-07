@@ -1,5 +1,5 @@
 # Misc
-- Recipe Viewer Compatibility (we cant test those, because they either don't support 1.21.11 or use loom 1.14)
+- Recipe Viewer Compatibility (we cant test those, because they either don't support 1.21.11 or use a newer version of loom)
 
 # Features
 ## Important Features

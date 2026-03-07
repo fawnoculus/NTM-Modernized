@@ -5,7 +5,7 @@ import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.NtmConfig;
 import net.fawnoculus.ntm.fluid.FluidUnit;
 import net.fawnoculus.ntm.fluid.data.custom.*;
-import net.fawnoculus.ntm.util.TextUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -133,10 +133,10 @@ public class FluidDataTypes {
             tooltip.accept(Component.translatable("fluid_tooltip.ntm.flammable").withStyle(ChatFormatting.YELLOW));
             switch (NtmConfig.FLUID_UNIT.getValue()) {
                 case NtmConfig.FluidUnit.MilliBuckets -> tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.provides", TextUtil.unit(FluidUnit.dropletsToMB(tuPerDroplet)), Component.translatable("generic.ntm.fluid.mb")).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable("fluid_tooltip.ntm.provides", NtmTextUtil.unit(FluidUnit.dropletsToMB(tuPerDroplet)), Component.translatable("generic.ntm.fluid.mb")).withStyle(ChatFormatting.YELLOW)
                 );
                 case NtmConfig.FluidUnit.Droplets -> tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.provides", TextUtil.unit(tuPerDroplet), Component.translatable("generic.ntm.fluid.droplet")).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable("fluid_tooltip.ntm.provides", NtmTextUtil.unit(tuPerDroplet), Component.translatable("generic.ntm.fluid.droplet")).withStyle(ChatFormatting.YELLOW)
                 );
             }
         }
@@ -147,13 +147,13 @@ public class FluidDataTypes {
             switch (NtmConfig.FLUID_UNIT.getValue()) {
                 case NtmConfig.FluidUnit.MilliBuckets -> tooltip.accept(
                   Component.translatable("fluid_tooltip.ntm.provides",
-                    TextUtil.unit(FluidUnit.dropletsToMB(data.ntePerDroplet()), "generic.ntm.delta_kelvin"),
+                    NtmTextUtil.unit(FluidUnit.dropletsToMB(data.ntePerDroplet()), "generic.ntm.delta_kelvin"),
                     Component.translatable("generic.ntm.fluid.mb")
                   ).withStyle(ChatFormatting.GOLD)
                 );
                 case NtmConfig.FluidUnit.Droplets -> tooltip.accept(
                   Component.translatable("fluid_tooltip.ntm.provides",
-                    TextUtil.unit(data.ntePerDroplet(), "generic.ntm.delta_kelvin").withStyle(ChatFormatting.RED),
+                    NtmTextUtil.unit(data.ntePerDroplet(), "generic.ntm.delta_kelvin").withStyle(ChatFormatting.RED),
                     Component.translatable("generic.ntm.fluid.droplets")
                   ).withStyle(ChatFormatting.GOLD)
                 );

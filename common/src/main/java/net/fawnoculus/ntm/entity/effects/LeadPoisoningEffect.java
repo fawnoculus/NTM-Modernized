@@ -1,7 +1,7 @@
 package net.fawnoculus.ntm.entity.effects;
 
 import net.fawnoculus.ntm.entity.NtmDamageTypes;
-import net.fawnoculus.ntm.util.EntityUtil;
+import net.fawnoculus.ntm.util.NtmEntityUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -20,9 +20,9 @@ public class LeadPoisoningEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
-        EntityUtil.applyDamage(entity, world, NtmDamageTypes.LEAD_POISONING, amplifier);
+        NtmEntityUtil.applyDamage(entity, world, NtmDamageTypes.LEAD_POISONING, amplifier);
         if (amplifier >= 255) {
-            EntityUtil.applyDamage(entity, world, NtmDamageTypes.LEAD_POISONING, Integer.MAX_VALUE);
+            NtmEntityUtil.applyDamage(entity, world, NtmDamageTypes.LEAD_POISONING, Integer.MAX_VALUE);
         }
         return super.applyEffectTick(world, entity, amplifier);
     }

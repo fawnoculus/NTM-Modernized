@@ -35,6 +35,8 @@ public class NtmDeferredRegistries {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Ntm.MOD_ID, Registries.MENU);
     public static final DeferredRegister<MapCodec<? extends EnchantmentEntityEffect>> ENCHANTMENT_ENTITY_EFFECT_TYPES = DeferredRegister.create(Ntm.MOD_ID, Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE);
 
+    // On fabric this will register everything imminently,
+    // on neoforge these will be registered whenever neoforge feels like it and gives architectury the event
     public static void init() {
         SOUNDS.register();
         MOB_EFFECTS.register();

@@ -1,6 +1,6 @@
 package net.fawnoculus.ntm.client.gui.area;
 
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.network.chat.Component;
@@ -59,6 +59,6 @@ public interface InfoArea extends Renderable {
 
     default void drawTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         if (!isInBounds(mouseX, mouseY)) return;
-        guiGraphics.setComponentTooltipForNextFrame(ClientUtil.getFont(), this.getTooltip(), mouseX, mouseY);
+        guiGraphics.setComponentTooltipForNextFrame(NtmClientUtil.getFont(), this.getTooltip(), mouseX, mouseY);
     }
 }

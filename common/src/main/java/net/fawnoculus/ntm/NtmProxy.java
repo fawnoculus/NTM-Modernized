@@ -1,8 +1,7 @@
 package net.fawnoculus.ntm;
 
 import dev.architectury.platform.Platform;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.fawnoculus.ntm.api.annotations.ServerOnly;
 import net.fawnoculus.ntm.client.NtmClientProxy;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.ApiStatus;
 
 public class NtmProxy {
-    @Environment(EnvType.SERVER)
+    @ServerOnly
     @ApiStatus.Internal
     private static final NtmProxy INSTANCE = new NtmProxy();
 
@@ -31,8 +30,8 @@ public class NtmProxy {
      *
      * @return The proxy to be used on Servers
      */
+    @ServerOnly
     @ApiStatus.Internal
-    @Environment(EnvType.SERVER)
     private static NtmProxy getCommonProxy() {
         return INSTANCE;
     }
@@ -44,10 +43,9 @@ public class NtmProxy {
      * @return The proxy that should be used
      */
     public static NtmProxy getProxy() {
-        return switch (Platform.getEnv()) {
+        return switch (Platform.getEnvironment()) {
             case SERVER -> getCommonProxy();
             case CLIENT -> NtmClientProxy.getClientProxy();
-            default -> throw new IllegalStateException("Environment is Neither Client nor Server");
         };
     }
 
@@ -62,56 +60,56 @@ public class NtmProxy {
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with default parameters
      */
     public void playSoundToPlayer(Player player, SoundEvent sound, SoundSource category) {
         playSoundToPlayer(player, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(sound), category, player.getX(), player.getY(), player.getZ(), 0f, 0f, player.getRandom().nextLong());
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some default parameters
      */
     public void playSoundToPlayer(Player player, SoundEvent sound, SoundSource category, float volume, float pitch) {
         playSoundToPlayer(player, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(sound), category, player.getX(), player.getY(), player.getZ(), volume, pitch, player.getRandom().nextLong());
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some default parameters
      */
     public void playSoundToPlayer(Player player, SoundEvent sound, SoundSource category, double x, double y, double z, float volume, float pitch) {
         playSoundToPlayer(player, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(sound), category, x, y, z, volume, pitch, player.getRandom().nextLong());
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some default parameters
      */
     public void playSoundToPlayer(Player player, SoundEvent sound, SoundSource category, double x, double y, double z, float volume, float pitch, long seed) {
         playSoundToPlayer(player, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(sound), category, x, y, z, volume, pitch, seed);
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some default parameters
      */
     public void playSoundToPlayer(Player player, Holder<SoundEvent> sound, SoundSource category) {
         playSoundToPlayer(player, sound, category, player.getX(), player.getY(), player.getZ(), 0f, 0f, player.getRandom().nextLong());
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some default parameters
      */
     public void playSoundToPlayer(Player player, Holder<SoundEvent> sound, SoundSource category, float volume, float pitch) {
         playSoundToPlayer(player, sound, category, player.getX(), player.getY(), player.getZ(), volume, pitch, player.getRandom().nextLong());
     }
 
     /**
-     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some public static parameters
+     * it's just {@link NtmProxy#playSoundToPlayer(Player, Holder, SoundSource, double, double, double, float, float, long)} with some default parameters
      */
     public void playSoundToPlayer(Player player, Holder<SoundEvent> sound, SoundSource category, double x, double y, double z, float volume, float pitch) {
         playSoundToPlayer(player, sound, category, x, y, z, volume, pitch, player.getRandom().nextLong());
     }
 
     /**
-     * Plays a sound to the specified player, this is achived by sending them á sound packet if they are a server player entity
+     * Plays a sound to the specified player, this is done by sending them á sound packet if they are a server player entity
      * or directly telling the client to play the sound when the current {@link net.minecraft.client.player.LocalPlayer} is passed in
      *
      * @param player   The player that should hear the sound

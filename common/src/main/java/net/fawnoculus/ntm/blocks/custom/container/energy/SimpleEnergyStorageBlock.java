@@ -5,7 +5,7 @@ import dev.architectury.registry.menu.MenuRegistry;
 import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.custom.HoverTooltipBlock;
 import net.fawnoculus.ntm.blocks.entities.container.energy.SimpleEnergyStorageBE;
-import net.fawnoculus.ntm.util.TextUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -111,9 +111,9 @@ public class SimpleEnergyStorageBlock extends BaseEntityBlock implements HoverTo
         SimpleEnergyStorageBE energyStorageBE = (SimpleEnergyStorageBE) world.getBlockEntity(pos);
         assert energyStorageBE != null;
         long value = energyStorageBE.energy.getValue();
-        Component valueText = TextUtil.unit(value);
+        Component valueText = NtmTextUtil.unit(value);
         long maxValue = energyStorageBE.energy.getMaxValue();
-        Component maxValueText = TextUtil.unit(maxValue, "generic.ntm.energy");
+        Component maxValueText = NtmTextUtil.unit(maxValue, "generic.ntm.energy");
         int color = Mth.hsvToRgb(Math.max(0.0F, (float) value / (float) maxValue) / 3.0F, 1.0F, 1.0F);
 
         tooltip.accept(this.getName().withStyle(ChatFormatting.YELLOW));

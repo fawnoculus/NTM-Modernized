@@ -1,6 +1,6 @@
 package net.fawnoculus.ntm.items.custom.container.energy;
 
-import net.fawnoculus.ntm.util.TextUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -46,6 +46,6 @@ public class SelfChargingBatteryItem extends Item implements EnergyContainingIte
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
-        tooltip.accept(TextUtil.unit(this.ENERGY_PER_TICK, "generic.ntm.energy_t").withStyle(ChatFormatting.YELLOW));
+        tooltip.accept(NtmTextUtil.unit(this.ENERGY_PER_TICK, "generic.ntm.energy_t").withStyle(ChatFormatting.YELLOW));
     }
 }

@@ -2,7 +2,7 @@ package net.fawnoculus.ntm.fluid.data;
 
 import com.mojang.serialization.Codec;
 import net.fawnoculus.ntm.Ntm;
-import net.fawnoculus.ntm.util.CodecUtil;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
@@ -31,6 +31,6 @@ public class FireDiamond {
         RADIOACTIVE,              // RE
         ANTIMATTER;               // ANTI
 
-        public static final Codec<SpecialNotice> CODEC = CodecUtil.getEnumCodec(SpecialNotice.class);
+        public static final Codec<SpecialNotice> CODEC = NtmCodecUtil.getEnumCodec(SpecialNotice.class);
     }
 }

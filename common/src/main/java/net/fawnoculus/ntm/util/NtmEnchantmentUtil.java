@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class EnchantmentUtil {
+public class NtmEnchantmentUtil {
     public static void addEnchantment(@NotNull Level world, ResourceKey<Enchantment> enchantmentKey, int level, @NotNull ItemStack stack) {
         Holder.Reference<Enchantment> enchantmentRegistryEntry = getEnchantmentEntry(world, enchantmentKey);
         stack.enchant(enchantmentRegistryEntry, level);

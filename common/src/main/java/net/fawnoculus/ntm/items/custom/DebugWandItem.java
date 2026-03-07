@@ -1,7 +1,9 @@
 package net.fawnoculus.ntm.items.custom;
 
+import net.fawnoculus.ntm.api.explosion.custom.NtmBalefireExplosion;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,15 +24,14 @@ public class DebugWandItem extends Item {
     }
 
     @Override
-    public @NonNull InteractionResult use(Level world, @NonNull Player user, @NonNull InteractionHand hand) {
-        if (world.isClientSide()) {
+    public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player user, @NonNull InteractionHand hand) {
+        if (!(level instanceof ServerLevel serverLevel)) {
             return InteractionResult.SUCCESS;
         }
 
         BlockHitResult hitResult = (BlockHitResult) user.pick(256, 0, false);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
-            // TODO: simple explosion type testing
-            //NTMExplosionTypes.SIMPLE.explode((ServerLevel) world, hitResult.getBlockPos(), 10f);
+            NtmBalefireExplosion.addExplosion(serverLevel, hitResult.getBlockPos(), 300);
         }
 
         return InteractionResult.SUCCESS_SERVER;

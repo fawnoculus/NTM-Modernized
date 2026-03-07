@@ -10,26 +10,22 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class WorldUtil {
-    @Contract(value = "_ -> new", pure = true)
+public class NtmWorldUtil {
     public static @NotNull ChunkPos getChunkPos(@NotNull Vec3 pos) {
         return new ChunkPos((int) (pos.x / 16), (int) (pos.z / 16));
     }
 
-    @Contract("_ -> new")
     public static @NotNull ChunkPos getChunkPos(@NotNull Vec3i pos) {
         return new ChunkPos(pos.getX() / 16, pos.getZ() / 16);
     }
 
-    @Contract("_ -> new")
     public static @NotNull Vec3 getVec3d(@NotNull Vec3i pos) {
         return new Vec3(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static void removeBlock(Level world, BlockPos pos, Player player, boolean doBlockDrops) {
+    public static void breakBlock(Level world, BlockPos pos, Player player, boolean doBlockDrops) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         BlockState originalState = world.getBlockState(pos);
         Block block = originalState.getBlock();

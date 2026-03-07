@@ -20,7 +20,7 @@ import net.fawnoculus.ntm.client.NtmClientConfig;
 import net.fawnoculus.ntm.client.api.messages.MessageSystem;
 import net.fawnoculus.ntm.client.render.hud.FlashBangRender;
 import net.fawnoculus.ntm.client.render.hud.HudWigglerRender;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.fawnoculus.ntm.commands.NtmCommands;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -47,7 +47,7 @@ public class NtmClientCommands {
             .then(ClientCommandRegistrationEvent.literal("config")
               .then(NtmClientConfig.CLIENT_CONFIG_FILE.getClientCommand("client"))
               .then(NtmConfig.COMMON_CONFIG_FILE.getClientCommand("common"))
-              .then(NtmConfig.WORLD_CONFIG.defaultConfig().getClientCommand("world-default"))
+              .then(NtmConfig.WORLD_CONFIG.defaultConfig().getClientCommand("level-default"))
             )
             .then(ClientCommandRegistrationEvent.literal("version")
               .executes(NtmClientCommands::version)
@@ -136,15 +136,15 @@ public class NtmClientCommands {
     }
 
     private static int forceQuit(CommandContext<ClientCommandSourceStack> context) {
-        ClientUtil.getClient().stop();
+        NtmClientUtil.getClient().stop();
         return 0;
     }
 
     @SuppressWarnings("resource")
     private static int forceDisconnect(CommandContext<ClientCommandSourceStack> context) {
         context.getSource().arch$getLevel().disconnect(Component.translatable("message.ntm.force_disconnect"));
-        ClientUtil.getClient().disconnectWithSavingScreen();
-        ClientUtil.getClient().setScreen(new TitleScreen());
+        NtmClientUtil.getClient().disconnectWithSavingScreen();
+        NtmClientUtil.getClient().setScreen(new TitleScreen());
         return 0;
     }
 

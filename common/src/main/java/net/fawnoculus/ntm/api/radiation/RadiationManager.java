@@ -10,8 +10,8 @@ import net.fawnoculus.ntm.entity.NtmDamageTypes;
 import net.fawnoculus.ntm.entity.NtmStatusEffects;
 import net.fawnoculus.ntm.misc.data.CustomDataHolder;
 import net.fawnoculus.ntm.network.s2c.RadiationInformationPayload;
-import net.fawnoculus.ntm.util.EntityUtil;
-import net.fawnoculus.ntm.util.WorldUtil;
+import net.fawnoculus.ntm.util.NtmEntityUtil;
+import net.fawnoculus.ntm.util.NtmWorldUtil;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -118,11 +118,11 @@ public class RadiationManager {
     }
 
     public static RadiationProcessor getRadiationProcessor(ServerLevel world, Vec3 pos) {
-        return getRadiationProcessor(world, WorldUtil.getChunkPos(pos));
+        return getRadiationProcessor(world, NtmWorldUtil.getChunkPos(pos));
     }
 
     public static RadiationProcessor getRadiationProcessor(ServerLevel world, Vec3i pos) {
-        return getRadiationProcessor(world, WorldUtil.getChunkPos(pos));
+        return getRadiationProcessor(world, NtmWorldUtil.getChunkPos(pos));
     }
 
     public static RadiationProcessor getRadiationProcessor(ServerLevel world, ChunkPos pos) {
@@ -146,7 +146,7 @@ public class RadiationManager {
         radiationExposure += amount;
 
         if (radiationExposure >= 1_000_000) {
-            EntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.RADIATION, Float.MAX_VALUE);
+            NtmEntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.RADIATION, Float.MAX_VALUE);
             setRadiationExposure(entity, 0);
         } else {
             setRadiationExposure(entity, radiationExposure);
@@ -216,7 +216,7 @@ public class RadiationManager {
 
         // Regular Radiation Effects
         if (radiationExposure >= 1_000_000) {
-            EntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.RADIATION, Float.MAX_VALUE);
+            NtmEntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.RADIATION, Float.MAX_VALUE);
             setRadiationExposure(entity, 0);
             return;
         }

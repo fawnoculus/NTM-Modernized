@@ -1,6 +1,6 @@
 package net.fawnoculus.ntm.entity.effects;
 
-import net.fawnoculus.ntm.util.EntityUtil;
+import net.fawnoculus.ntm.util.NtmEntityUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
@@ -28,7 +28,7 @@ public class ExplosionStatusEffect extends MobEffect {
         ExplosionDamageCalculator explosionBehavior = new SimpleExplosionDamageCalculator(true, true, Optional.empty(), Optional.empty());
         world.explode(
           null,
-          EntityUtil.newDamageSource(world, DamageTypes.EXPLOSION),
+          NtmEntityUtil.newDamageSource(world, DamageTypes.EXPLOSION),
           explosionBehavior,
           entity.getX(), entity.getY(), entity.getZ(),
           amplifier, false,

@@ -12,11 +12,13 @@
         "PlayerListMixin",
         "SerializableChunkDataMixin",
         "ServerLevelMixin",
-        "ServerPlayerGameModeMixin",
         "accessor.DimensionDataStorageAccessor",
         "accessor.MinecraftServerAccessor"
     ],
     "injectors": {
         "defaultRequire": 1
+    },
+    "overwrites": {
+        "requireAnnotations": true
     }
 }

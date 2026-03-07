@@ -1,8 +1,6 @@
 package net.fawnoculus.ntm.fabric;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -14,6 +12,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fawnoculus.ntm.NtmPlatform;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
@@ -66,34 +65,34 @@ public class NtmPlatformImpl {
         ItemGroupEvents.modifyEntriesEvent(resourceKey).register(entries -> modifications.accept(entries::accept));
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void addHudElementFirst(Identifier hudId, NtmPlatform.HudElement hudElement) {
         HudElementRegistry.addFirst(hudId, hudElement::render);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void addHudElementLast(Identifier hudId, NtmPlatform.HudElement hudElement) {
         HudElementRegistry.addLast(hudId, hudElement::render);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void addHudElementBefore(Identifier before, Identifier hudId, NtmPlatform.HudElement hudElement) {
         HudElementRegistry.attachElementBefore(before, hudId, hudElement::render);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void addHudElementAfter(Identifier after, Identifier hudId, NtmPlatform.HudElement hudElement) {
         HudElementRegistry.attachElementAfter(after, hudId, hudElement::render);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static boolean registerBuiltinResourcePack(Identifier identifier, Component name, NtmPlatform.PackActivationType activationType) {
         Optional<ModContainer> container = FabricLoader.getInstance().getModContainer(identifier.getNamespace());
         return container.filter(modContainer -> ResourceLoader.registerBuiltinPack(identifier, modContainer, name, transformActivationType(activationType))).isPresent();
 
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     private static PackActivationType transformActivationType(NtmPlatform.PackActivationType type) {
         return switch (type) {
             case ALWAYS_ON -> PackActivationType.ALWAYS_ENABLED;
@@ -102,31 +101,31 @@ public class NtmPlatformImpl {
         };
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void registerItemModelOverride(Function<Identifier, ItemModel.@Nullable Unbaked> override) {
         ModelLoadingPlugin.register(pluginContext ->
           pluginContext.modifyItemModelBeforeBake().register((original, context) -> Objects.requireNonNullElse(override.apply(context.itemId()), original))
         );
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void registerBlockModelOverride(Function<BlockState, BlockStateModel.@Nullable UnbakedRoot> override) {
         ModelLoadingPlugin.register(pluginContext ->
           pluginContext.modifyBlockModelBeforeBake().register((original, context) -> Objects.requireNonNullElse(override.apply(context.state()), original))
         );
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static @Nullable TextureAtlasSprite getFluidSprites(Fluid fluid) {
         return FluidVariantRendering.getSprite(FluidVariant.of(fluid));
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static List<Component> getFluidTooltip(Fluid fluid) {
         return FluidVariantRendering.getTooltip(FluidVariant.of(fluid));
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void registerScreenFactory(
       RegistrySupplier<MenuType<H>> type,
       NtmPlatform.ScreenFactory<H, S> factory

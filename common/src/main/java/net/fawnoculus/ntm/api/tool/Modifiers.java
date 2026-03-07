@@ -5,7 +5,7 @@ import net.fawnoculus.ntm.api.radiation.RadiationManager;
 import net.fawnoculus.ntm.entity.NtmStatusEffects;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.fawnoculus.ntm.misc.NtmSounds;
-import net.fawnoculus.ntm.util.EntityUtil;
+import net.fawnoculus.ntm.util.NtmEntityUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -136,7 +136,7 @@ public abstract class Modifiers {
         public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker, int level) {
             target.setHealth(target.getHealth() - level);
             if (target.getHealth() <= 0) {
-                target.die(EntityUtil.newDamageSource(target.level(), DamageTypes.MAGIC));
+                target.die(NtmEntityUtil.newDamageSource(target.level(), DamageTypes.MAGIC));
             }
             attacker.heal(level);
         }

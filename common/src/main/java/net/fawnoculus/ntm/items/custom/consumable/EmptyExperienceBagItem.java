@@ -6,7 +6,7 @@ import net.fawnoculus.ntm.api.messages.AdvancedMessage;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.fawnoculus.ntm.misc.NtmSounds;
 import net.fawnoculus.ntm.network.s2c.AdvancedMessagePayload;
-import net.fawnoculus.ntm.util.PlayerUtil;
+import net.fawnoculus.ntm.util.NtmPlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -47,7 +47,7 @@ public class EmptyExperienceBagItem extends Item {
             stack.shrink(1);
         }
         world.playSound(null, BlockPos.containing(player.position()).above(), NtmSounds.IV_BAG_INJECTS.get(), SoundSource.PLAYERS);
-        PlayerUtil.removeExperience(player, XP_PER_BAG);
+        NtmPlayerUtil.removeExperience(player, XP_PER_BAG);
         player.getInventory().placeItemBackInInventory(new ItemStack(NtmItems.EXPERIENCE_BAG));
 
         return InteractionResult.SUCCESS_SERVER;

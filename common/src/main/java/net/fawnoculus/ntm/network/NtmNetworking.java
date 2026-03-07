@@ -12,7 +12,7 @@ import net.fawnoculus.ntm.network.c2s.BEInteractionPayload;
 import net.fawnoculus.ntm.network.c2s.ItemInteractionPayload;
 import net.fawnoculus.ntm.network.c2s.ToolAbilityPresetPayload;
 import net.fawnoculus.ntm.network.s2c.AdvancedMessagePayload;
-import net.fawnoculus.ntm.util.WorldUtil;
+import net.fawnoculus.ntm.util.NtmWorldUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -64,7 +64,7 @@ public class NtmNetworking {
             return;
         }
 
-        if (player.getEyePosition().distanceTo(WorldUtil.getVec3d(payload.pos())) > player.blockInteractionRange() + 1) {
+        if (player.getEyePosition().distanceTo(NtmWorldUtil.getVec3d(payload.pos())) > player.blockInteractionRange() + 1) {
             if (NtmConfig.DEV_MODE.getValue()) {
                 Ntm.LOGGER.warn("Player '{}' tried to use action '{}' on BE at '{}' but was to far away", player.getName().tryCollapseToString(), payload.action().toString(), payload.pos().toShortString());
             }

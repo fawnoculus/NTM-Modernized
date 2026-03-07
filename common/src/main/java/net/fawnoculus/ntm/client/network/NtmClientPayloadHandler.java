@@ -69,7 +69,7 @@ public class NtmClientPayloadHandler {
           NetworkManager.Side.S2C,
           NtmVersionPayload.ID,
           NtmVersionPayload.STREAM_CODEC,
-          ClientReceivedVersionHandler::handlePacket
+          NtmClientReceivedVersionHandler::handlePacket
         );
 
         NetworkManager.registerReceiver(

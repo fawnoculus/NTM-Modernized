@@ -1,10 +1,11 @@
+![NTM-Modernized Icon](https://raw.githubusercontent.com/fawnoculus/NTM-Modernized/refs/heads/master/.idea/icon.png)
+# NTM-Modernized
+[![Available on Fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_64h.png)](https://fabricmc.net/)
+[![Available on Neoforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_64h.png)](https://neoforged.net/)
+[![Available on Quilt](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/quilt_64h.png)](https://quiltmc.net/)
 
-<div align="center">
-  <img src="./.idea/icon.png" alt="NTM-Modernized Icon" width="256">
-  <h1>NTM-Modernized</h1>
-  <a href="https://github.com/fawnoculus/NTM-Modernized/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/fawnoculus/NTM-Modernized?style=flat&color=900c3f" alt="Licence: GPL-3.0"></a>
-  <a href="https://github.com/fawnoculus/NTM-Modernized/actions/workflows/build.yml"><img src="https://github.com/fawnoculus/NTM-Modernized/actions/workflows/build.yml/badge.svg" alt="Build Workflow"></a>
-</div>
+[![Licensed under: GPL-3.0](https://img.shields.io/github/license/fawnoculus/NTM-Modernized?style=flat&color=900c3f)](https://github.com/fawnoculus/NTM-Modernized/blob/master/LICENSE.txt)
+[![Build Workflow](https://github.com/fawnoculus/NTM-Modernized/actions/workflows/build.yml/badge.svg)](https://github.com/fawnoculus/NTM-Modernized/actions/workflows/build.yml)
 
 ## What is NTM-Modernized?
 NTM-Modernized is an Attempt to recreate [HBM's NTM](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT) (a mod for 1.7.10) on modern Versions of Minecraft.
@@ -13,8 +14,8 @@ Depending on how development plays out some features from [NTM-Space](https://gi
 ## DISCLAIMERS
 1. I am not in any way associated with HBM (aka Bob), I am developing this Recreation purely because I liked HBM's NTM and at some point thought "Wow, this would be really cool in newer Versions!"
 2. NTM-Modernized is not even remotely finished!
-  Most Features are still missing, unfinished, unpolished or barely functioning.
-  There will be no release of mod on Modrinth / CurseForge until It is at least in a *"playable"* State
+   Most Features are still missing, unfinished, unpolished or barely functioning.
+   There will be no release of mod on Modrinth / CurseForge until It is at least in a *"playable"* State
 3. Don't bother contributors of the original mod with problems of this one! (We don't want to bother them with hundreds of unnecessary Bug Reports!)
 
 ## Installing NTM-Modernized
@@ -34,21 +35,21 @@ For now your Options for getting this mod are:
 
 ## Building it from Source
 Building it from source should be unnecessary as you can download a jar of the latest commit from [GitHub Actions](https://github.com/fawnoculus/NTM-Modernized/actions/workflows/build.yml)
-* Make sure you have [**JDK-21**](https://adoptium.net/temurin/releases/?variant=openjdk8&jvmVariant=hotspot&package=jdk&version=21) and [**git**](https://git-scm.com/downloads) installed
-* Open PowerShell (or Bash if you are using Linux)
-* Navigate to the Directory you wish to copy the Sources to
+- Make sure you have [**JDK-21**](https://adoptium.net/temurin/releases/?variant=openjdk8&jvmVariant=hotspot&package=jdk&version=21) and [**git**](https://git-scm.com/downloads) installed
+- Open PowerShell (or Bash if you are using Linux)
+- Navigate to the Directory you wish to copy the Sources to
 ```shell
 cd $HOME/Downloads/
 ```
-* Download the Sources
+- Download the Sources
 ```shell
 git clone https://github.com/fawnoculus/NTM-Modernized
 ```
-* enter the sources directory
+- enter the sources directory
 ```shell
 cd NTM-Modernized
 ```
-* build the Mod
+- build the Mod
 ```shell
 ./gradlew build
 ```
@@ -60,5 +61,8 @@ where ***MODLOADER*** is replaced by the Modloader for which you want the mod fi
 Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for information of how you can aid in development.
 
 ## Licence
-This software is licensed under the GNU Public License version 3. In short: This software is free, you may run the software freely, create modified versions,
+This software is licensed under the GNU Public License version 3.0 In short: This software is free, you may run the software freely, create modified versions,
 distribute this software and distribute modified versions, as long as the modified software too has a free software license. The full license can be found in the `LICENSE.txt` file.
+
+Based on [MultiLoader-Template](https://github.com/jaredlll08/MultiLoader-Template) which is licensed under Creative Commons 1.0 Universal,
+see their license [here](https://github.com/jaredlll08/MultiLoader-Template/blob/1.21.11/LICENSE)

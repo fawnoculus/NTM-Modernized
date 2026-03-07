@@ -90,6 +90,7 @@ public class NodeNetwork {
 
     /**
      * removes all connections from a node &AMP; removes the node from the network
+     * <p>TODO: make the performance of this not suck
      *
      * @param originNode the Node to me removed
      */

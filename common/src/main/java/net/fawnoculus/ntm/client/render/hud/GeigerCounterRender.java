@@ -2,9 +2,9 @@ package net.fawnoculus.ntm.client.render.hud;
 
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.client.api.radiation.ClientRadiationManager;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.fawnoculus.ntm.items.NtmItems;
-import net.fawnoculus.ntm.util.PlayerUtil;
+import net.fawnoculus.ntm.util.NtmPlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -23,7 +23,7 @@ public class GeigerCounterRender {
     private static final int COLOR = ARGB.color(256, 256, 256);
 
     private static boolean shouldDraw() {
-        return ClientUtil.hasPlayer() && PlayerUtil.hasItem(ClientUtil.getPlayer(), NtmItems.GEIGER_COUNTER);
+        return NtmClientUtil.hasPlayer() && NtmPlayerUtil.hasItem(NtmClientUtil.getPlayer(), NtmItems.GEIGER_COUNTER);
     }
 
     public static void drawGeigerCounter(GuiGraphics guiGraphics, DeltaTracker ignored) {

@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import dev.architectury.platform.Platform;
 import io.netty.buffer.ByteBuf;
 import net.fawnoculus.ntm.Ntm;
-import net.fawnoculus.ntm.util.ExceptionUtil;
-import net.fawnoculus.ntm.util.JsonUtil;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
+import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -46,22 +46,22 @@ public class HazmatRegistry {
                         fileWriter.write("\t\"example:no_longer_radiation_resistance_giving\": 0\n");
                         fileWriter.write("}");
                     } catch (Exception e) {
-                        Ntm.LOGGER.error("An Exception occurred while trying write Examples to Hazmat Overrides File\nException:{}", ExceptionUtil.makePretty(e));
+                        Ntm.LOGGER.error("An Exception occurred while trying write Examples to Hazmat Overrides File\nException:{}", NtmJavaUtil.makePretty(e));
                     }
                 } else {
                     Ntm.LOGGER.warn("Failed to crate Hazmat Overrides File");
                 }
             } catch (Exception e) {
-                Ntm.LOGGER.error("An Exception occurred while trying to crate Hazmat Overrides File\nException:{}", ExceptionUtil.makePretty(e));
+                Ntm.LOGGER.error("An Exception occurred while trying to crate Hazmat Overrides File\nException:{}", NtmJavaUtil.makePretty(e));
             }
             return;
         }
         JsonObject overrides = new JsonObject();
         try {
             FileReader fileReader = new FileReader(file);
-            overrides = JsonUtil.jsonFromReader(fileReader);
+            overrides = NtmCodecUtil.jsonFromReader(fileReader);
         } catch (Exception e) {
-            Ntm.LOGGER.error("An Exception occurred while trying read Hazmat Overrides File\nException:{}", ExceptionUtil.makePretty(e));
+            Ntm.LOGGER.error("An Exception occurred while trying read Hazmat Overrides File\nException:{}", NtmJavaUtil.makePretty(e));
         }
 
         for (String key : overrides.keySet()) {
@@ -70,7 +70,7 @@ public class HazmatRegistry {
                 Double value = overrides.get(key).getAsDouble();
                 hazmatOverrides.put(identifier, value);
             } catch (Exception e) {
-                Ntm.LOGGER.error("An Exception occurred while trying parse Hazmat Overrides for {}\nException:{}", key, ExceptionUtil.makePretty(e));
+                Ntm.LOGGER.error("An Exception occurred while trying parse Hazmat Overrides for {}\nException:{}", key, NtmJavaUtil.makePretty(e));
             }
         }
 

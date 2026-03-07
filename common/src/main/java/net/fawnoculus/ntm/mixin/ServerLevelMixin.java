@@ -42,11 +42,11 @@ public abstract class ServerLevelMixin implements RadiationProcessorMultiHolder 
         if (this.getServer().tickRateManager().runsNormally()) {
             ProfilerFiller profiler = Profiler.get();
 
-            profiler.push("[NTM] radiationManager");
+            profiler.push("ntm_radiation_manager");
             RadiationManager.tick(this.getLevel(), this.entityTickList);
             profiler.pop();
 
-            profiler.push("[NTM] nodeNetworks");
+            profiler.push("ntm_node_networks");
             NodeNetworkManager.tickNetworks();
             profiler.pop();
         }

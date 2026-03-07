@@ -1,9 +1,8 @@
 package net.fawnoculus.ntm.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fawnoculus.ntm.NtmProxy;
-import net.fawnoculus.ntm.client.util.ClientUtil;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
+import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -20,7 +19,7 @@ import org.jetbrains.annotations.ApiStatus;
 
 // This class is technically acceptable in both environments
 public class NtmClientProxy extends NtmProxy {
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     @ApiStatus.Internal
     private static final NtmClientProxy INSTANCE = new NtmClientProxy();
 
@@ -36,7 +35,7 @@ public class NtmClientProxy extends NtmProxy {
      *
      * @return The proxy to be used on Clients
      */
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     @ApiStatus.Internal
     public static NtmClientProxy getClientProxy() {
         return INSTANCE;
@@ -54,8 +53,8 @@ public class NtmClientProxy extends NtmProxy {
 
     @Override
     public void playSoundToPlayer(Player player, Holder<SoundEvent> sound, SoundSource category, double x, double y, double z, float volume, float pitch, long seed) {
-        if (player instanceof LocalPlayer localPlayer && localPlayer.equals(ClientUtil.getPlayer())) {
-            ClientUtil.playSound(new SimpleSoundInstance(sound.value(), category, volume, pitch, RandomSource.create(seed), x, y, z));
+        if (player instanceof LocalPlayer localPlayer && localPlayer.equals(NtmClientUtil.getPlayer())) {
+            NtmClientUtil.playSound(new SimpleSoundInstance(sound.value(), category, volume, pitch, RandomSource.create(seed), x, y, z));
             return;
         }
         if (player instanceof ServerPlayer serverPlayer) {

@@ -3,7 +3,7 @@ package net.fawnoculus.ntm.items.custom.consumable;
 import net.fawnoculus.ntm.entity.NtmDamageTypes;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.fawnoculus.ntm.misc.NtmSounds;
-import net.fawnoculus.ntm.util.EntityUtil;
+import net.fawnoculus.ntm.util.NtmEntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -28,7 +28,7 @@ public class IvBagItem extends Item {
             return InteractionResult.SUCCESS;
         }
         if (!player.isCreative()) {
-            EntityUtil.applyDamage(player, (ServerLevel) world, NtmDamageTypes.BLOOD_LOSS, 5F);
+            NtmEntityUtil.applyDamage(player, (ServerLevel) world, NtmDamageTypes.BLOOD_LOSS, 5F);
             ItemStack stack = player.getItemInHand(hand);
             stack.shrink(1);
         }
@@ -44,7 +44,7 @@ public class IvBagItem extends Item {
             return;
         }
         if (!player.isCreative()) {
-            EntityUtil.applyDamage(target, world, NtmDamageTypes.BLOOD_LOSS, 5F);
+            NtmEntityUtil.applyDamage(target, world, NtmDamageTypes.BLOOD_LOSS, 5F);
             stack.shrink(1);
         }
         world.playSound(null, BlockPos.containing(target.position()).above(), NtmSounds.IV_BAG_INJECTS.get(), SoundSource.PLAYERS);

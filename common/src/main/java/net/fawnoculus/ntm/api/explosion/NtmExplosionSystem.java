@@ -18,7 +18,7 @@ public class NtmExplosionSystem {
     }
 
     public static void processExplosions(@Range(from = 0, to = Long.MAX_VALUE) long maxNanos) {
-        maxNanos = Math.min(maxNanos, NtmConfig.MIN_EXPLOSION_NANOS.getValue());
+        maxNanos = Math.max(maxNanos, NtmConfig.MIN_EXPLOSION_NANOS.getValue());
 
         final long endNanoTime = System.nanoTime() + maxNanos;
         long currentNanoTime = System.nanoTime();

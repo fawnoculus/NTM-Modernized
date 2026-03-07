@@ -113,7 +113,7 @@ public class PerWorldConfigOption<T> {
         if (this.DEFAULT.setValueFrom(element, JsonOps.INSTANCE)) {
             onSuccess.accept(Component.translatable("command.ntm.set_config_value", this.NAME, value));
             file.writeFile();
-            return 1;
+            return 0;
         }
 
         onFailure.accept(Component.translatable("command.ntm.set_config_value.failed", this.NAME, value));

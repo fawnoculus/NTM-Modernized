@@ -27,8 +27,6 @@ public class PerWorldConfigFile {
         this.WORLD_SUB_PATH = worldSubPath;
         this.DEFAULT_SUB_PATH = defaultSubPath;
         this.DEFAULT_CONFIG = new ConfigFile(encoding, defaultSubPath);
-
-        PER_WORLD_CONFIG_FILES.add(this);
     }
 
     public static List<PerWorldConfigFile> getPerWorldConfigFiles() {
@@ -61,7 +59,7 @@ public class PerWorldConfigFile {
         for (PerWorldConfigOption<?> option : OPTIONS) {
             get.then(option.getGetCommand());
             set.then(option.getSetCommand(this));
-            set.then(option.getSetDefaultCommand(this));
+            setDefault.then(option.getSetDefaultCommand(this));
         }
 
         return Commands.literal(commandName)
@@ -89,6 +87,7 @@ public class PerWorldConfigFile {
     }
 
     public void init() {
+        PER_WORLD_CONFIG_FILES.add(this);
         this.DEFAULT_CONFIG.init();
     }
 

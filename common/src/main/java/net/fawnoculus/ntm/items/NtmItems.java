@@ -17,7 +17,7 @@ import net.fawnoculus.ntm.items.custom.tools.*;
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
 import net.fawnoculus.ntm.misc.NtmDeferredRegistries;
 import net.fawnoculus.ntm.misc.NtmSounds;
-import net.fawnoculus.ntm.util.EntityUtil;
+import net.fawnoculus.ntm.util.NtmEntityUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -716,9 +716,9 @@ public class NtmItems {
       new InjectionItem(settings, NtmSounds.SYRINGE_INJECTS, EMPTY_SYRINGE,
         (serverWorld, entity) -> {
             if (!entity.hasInfiniteMaterials()) {
-                EntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.EUTHANIZED, 30f);
+                NtmEntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.EUTHANIZED, 30f);
             } else {
-                EntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.EUTHANIZED, 2f);
+                NtmEntityUtil.applyDamage(entity, serverWorld, NtmDamageTypes.EUTHANIZED, 2f);
             }
         })
     );
@@ -763,7 +763,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> FIRST_AID_KIT = register("first_aid_kit", settings -> new InjectionWithTooltipItem(settings, 2, null, List.of(),
       (serverWorld, entity) -> {
           entity.setHealth(entity.getMaxHealth());
-          EntityUtil.removeNegativeEffects(entity);
+          NtmEntityUtil.removeNegativeEffects(entity);
       }));
 
     public static final RegistrySupplier<Item> IV_BAG = register("iv_bag", IvBagItem::new);
@@ -773,13 +773,13 @@ public class NtmItems {
     public static final RegistrySupplier<Item> EMPTY_EXPERIENCE_BAG = register("empty_experience_bag", EmptyExperienceBagItem::new);
     public static final RegistrySupplier<Item> EXPERIENCE_BAG = register("experience_bag", ExperienceBagItem::new);
     public static final RegistrySupplier<Item> RAD_AWAY = register("rad_away", settings -> new InjectionItem(settings, NtmSounds.IV_BAG_INJECTS, IV_BAG,
-      (serverWorld, entity) -> EntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 140)
+      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 140)
     ));
     public static final RegistrySupplier<Item> STRONG_RAD_AWAY = register("strong_rad_away", settings -> new InjectionItem(settings, NtmSounds.IV_BAG_INJECTS, IV_BAG,
-      (serverWorld, entity) -> EntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 350)
+      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 350)
     ));
     public static final RegistrySupplier<Item> ELITE_RAD_AWAY = register("elite_rad_away", settings -> new InjectionItem(settings, NtmSounds.IV_BAG_INJECTS, IV_BAG,
-      (serverWorld, entity) -> EntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 500)
+      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 500)
     ));
     public static final RegistrySupplier<Item> RAD_X = register("rad_x", TooltipItem::new, () -> new Item.Properties()
       .food(NtmFoodComponents.ALWAYS_EDIBLE, NtmConsumableComponents.RAD_X)

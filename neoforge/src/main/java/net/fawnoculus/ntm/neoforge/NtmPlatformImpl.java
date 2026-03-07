@@ -3,6 +3,7 @@ package net.fawnoculus.ntm.neoforge;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.NtmPlatform;
+import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
@@ -24,8 +25,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
@@ -90,22 +89,22 @@ public class NtmPlatformImpl {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static void addHudElementFirst(Identifier hudId, NtmPlatform.HudElement hudElement) {
         FIST_HUD_ELEMENTS.add(new HudElementInstance(hudId, hudElement));
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static void addHudElementLast(Identifier hudId, NtmPlatform.HudElement hudElement) {
         LAST_HUD_ELEMENTS.add(new HudElementInstance(hudId, hudElement));
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static void addHudElementBefore(Identifier before, Identifier hudId, NtmPlatform.HudElement hudElement) {
         BEFORE_HUD_ELEMENTS.add(new RelativeHudElementInstance(toNeoforgeHudId(before), hudId, hudElement));
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static void addHudElementAfter(Identifier after, Identifier hudId, NtmPlatform.HudElement hudElement) {
         AFTER_HUD_ELEMENTS.add(new RelativeHudElementInstance(toNeoforgeHudId(after), hudId, hudElement));
     }
@@ -175,14 +174,14 @@ public class NtmPlatformImpl {
         return ntmPlatformId;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static boolean registerBuiltinResourcePack(Identifier identifier, Component name, NtmPlatform.PackActivationType activationType) {
         RESOURCE_PACKS.add(new ResourcePack(identifier, name, activationType));
         return true;
     }
 
+    @ClientOnly
     @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
     public static void addPackFindersEvent(AddPackFindersEvent addPackFindersEvent) {
         if (addPackFindersEvent.getPackType() != PackType.CLIENT_RESOURCES) {
             return;
@@ -200,12 +199,12 @@ public class NtmPlatformImpl {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static void registerItemModelOverride(Function<Identifier, ItemModel.@Nullable Unbaked> override) {
         ITEM_MODEL_OVERRIDES.add(override);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static ItemModel.@Nullable Unbaked getItemModelOverride(Identifier itemId) {
         ItemModel.@Nullable Unbaked model = null;
         for (Function<Identifier, ItemModel.@Nullable Unbaked> override : ITEM_MODEL_OVERRIDES) {
@@ -217,12 +216,12 @@ public class NtmPlatformImpl {
         return model;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static void registerBlockModelOverride(Function<BlockState, BlockStateModel.@Nullable UnbakedRoot> override) {
         BLOCK_STATE_MODEL_OVERRIDES.add(override);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static BlockStateModel.@Nullable UnbakedRoot getBlockModelOverride(BlockState blockState) {
         BlockStateModel.@Nullable UnbakedRoot model = null;
         for (Function<BlockState, BlockStateModel.@Nullable UnbakedRoot> override : BLOCK_STATE_MODEL_OVERRIDES) {
@@ -234,17 +233,17 @@ public class NtmPlatformImpl {
         return model;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static TextureAtlasSprite getFluidSprites(Fluid fluid) {
         return FluidSpriteCache.getSprite(BuiltInRegistries.FLUID.getKey(fluid));
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static List<Component> getFluidTooltip(Fluid fluid) {
         return List.of(); // TODO: actually get Fluid Tooltips on Neoforge
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public static <H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>> void registerScreenFactory(
       RegistrySupplier<MenuType<H>> type,
       NtmPlatform.ScreenFactory<H, S> factory
@@ -252,8 +251,8 @@ public class NtmPlatformImpl {
         SCREEN_FACTORIES.add(new ScreenFactoryInstance<>(type, factory));
     }
 
+    @ClientOnly
     @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
     public static void addPackFindersEvent(RegisterMenuScreensEvent menuScreensEvent) {
         for (var screenFactory : SCREEN_FACTORIES) {
             addScreenFactory(menuScreensEvent, screenFactory);
@@ -268,20 +267,20 @@ public class NtmPlatformImpl {
         menuScreensEvent.register(screenFactoryInstance.type.get(), screenFactoryInstance.factory::create);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     private record ResourcePack(Identifier identifier, Component name, NtmPlatform.PackActivationType activationType) {
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     private record HudElementInstance(Identifier hudId, NtmPlatform.HudElement hudElement) {
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     private record RelativeHudElementInstance(Identifier relative, Identifier hudId,
                                               NtmPlatform.HudElement hudElement) {
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     private record ScreenFactoryInstance<H extends AbstractContainerMenu, S extends Screen & MenuAccess<H>>(
       RegistrySupplier<MenuType<H>> type,
       NtmPlatform.ScreenFactory<H, S> factory

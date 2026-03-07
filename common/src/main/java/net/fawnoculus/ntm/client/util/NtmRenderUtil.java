@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.Objects;
 
-public class RenderUtil {
+public class NtmRenderUtil {
     public static void drawVariableWidthRect(
       GuiGraphics guiGraphics, Identifier texture,
       int x, int y,

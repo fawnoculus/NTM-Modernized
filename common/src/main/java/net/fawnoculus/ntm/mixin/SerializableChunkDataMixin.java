@@ -18,14 +18,17 @@ public class SerializableChunkDataMixin implements CustomDataHolder {
     @Unique
     CompoundTag ntm$customData = new CompoundTag();
 
-    @Inject(method = "parse", at = @At(value = "RETURN"))
-    private static void earlyJoin(
+    @Inject(method = "parse", at = @At(value = "RETURN", ordinal = 1))
+    private static void getCustomData(
       LevelHeightAccessor levelHeightAccessor,
       PalettedContainerFactory palettedContainerFactory,
       CompoundTag tag,
       CallbackInfoReturnable<SerializableChunkData> cir
     ) {
-        CustomDataHolder.from(cir.getReturnValue()).ntm$setCustomData(tag.getCompoundOrEmpty(CustomDataHolder.KEY));
+        SerializableChunkData chunkData = cir.getReturnValue();
+        if (chunkData != null) {
+            CustomDataHolder.from(chunkData).ntm$setCustomData(tag.getCompoundOrEmpty(CustomDataHolder.KEY));
+        }
     }
 
     @Override

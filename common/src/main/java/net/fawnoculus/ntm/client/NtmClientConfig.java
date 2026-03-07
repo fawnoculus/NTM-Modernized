@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import net.fawnoculus.ntm.api.config.ConfigFile;
 import net.fawnoculus.ntm.api.config.ConfigOption;
 import net.fawnoculus.ntm.api.config.encoder.JsonConfigEncoder;
+import net.fawnoculus.ntm.util.NtmCodecUtil;
 
 public class NtmClientConfig {
     public static final ConfigFile CLIENT_CONFIG_FILE = new ConfigFile(JsonConfigEncoder.getInstance(), "ntm/client.json");
@@ -16,9 +17,10 @@ public class NtmClientConfig {
       "tool_ability_y_offset", Codec.INT, 10,
       "Tool ability display y offset from crosshair [default: 10]"
     );
-    public static final ConfigOption<Boolean> FIX_EFFECT_LEVEL = CLIENT_CONFIG_FILE.newOption(
-      "fix_effect_level", Codec.BOOL, true,
-      "If Status Effects with high Amplifiers should be displayed as Arabic Numerals if the roman Numeral is not Available [default: true]"
+    public static final ConfigOption<EffectLevelFix> FIX_EFFECT_LEVEL = CLIENT_CONFIG_FILE.newOption(
+      "high_effect_level_fix", EffectLevelFix.CODEC, EffectLevelFix.DECIMAL_IF_TO_BIG,
+      "Fix for Minecraft incorrectly displaying large status effect levels that should be used " +
+        "(values: NONE, LARGE_ROMAN_NUMERALS, ALWAYS_DECIMAL, DECIMAL_IF_TO_BIG) [default: DECIMAL_IF_TO_BIG]"
     );
     public static final ConfigOption<Boolean> BLOCK_MODEL_AMBIENT_OCCLUSION = CLIENT_CONFIG_FILE.newOption(
       "block_model_ambient_occlusion", Codec.BOOL, false,
@@ -28,6 +30,15 @@ public class NtmClientConfig {
       "shade_models", Codec.BOOL, true,
       "whether to shade the models [default: true]"
     );
+
+    public enum EffectLevelFix {
+        NONE,
+        LARGE_ROMAN_NUMERALS,
+        ALWAYS_DECIMAL,
+        DECIMAL_IF_TO_BIG;
+
+        public static final Codec<EffectLevelFix> CODEC = NtmCodecUtil.getEnumCodec(EffectLevelFix.class);
+    }
 
     public static void init() {
         CLIENT_CONFIG_FILE.init();

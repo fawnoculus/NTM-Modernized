@@ -3,8 +3,8 @@ package net.fawnoculus.ntm.api.tool;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.NtmConfig;
 import net.fawnoculus.ntm.items.NtmItems;
-import net.fawnoculus.ntm.util.EnchantmentUtil;
-import net.fawnoculus.ntm.util.WorldUtil;
+import net.fawnoculus.ntm.util.NtmEnchantmentUtil;
+import net.fawnoculus.ntm.util.NtmWorldUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -200,9 +200,9 @@ public abstract class Abilities {
                 return false;
             }
 
-            EnchantmentUtil.addEnchantment(world, Enchantments.SILK_TOUCH, 1, stack);
-            WorldUtil.dropItemsFromBlock(world, pos, miner, stack);
-            EnchantmentUtil.removeEnchantment(Enchantments.SILK_TOUCH, stack);
+            NtmEnchantmentUtil.addEnchantment(world, Enchantments.SILK_TOUCH, 1, stack);
+            NtmWorldUtil.dropItemsFromBlock(world, pos, miner, stack);
+            NtmEnchantmentUtil.removeEnchantment(Enchantments.SILK_TOUCH, stack);
             return false;
         }
     };
@@ -225,9 +225,9 @@ public abstract class Abilities {
                 return false;
             }
 
-            EnchantmentUtil.addEnchantment(world, Enchantments.FORTUNE, level, stack);
-            WorldUtil.dropItemsFromBlock(world, pos, miner, stack);
-            EnchantmentUtil.removeEnchantment(Enchantments.FORTUNE, stack);
+            NtmEnchantmentUtil.addEnchantment(world, Enchantments.FORTUNE, level, stack);
+            NtmWorldUtil.dropItemsFromBlock(world, pos, miner, stack);
+            NtmEnchantmentUtil.removeEnchantment(Enchantments.FORTUNE, stack);
             return false;
         }
     };

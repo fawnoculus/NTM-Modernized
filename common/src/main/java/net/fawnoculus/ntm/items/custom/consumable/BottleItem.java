@@ -2,7 +2,7 @@ package net.fawnoculus.ntm.items.custom.consumable;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fawnoculus.ntm.items.NtmItems;
-import net.fawnoculus.ntm.util.PlayerUtil;
+import net.fawnoculus.ntm.util.NtmPlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -40,7 +40,7 @@ public class BottleItem extends Item {
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level world, @NonNull Player playerEntity, @NonNull InteractionHand hand) {
-        if (!PlayerUtil.hasItem(playerEntity, NtmItems.BOTTLE_OPENER)) {
+        if (!NtmPlayerUtil.hasItem(playerEntity, NtmItems.BOTTLE_OPENER)) {
             return InteractionResult.FAIL;
         }
         return super.use(world, playerEntity, hand);
