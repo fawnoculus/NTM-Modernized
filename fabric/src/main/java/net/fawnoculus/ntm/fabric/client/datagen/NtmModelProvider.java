@@ -18,7 +18,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
@@ -100,7 +99,7 @@ public class NtmModelProvider extends FabricModelProvider {
         blockStateModelGenerator.createTrivialCube(NtmBlocks.OIL_DEPOSIT.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.DEEPSLATE_OIL_DEPOSIT.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.EMPTY_OIL_DEPOSIT.get());
-        blockStateModelGenerator.createTrivialCube(NtmBlocks.DEEPSLATE_EMPTY_OIL_DEPOSIT.get());
+        blockStateModelGenerator.createTrivialCube(NtmBlocks.EMPTY_DEEPSLATE_OIL_DEPOSIT.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.ALUMINIUM_ORE_CLUSTER.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.DEEPSLATE_ALUMINIUM_ORE_CLUSTER.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.COPPER_ORE_CLUSTER.get());
@@ -112,6 +111,7 @@ public class NtmModelProvider extends FabricModelProvider {
         blockStateModelGenerator.createTrivialCube(NtmBlocks.DEAD_DIRT.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.OILY_DIRT.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.OILY_SAND.get());
+        blockStateModelGenerator.createTrivialCube(NtmBlocks.RED_OILY_SAND.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.DEPTH_ROCK.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.DEPTH_CINNABAR_ORE.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.DEPTH_ZIRCONIUM_ORE.get());
@@ -209,7 +209,6 @@ public class NtmModelProvider extends FabricModelProvider {
         blockStateModelGenerator.createTrivialCube(NtmBlocks.PLUTONIUM_238_BLOCK.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.PLUTONIUM_239_BLOCK.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.PLUTONIUM_240_BLOCK.get());
-        blockStateModelGenerator.createTrivialCube(NtmBlocks.PLUTONIUM_241_BLOCK.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.POLONIUM_210_BLOCK.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.POLYMER_BLOCK.get());
         blockStateModelGenerator.createTrivialCube(NtmBlocks.RADIUM_226_BLOCK.get());
@@ -256,12 +255,6 @@ public class NtmModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSingleton(NtmBlocks.TECHNETIUM_STEEL_BARREL, SIMPLE_BARREL);
         blockStateModelGenerator.registerSingleton(NtmBlocks.MAGNETIC_BARREL, SIMPLE_BARREL);
          */
-
-        registerSimpleHorizontalOrientable(blockStateModelGenerator, NtmBlocks.POTATO_BATTERY_BLOCK.get());
-        registerSimpleHorizontalOrientable(blockStateModelGenerator, NtmBlocks.ENERGY_STORAGE_BLOCK.get());
-        registerSimpleHorizontalOrientable(blockStateModelGenerator, NtmBlocks.LITHIUM_ION_ENERGY_STORAGE_BLOCK.get());
-        registerSimpleHorizontalOrientable(blockStateModelGenerator, NtmBlocks.SCHRABIDIUM_ENERGY_STORAGE_BLOCK.get());
-        registerSimpleHorizontalOrientable(blockStateModelGenerator, NtmBlocks.SPARK_ENERGY_STORAGE_BLOCK.get());
 
 
         TextureMapping alloyFurnaceTextureMap = new TextureMapping()
@@ -413,10 +406,10 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.AUSTRALIUM_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.AUSTRALIUM_BILLET.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.AUSTRALIUM_NUGGET.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.LESSER_AUSTRALIUM_BILLET.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.LESSER_AUSTRALIUM_NUGGET.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.GREATER_AUSTRALIUM_BILLET.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.GREATER_AUSTRALIUM_NUGGET.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.LESSER_AUSTRALIUM_BILLET.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.LESSER_AUSTRALIUM_NUGGET.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.AUSTRALIUM_POWDER.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.BAKELITE_BAR.get(), ModelTemplates.FLAT_ITEM);
@@ -441,7 +434,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.BISMUTH_BRONZE_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.CAST_BISMUTH_BRONZE_PLATE.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.BORAX_POWDER.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.BORAX.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.BORON_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.BORON_POWDER.get(), ModelTemplates.FLAT_ITEM);
@@ -491,6 +484,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.CARBON_WIRE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.COAL_BRIQUETTE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.COAL_COKE.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.COAL_CRYSTALS.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.COBALT_BILLET.get(), ModelTemplates.FLAT_ITEM);
@@ -524,6 +518,9 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.RAW_CRYOLITE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.CRYOLITE_CHUNK.get(), ModelTemplates.FLAT_ITEM);
 
+        itemModelGenerator.generateFlatItem(NtmItems.CRYSTAL_HORN.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.CRYSTAL_CHARRED.get(), ModelTemplates.FLAT_ITEM);
+
         itemModelGenerator.generateFlatItem(NtmItems.DESH_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.DESH_BLEND.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.DESHREADY_BLEND.get(), ModelTemplates.FLAT_ITEM);
@@ -549,17 +546,17 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.EUPHEMIUM_POWDER.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.EUPHEMIUM_NUGGET.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.FERRIC_SCHARBIDATE_INGOT.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.FERRIC_SCHARBIDATE_POWDER.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.CAST_FERRIC_SCHARBIDATE_PLATE.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.DENSE_FERRIC_SCHARBIDATE_WIRE.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.FERRIC_SCHRABIDATE_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.FERRIC_SCHRABIDATE_POWDER.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.CAST_FERRIC_SCHRABIDATE_PLATE.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.DENSE_FERRIC_SCHRABIDATE_WIRE.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.FERROURANIUM_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.CAST_FERROURANIUM_PLATE.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.FLASH_GOLD.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.FLASH_GOLD_BILLET.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.FLASH_LEAD.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.FLASH_LEAD_BILLET.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.FLUORITE_CRYSTALS.get(), ModelTemplates.FLAT_ITEM);
@@ -567,7 +564,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.FLUX.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.FULLERENE.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.CRYSTALLINE_FULLERENE.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.CRYSTALLINE_FULLERITE.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.GHIORSIUM_336_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.GHIORSIUM_336_BILLET.get(), ModelTemplates.FLAT_ITEM);
@@ -687,7 +684,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.DENSE_NIOBIUM_WIRE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.NIOBIUM_FRAGMENT.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.NITAN_BLEND.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.NITANIUM_BLEND.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.NITER.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.NITER_CRYSTALS.get(), ModelTemplates.FLAT_ITEM);
@@ -780,7 +777,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.CAST_SATURNITE_PLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SATURNITE_SHELL.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.SAWDUST_POWDER.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.SAWDUST.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SAWDUST_BRIQUETTE.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.RAW_SCHRABIDIUM.get(), ModelTemplates.FLAT_ITEM);
@@ -814,7 +811,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.PRINTED_SILICON_WAFER.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SILICON_NUGGET.get(), ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(NtmItems.SODIUM_POWDER.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.SODIUM.get(), ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(NtmItems.SOLINIUM_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SOLINIUM_BILLET.get(), ModelTemplates.FLAT_ITEM);
@@ -917,6 +914,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.URANIUM_238_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.URANIUM_238_BILLET.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.URANIUM_238_NUGGET.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.URANIUM_ZIRCONIUM_HYDRIDE_BILLET.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.URANIUM_POWDER.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.URANIUM_CRYSTALS.get(), ModelTemplates.FLAT_ITEM);
 
@@ -948,7 +946,9 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.NETWORK_DEBUG_TOOL.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.GEIGER_COUNTER.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.DOSIMETER.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.ROD_OF_DISCORD.get(), ModelTemplates.FLAT_ITEM);
 
+        /*
         // Batteries
         itemModelGenerator.generateFlatItem(NtmItems.BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.REDSTONE_POWER_CELL.get(), ModelTemplates.FLAT_ITEM);
@@ -986,6 +986,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.SELF_CHARGING_GOLD_198_BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SELF_CHARGING_LEAD_209_BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SELF_CHARGING_AMERICIUM_241_BATTERY.get(), ModelTemplates.FLAT_ITEM);
+         */
 
         // Consumables
         itemModelGenerator.generateFlatItem(NtmItems.EMPTY_SYRINGE.get(), ModelTemplates.FLAT_ITEM);
@@ -1026,7 +1027,7 @@ public class NtmModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(NtmItems.EXPENSIVE_TEM_FLAKES.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.GLOWING_MUSHROOM_STEW.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.SCRAMBLED_BALEFIRE_EGG.get(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(NtmItems.SCRAMBLED_BALEFIRE_EGG_AND_HAM.get(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(NtmItems.HAM_AND_BALEFIRE_EGGS.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.LEMON.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.MRE.get(), ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(NtmItems.LOOPS.get(), ModelTemplates.FLAT_ITEM);
@@ -1149,10 +1150,5 @@ public class NtmModelProvider extends FabricModelProvider {
 
         itemModelGenerator.generateFlatItem(NtmItems.MESE_PICKAXE.get(), HANDHELD_LARGE);
         itemModelGenerator.generateFlatItem(NtmItems.MESE_AXE.get(), HANDHELD_LARGE);
-    }
-
-    @Override
-    public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Model Provider";
     }
 }

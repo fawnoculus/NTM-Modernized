@@ -1,12 +1,13 @@
 package net.fawnoculus.ntm.fabric.client.datagen.tags;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import org.jspecify.annotations.NonNull;
 
@@ -17,8 +18,12 @@ public class NtmEntityTypeTagProvider extends FabricTagProvider<EntityType<?>> {
         super(output, Registries.ENTITY_TYPE, registriesFuture);
     }
 
-    private static Identifier id(EntityType<?> entityType) {
-        return BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+    private static Identifier id(RegistrySupplier<EntityType<?>> entityType) {
+        return BuiltInRegistries.ENTITY_TYPE.getKey(entityType.get());
+    }
+
+    private static TagKey<EntityType<?>> cTag(String name) {
+        return TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("c", name));
     }
 
     @Override
@@ -27,6 +32,6 @@ public class NtmEntityTypeTagProvider extends FabricTagProvider<EntityType<?>> {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " EntityType-Tag Provider";
+        return "EntityType-Tag Provider";
     }
 }

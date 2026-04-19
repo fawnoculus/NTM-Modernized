@@ -12,6 +12,7 @@ public class NtmJavaUtil {
      * Makes a {@link Throwable} look pretty for logging
      * (I know that you can just pass a Throwable directly to a logger,
      * but this may also be used for output to the chat and allows for disabling the stacktrace)
+     *
      * @see NtmJavaUtil#makePretty(Throwable, boolean)
      */
     public static @NotNull String makePretty(@NotNull Throwable throwable) {
@@ -43,6 +44,7 @@ public class NtmJavaUtil {
     /**
      * Creates a {@link VarArgFunction} to be used in context where you need to make a functional interface that will always just return a value
      * this can be used by using "{@linkplain NtmJavaUtil NtmJavaUtil.}{@linkplain NtmJavaUtil#valueFunc(Object) valueFunc(VALUE_HERE)}{@linkplain VarArgFunction#apply(Object...) ::apply}"
+     *
      * @param value the value that will be returned by the created function
      */
     @SuppressWarnings("JavadocDeclaration")

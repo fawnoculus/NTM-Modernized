@@ -5,6 +5,7 @@ import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.messages.AdvancedMessage;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.fawnoculus.ntm.misc.NtmSounds;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.s2c.AdvancedMessagePayload;
 import net.fawnoculus.ntm.util.NtmPlayerUtil;
 import net.minecraft.ChatFormatting;
@@ -33,7 +34,7 @@ public class EmptyExperienceBagItem extends Item {
             if (!world.isClientSide()) {
                 NetworkManager.sendToPlayer((ServerPlayer) player, new AdvancedMessagePayload(new AdvancedMessage(
                   Ntm.id("empty_xp_bag"),
-                  Component.translatable("message.ntm.not_enough_xp").withStyle(ChatFormatting.RED),
+                  Component.translatable(NtmTranslations.MESSAGE_NOT_ENOUGH_XP).withStyle(ChatFormatting.RED),
                   1000.0f))
                 );
             }

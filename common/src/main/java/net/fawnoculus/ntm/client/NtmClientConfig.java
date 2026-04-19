@@ -20,7 +20,7 @@ public class NtmClientConfig {
     public static final ConfigOption<EffectLevelFix> FIX_EFFECT_LEVEL = CLIENT_CONFIG_FILE.newOption(
       "high_effect_level_fix", EffectLevelFix.CODEC, EffectLevelFix.DECIMAL_IF_TO_BIG,
       "Fix for Minecraft incorrectly displaying large status effect levels that should be used " +
-        "(values: NONE, LARGE_ROMAN_NUMERALS, ALWAYS_DECIMAL, DECIMAL_IF_TO_BIG) [default: DECIMAL_IF_TO_BIG]"
+        "(values: NONE, LARGE_ROMAN_NUMERALS, ALWAYS_DECIMAL, DECIMAL_IF_TO_BIG) [default: LARGE_ROMAN_NUMERALS]"
     );
     public static final ConfigOption<Boolean> BLOCK_MODEL_AMBIENT_OCCLUSION = CLIENT_CONFIG_FILE.newOption(
       "block_model_ambient_occlusion", Codec.BOOL, false,
@@ -31,6 +31,10 @@ public class NtmClientConfig {
       "whether to shade the models [default: true]"
     );
 
+    public static void init() {
+        CLIENT_CONFIG_FILE.init();
+    }
+
     public enum EffectLevelFix {
         NONE,
         LARGE_ROMAN_NUMERALS,
@@ -38,9 +42,5 @@ public class NtmClientConfig {
         DECIMAL_IF_TO_BIG;
 
         public static final Codec<EffectLevelFix> CODEC = NtmCodecUtil.getEnumCodec(EffectLevelFix.class);
-    }
-
-    public static void init() {
-        CLIENT_CONFIG_FILE.init();
     }
 }

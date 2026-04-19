@@ -1,20 +1,13 @@
 package net.fawnoculus.ntm.client.commands;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
 import dev.architectury.event.events.client.ClientCommandRegistrationEvent;
 import dev.architectury.event.events.client.ClientCommandRegistrationEvent.ClientCommandSourceStack;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.NtmConfig;
-import net.fawnoculus.ntm.api.config.ConfigFile;
-import net.fawnoculus.ntm.api.config.ConfigOption;
 import net.fawnoculus.ntm.api.messages.AdvancedMessage;
 import net.fawnoculus.ntm.client.NtmClientConfig;
 import net.fawnoculus.ntm.client.api.messages.MessageSystem;
@@ -22,7 +15,7 @@ import net.fawnoculus.ntm.client.render.hud.FlashBangRender;
 import net.fawnoculus.ntm.client.render.hud.HudWigglerRender;
 import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.fawnoculus.ntm.commands.NtmCommands;
-import net.minecraft.ChatFormatting;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ComponentArgument;
@@ -118,7 +111,7 @@ public class NtmClientCommands {
     }
 
     private static int version(CommandContext<ClientCommandSourceStack> context) {
-        context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.version.client", Ntm.MOD_VERSION), false);
+        context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_VERSION_CLIENT, Ntm.MOD_VERSION), false);
         return 0;
     }
 
@@ -142,36 +135,36 @@ public class NtmClientCommands {
 
     @SuppressWarnings("resource")
     private static int forceDisconnect(CommandContext<ClientCommandSourceStack> context) {
-        context.getSource().arch$getLevel().disconnect(Component.translatable("message.ntm.force_disconnect"));
+        context.getSource().arch$getLevel().disconnect(Component.translatable(NtmTranslations.MESSAGE_FORCE_DISCONNECT));
         NtmClientUtil.getClient().disconnectWithSavingScreen();
         NtmClientUtil.getClient().setScreen(new TitleScreen());
         return 0;
     }
 
     private static int clearMessages(CommandContext<ClientCommandSourceStack> context) {
-        context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.cleared", MessageSystem.getAllMessages().size()), false);
+        context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_IS_DISABLED, MessageSystem.getAllMessages().size()), false);
         MessageSystem.removeAllMessages();
         return 0;
     }
 
     private static int removeMessage(CommandContext<ClientCommandSourceStack> context, Identifier identifier) {
-        context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.removed", identifier.toString()), false);
+        context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_REMOVED, identifier.toString()), false);
         MessageSystem.removeAllMessages();
         return 0;
     }
 
     private static int addMessage(CommandContext<ClientCommandSourceStack> context, Component text, float millis, Identifier identifier) {
         MessageSystem.addMessage(new AdvancedMessage(identifier, text, millis));
-        context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.added"), false);
+        context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_ADDED), false);
         return 0;
     }
 
     private static int getMessagesEnabled(CommandContext<ClientCommandSourceStack> context) {
         boolean enabled = MessageSystem.getIsEnabled();
         if (enabled) {
-            context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.is_enabled"), false);
+            context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_IS_ENABLED), false);
         } else {
-            context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.is_disabled"), false);
+            context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_IS_DISABLED), false);
         }
         return 0;
     }
@@ -179,61 +172,10 @@ public class NtmClientCommands {
     private static int setMessagesEnabled(CommandContext<ClientCommandSourceStack> context, Boolean enabled) {
         MessageSystem.setIsEnabled(enabled);
         if (enabled) {
-            context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.set_enabled"), false);
+            context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_DET_ENABLED), false);
         } else {
-            context.getSource().arch$sendSuccess(() -> Component.translatable("message.ntm.message_client.set_disabled"), false);
+            context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLIENT_SET_DISABLED), false);
         }
         return 0;
-    }
-
-
-    private static int reloadConfig(CommandContext<ClientCommandSourceStack> context, ConfigFile file) {
-        context.getSource().arch$sendSuccess(() -> Component.translatable("command.ntm.reload_configs", file.getSubPath()), false);
-        file.readFile();
-        return 0;
-    }
-
-    protected static <T> int getOptionInfo(CommandContext<ClientCommandSourceStack> context, ConfigOption<T> option) {
-        Codec<T> codec = option.getCodec();
-        T defaultValue = option.getDefaultValue();
-        T currentValue = option.getValue();
-
-        Component nameText = Component.translatable("command.ntm.get_option_info.name").withStyle(ChatFormatting.BLUE)
-          .append(Component.literal(option.getName()).withStyle(ChatFormatting.WHITE));
-        context.getSource().arch$sendSuccess(() -> nameText, false);
-
-        if (option.getComment() != null) {
-            Component commentText = Component.translatable("command.ntm.get_option_info.comment").withStyle(ChatFormatting.YELLOW)
-              .append(Component.literal(option.getComment()).withStyle(ChatFormatting.WHITE));
-            context.getSource().arch$sendSuccess(() -> commentText, false);
-        }
-
-        Component defaultValueText = Component.translatable("command.ntm.get_option_info.default").withStyle(ChatFormatting.YELLOW)
-          .append(Component.literal(codec.encodeStart(JsonOps.INSTANCE, defaultValue).getOrThrow().toString()).withStyle(ChatFormatting.WHITE));
-        context.getSource().arch$sendSuccess(() -> defaultValueText, false);
-
-        Component currentValueText = Component.translatable("command.ntm.get_option_info.current_value").withStyle(ChatFormatting.YELLOW)
-          .append(Component.literal(codec.encodeStart(JsonOps.INSTANCE, currentValue).getOrThrow().toString()).withStyle(ChatFormatting.WHITE));
-        context.getSource().arch$sendSuccess(() -> currentValueText, false);
-        return 0;
-    }
-
-    private static int trySetOption(CommandContext<ClientCommandSourceStack> context, ConfigFile file, ConfigOption<?> option, String value) {
-        JsonElement element;
-        try {
-            element = JsonParser.parseString(value);
-        } catch (JsonSyntaxException exception) {
-            context.getSource().arch$sendFailure(Component.translatable("command.ntm.set_config_value.invalid_json", value));
-            return -2;
-        }
-
-        if (option.setValueFrom(element, JsonOps.INSTANCE)) {
-            context.getSource().arch$sendSuccess(() -> Component.translatable("command.ntm.set_config_value", option.getName(), value), false);
-            file.writeFile();
-            return 0;
-        }
-
-        context.getSource().arch$sendFailure(Component.translatable("command.ntm.set_config_value.failed", option.getName(), value));
-        return -1;
     }
 }

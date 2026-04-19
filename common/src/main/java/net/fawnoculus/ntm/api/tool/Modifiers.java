@@ -2,7 +2,7 @@ package net.fawnoculus.ntm.api.tool;
 
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.radiation.RadiationManager;
-import net.fawnoculus.ntm.entity.NtmStatusEffects;
+import net.fawnoculus.ntm.entity.NtmMobEffects;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.fawnoculus.ntm.misc.NtmSounds;
 import net.fawnoculus.ntm.util.NtmEntityUtil;
@@ -85,8 +85,7 @@ public abstract class Modifiers {
     };
 
     /**
-     * Inflicts a slowness & weakness effect
-     * <p>
+     * Inflicts a slowness & weakness effect<br>
      * The Level represents the Stun time in seconds
      */
     public static final ItemModifier STUNNING = new ItemModifier(Ntm.id("stunning")) {
@@ -98,8 +97,7 @@ public abstract class Modifiers {
     };
 
     /**
-     * Sets target on fire
-     * <p>
+     * Sets target on fire<br>
      * The Level represents the Burn time in seconds
      */
     public static final ItemModifier FLAMING = new ItemModifier(Ntm.id("flaming")) {
@@ -112,14 +110,13 @@ public abstract class Modifiers {
     };
 
     /**
-     * Sets the Target on fire but with Phosphorus Flames, which cant be extinguished before the time runs out
-     * <p>
+     * Sets the Target on fire but with Phosphorus Flames, which cant be extinguished before the time runs out<br>
      * The Level represents the Phosphorus Burn time in seconds
      */
     public static final ItemModifier PHOSPHORUS_TIP = new ItemModifier(Ntm.id("phosphorus_tip")) {
         @Override
         public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker, int level) {
-            target.addEffect(new MobEffectInstance(NtmStatusEffects.PHOSPHORUS_BURNS, level * 20, 0, false, false, true));
+            target.addEffect(new MobEffectInstance(NtmMobEffects.PHOSPHORUS_BURNS, level * 20, 0, false, false, true));
         }
     };
 

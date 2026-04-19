@@ -2,14 +2,15 @@ package net.fawnoculus.ntm.api.node;
 
 
 import com.mojang.serialization.Codec;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmCodecUtil;
 import org.jetbrains.annotations.NotNull;
 
 public enum StorageMode {
-    Provide(true, false, "narration.ntm.storage_mode.provide"),
-    Consume(false, true, "narration.ntm.storage_mode.consume"),
-    Share(true, true, "narration.ntm.storage_mode.share"),
-    None(false, false, "narration.ntm.storage_mode.none");
+    Provide(true, false, NtmTranslations.NARRATION_STORAGE_MODE_PROVIDE),
+    Consume(false, true, NtmTranslations.NARRATION_STORAGE_MODE_CONSUME),
+    Share(true, true, NtmTranslations.NARRATION_STORAGE_MODE_SHARE),
+    None(false, false, NtmTranslations.NARRATION_STORAGE_MODE_NONE);
 
     public static final Codec<StorageMode> CODEC = NtmCodecUtil.getEnumCodec(StorageMode.class);
 

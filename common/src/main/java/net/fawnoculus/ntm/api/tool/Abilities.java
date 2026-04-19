@@ -35,8 +35,7 @@ import java.util.Optional;
 
 public abstract class Abilities {
     /**
-     * VeinMiner causes all blocks of the same type as the one broken to be mined
-     * <p>
+     * VeinMiner causes all blocks of the same type as the one broken to be mined<br>
      * MaxBlocks is the max Distance that a block can have from the originally broken block before it will no longer be harvested by VeinMiner
      */
     public static final ItemAbility VEIN_MINER = new ItemAbility(Ntm.id("vein_miner"), 10, false) {
@@ -83,8 +82,7 @@ public abstract class Abilities {
     };
 
     /**
-     * AoE breaks a cube around the block broken by the player
-     * <p>
+     * AoE breaks a cube around the block broken by the player<br>
      * blockAmount decides how big the Cube is (Value of 1 would cause a 3x3 Cube, Value of 2 a 5x5 Cube and so on)
      */
     public static final ItemAbility AOE = new ItemAbility(Ntm.id("aoe"), 10, false) {
@@ -109,8 +107,7 @@ public abstract class Abilities {
     };
 
     /**
-     * AoE breaks a cube around the block broken by the player
-     * <p>
+     * AoE breaks a cube around the block broken by the player<br>
      * blockAmount decides how big the Cube is (Value of 1 would cause a 3x3 Cube, Value of 2 a 5x5 Cube and so on)
      */
     public static final ItemAbility FLAT_AOE = new ItemAbility(Ntm.id("flat_aoe"), 10, false) {
@@ -154,8 +151,7 @@ public abstract class Abilities {
     };
 
     /**
-     * Creates an explosion when a block that the tool can be used for is broken
-     * <p>
+     * Creates an explosion when a block that the tool can be used for is broken<br>
      * The resulting EXPLOSION has the Strength specified by "explosionStrength"
      */
     public static final ItemAbility EXPLOSION = new ItemAbility(Ntm.id("explosion"), 10, false, true) {
@@ -208,8 +204,7 @@ public abstract class Abilities {
     };
 
     /**
-     * It's the same thing as if you had the enchantment
-     * <p>
+     * It's the same thing as if you had the enchantment<br>
      * The Level represents the Enchantment Level of FORTUNE that will be applied
      */
     public static final ItemAbility FORTUNE = new ItemAbility(Ntm.id("fortune"), 10, true) {

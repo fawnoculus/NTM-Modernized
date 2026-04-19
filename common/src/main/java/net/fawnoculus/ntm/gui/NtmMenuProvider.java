@@ -6,6 +6,7 @@ import net.minecraft.network.codec.StreamCodec;
 
 /**
  * A simple wrapper around Architectury's {@link ExtendedMenuProvider} to provide support for extra data through {@linkplain StreamCodec StreamCodecs}
+ *
  * @param <T> the type of extra data to transfer
  */
 public interface NtmMenuProvider<T> extends ExtendedMenuProvider {

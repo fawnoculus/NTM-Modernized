@@ -1,6 +1,7 @@
 package net.fawnoculus.ntm.items.custom;
 
 import net.fawnoculus.ntm.api.radiation.RadiationManager;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -22,15 +23,15 @@ public class DosimeterItem extends Item {
 
     private Component getRadsText(double milliRads) {
         if (milliRads > 3_600) {
-            return Component.translatable("generic.ntm.radiation.rad_s", ">3.6").withStyle(ChatFormatting.GOLD);
+            return Component.literal(">3.6").append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.GOLD);
         }
         if (milliRads > 1_000) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.GOLD);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.GOLD);
         }
         if (milliRads > 0) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.YELLOW);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.YELLOW);
         }
-        return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.GREEN);
+        return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.GREEN);
     }
 
     @Override
@@ -41,8 +42,8 @@ public class DosimeterItem extends Item {
 
         double totalRadiation = RadiationManager.getTotalRadiation(user);
 
-        user.displayClientMessage(Component.translatable("message.ntm.dosimeter").withStyle(ChatFormatting.GOLD), false);
-        user.displayClientMessage(Component.translatable("message.ntm.radiation.environmental_radiation").append(getRadsText(totalRadiation)).withStyle(ChatFormatting.YELLOW), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_DOSIMETER).withStyle(ChatFormatting.GOLD), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_ENVIRONMENTAL_RADIATION).append(getRadsText(totalRadiation)).withStyle(ChatFormatting.YELLOW), false);
         return InteractionResult.SUCCESS_SERVER;
     }
 

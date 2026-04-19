@@ -1,47 +1,32 @@
 package net.fawnoculus.ntm.gui.menus;
 
-import net.fawnoculus.ntm.blocks.entities.container.energy.SimpleEnergyStorageBE;
 import net.fawnoculus.ntm.gui.NtmMenuType;
-import net.fawnoculus.ntm.gui.slots.BatterySlot;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
 public class EnergyStorageMenu extends AbstractContainerMenu {
-    private final SimpleEnergyStorageBE blockEntity;
     private final ContainerLevelAccess screenContext;
 
     // Client Constructor
     public EnergyStorageMenu(int containerId, Inventory playerInventory, BlockPos pos) {
-        this(containerId, playerInventory, (SimpleEnergyStorageBE) playerInventory.player.level().getBlockEntity(pos));
+        this(containerId, playerInventory, playerInventory.player.level().getBlockEntity(pos));
     }
 
     // Common Constructor
-    public EnergyStorageMenu(int containerId, @NotNull Inventory playerInventory, SimpleEnergyStorageBE blockEntity) {
+    public EnergyStorageMenu(int containerId, @NotNull Inventory playerInventory, BlockEntity blockEntity) {
         super(NtmMenuType.ENERGY_STORAGE.get(), containerId);
 
-        this.blockEntity = blockEntity;
-        assert this.blockEntity.getLevel() != null;
-        this.screenContext = ContainerLevelAccess.create(this.blockEntity.getLevel(), this.blockEntity.getBlockPos());
-
-        SimpleContainer blockInventory = this.blockEntity.getInventory();
-        blockInventory.startOpen(playerInventory.player);
-        checkContainerSize(blockInventory, 2);
-
+        assert blockEntity.getLevel() != null;
+        this.screenContext = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
         addPlayerInventory(playerInventory);
-        addBlockInventory(blockInventory);
-    }
-
-    private void addBlockInventory(SimpleContainer inventory) {
-        addSlot(new BatterySlot(inventory, SimpleEnergyStorageBE.DISCHARGE_SLOT_INDEX, 26, 17));
-        addSlot(new BatterySlot(inventory, SimpleEnergyStorageBE.CHARGE_SLOT_INDEX, 26, 53));
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -66,7 +51,6 @@ public class EnergyStorageMenu extends AbstractContainerMenu {
     @Override
     public void removed(@NonNull Player player) {
         super.removed(player);
-        this.blockEntity.getInventory().stopOpen(player);
     }
 
     @Override
@@ -78,9 +62,5 @@ public class EnergyStorageMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(@NonNull Player player) {
         return screenContext.evaluate((world, pos) -> player.isWithinBlockInteractionRange(pos, 4.0), true);
-    }
-
-    public SimpleEnergyStorageBE getBlockEntity() {
-        return this.blockEntity;
     }
 }

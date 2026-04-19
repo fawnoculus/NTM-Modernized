@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "ntm:block/deepslate_empty_oil_deposit"
-  }
-}

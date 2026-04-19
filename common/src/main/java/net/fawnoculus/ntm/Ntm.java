@@ -8,7 +8,7 @@ import net.fawnoculus.ntm.blocks.NtmBlocks;
 import net.fawnoculus.ntm.blocks.NtmExtraBlockData;
 import net.fawnoculus.ntm.commands.NtmCommands;
 import net.fawnoculus.ntm.entity.NtmDamageTypes;
-import net.fawnoculus.ntm.entity.NtmStatusEffects;
+import net.fawnoculus.ntm.entity.NtmMobEffects;
 import net.fawnoculus.ntm.fluid.NtmFluidData;
 import net.fawnoculus.ntm.fluid.NtmFluids;
 import net.fawnoculus.ntm.items.*;
@@ -37,7 +37,7 @@ public final class Ntm {
         NtmApi.init();
 
         NtmDamageTypes.init();
-        NtmStatusEffects.init();
+        NtmMobEffects.init();
 
         NtmSounds.init();
         NtmParticles.init();

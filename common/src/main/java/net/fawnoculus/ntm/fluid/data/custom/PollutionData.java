@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fawnoculus.ntm.NtmConfig;
 import net.fawnoculus.ntm.fluid.FluidUnit;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import org.jetbrains.annotations.NotNull;
@@ -25,11 +26,11 @@ public record PollutionData(String name, Double amount) {
     public @NotNull MutableComponent getTooltip() {
         return switch (NtmConfig.FLUID_UNIT.getValue()) {
             case NtmConfig.FluidUnit.MilliBuckets ->
-              Component.translatable("fluid_tooltip.ntm.polluting.val", this.getFluidName(), this.amount() / FluidUnit.MILLI_BUCKET.DROPLETS)
-                .append(Component.translatable("generic.ntm.fluid.mb"));
+              Component.translatable(NtmTranslations.FLUID_POLLUTING_VAL, this.getFluidName(), this.amount() / FluidUnit.MILLI_BUCKET.DROPLETS)
+                .append(Component.translatable(NtmTranslations.GENERIC_FLUID_MB));
             case NtmConfig.FluidUnit.Droplets ->
-              Component.translatable("fluid_tooltip.ntm.polluting.val", this.getFluidName(), this.amount())
-                .append(Component.translatable("generic.ntm.fluid.droplets"));
+              Component.translatable(NtmTranslations.FLUID_POLLUTING_VAL, this.getFluidName(), this.amount())
+                .append(Component.translatable(NtmTranslations.GENERIC_FLUID_DROPLETS));
         };
     }
 }

@@ -2,11 +2,14 @@ package net.fawnoculus.ntm.fabric.client;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.annotations.ClientOnly;
 import net.fawnoculus.ntm.fabric.client.datagen.NtmAdvancementProvider;
+import net.fawnoculus.ntm.fabric.client.datagen.NtmDynamicRegistryProvider;
 import net.fawnoculus.ntm.fabric.client.datagen.NtmEnchantmentProvider;
 import net.fawnoculus.ntm.fabric.client.datagen.NtmModelProvider;
-import net.fawnoculus.ntm.fabric.client.datagen.NtmRegistryProvider;
+import net.fawnoculus.ntm.fabric.client.datagen.lang.*;
+import net.fawnoculus.ntm.fabric.client.datagen.lang.legacy.*;
 import net.fawnoculus.ntm.fabric.client.datagen.loot.NtmBlockLootProvider;
 import net.fawnoculus.ntm.fabric.client.datagen.loot.NtmChestLootProvider;
 import net.fawnoculus.ntm.fabric.client.datagen.loot.NtmEntityLootProvider;
@@ -23,12 +26,15 @@ import net.minecraft.core.registries.Registries;
 
 @ClientOnly
 public class NtmDataGenerator implements DataGeneratorEntrypoint {
+    // Some data providers download stuff directly from the originals git repository, and parse it to our format
+    // This is the specific commit from which said stuff will be downloaded from
+    public static final String DOWNLOAD_COMMIT = "db43064ee2d0174b1f0b86d3faeaf97ab66a737c";
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-        pack.addProvider(NtmRegistryProvider::new);
+        pack.addProvider(NtmDynamicRegistryProvider::new);
 
         pack.addProvider(NtmItemTagProvider::new);
         pack.addProvider(NtmBlockTagProvider::new);
@@ -47,6 +53,25 @@ public class NtmDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(NtmEnchantmentProvider::new);
 
         pack.addProvider(NtmModelProvider::new);
+
+        pack.addProvider(NtmEnglishLangProvider::new);
+        pack.addProvider(NtmFrenchLangProvider::new);
+        pack.addProvider(NtmGermanLangProvider::new);
+        pack.addProvider(NtmItalianLangProvider::new);
+        pack.addProvider(NtmPolishLangProvider::new);
+        pack.addProvider(NtmRussianLangProvider::new);
+        pack.addProvider(NtmUkrainianLangProvider::new);
+        pack.addProvider(NtmChineseLangProvider::new);
+
+        FabricDataGenerator.Pack legacyPack = fabricDataGenerator.createBuiltinResourcePack(Ntm.id("legacy"));
+        legacyPack.addProvider(NtmLegacyEnglishLangProvider::new);
+        legacyPack.addProvider(NtmLegacyFrenchLangProvider::new);
+        legacyPack.addProvider(NtmLegacyGermanLangProvider::new);
+        legacyPack.addProvider(NtmLegacyItalianLangProvider::new);
+        legacyPack.addProvider(NtmLegacyPolishLangProvider::new);
+        legacyPack.addProvider(NtmLegacyRussianLangProvider::new);
+        legacyPack.addProvider(NtmLegacyUkrainianLangProvider::new);
+        legacyPack.addProvider(NtmLegacyChineseLangProvider::new);
     }
 
     @Override

@@ -13,8 +13,9 @@ import net.fawnoculus.ntm.api.messages.AdvancedMessage;
 import net.fawnoculus.ntm.api.node.network.NetworkType;
 import net.fawnoculus.ntm.api.node.network.NodeNetwork;
 import net.fawnoculus.ntm.api.node.network.NodeNetworkManager;
-import net.fawnoculus.ntm.entity.NtmStatusEffects;
+import net.fawnoculus.ntm.entity.NtmMobEffects;
 import net.fawnoculus.ntm.items.custom.container.energy.EnergyContainingItem;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.s2c.AdvancedMessagePayload;
 import net.fawnoculus.ntm.network.s2c.RemoveAllMessagesPayload;
 import net.fawnoculus.ntm.network.s2c.RemoveMessagePayload;
@@ -165,11 +166,11 @@ public class NtmCommands {
 
     private static int version(CommandContext<CommandSourceStack> context) {
         if (!context.getSource().getServer().isSingleplayer()) {
-            context.getSource().sendSuccess(() -> Component.translatableEscape("message.ntm.version.server", Ntm.MOD_VERSION), false);
+            context.getSource().sendSuccess(() -> Component.translatableEscape(NtmTranslations.MESSAGE_VERSION_SERVER, Ntm.MOD_VERSION), false);
             return 0;
         }
 
-        context.getSource().sendSuccess(() -> Component.translatableEscape("message.ntm.version", Ntm.MOD_VERSION), false);
+        context.getSource().sendSuccess(() -> Component.translatableEscape(NtmTranslations.MESSAGE_VERSION, Ntm.MOD_VERSION), false);
         return 0;
     }
 
@@ -177,7 +178,7 @@ public class NtmCommands {
         for (ServerPlayer player : targets) {
             NetworkManager.sendToPlayer(player, new RemoveMessagePayload(identifier));
         }
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.message.cleared_specific", identifier.toString(), targets.size()), true);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLEARED_SPECIFIC, identifier.toString(), targets.size()), true);
         return 0;
     }
 
@@ -185,7 +186,7 @@ public class NtmCommands {
         for (ServerPlayer player : targets) {
             NetworkManager.sendToPlayer(player, new RemoveAllMessagesPayload());
         }
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.message.cleared_all", targets.size()), true);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_CLEARED_ALL, targets.size()), true);
         return 0;
     }
 
@@ -193,19 +194,19 @@ public class NtmCommands {
         for (ServerPlayer player : targets) {
             NetworkManager.sendToPlayer(player, new AdvancedMessagePayload(new AdvancedMessage(identifier, text, millis)));
         }
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.message.sent", targets.size()), true);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_MESSAGE_SEND, targets.size()), true);
         return 0;
     }
 
     private static int funny(CommandContext<CommandSourceStack> context) {
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.the_funny"), false);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_THE_FUNNY), false);
         // This doesn't actually do anything
         return 0;
     }
 
     private static int setDevConstant(CommandContext<CommandSourceStack> context, boolean value) {
         SharedConstants.IS_RUNNING_IN_IDE = value;
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.set_dev_constant", value), false);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_SET_DEV_CONSTANT, value), false);
         return 0;
     }
 
@@ -216,28 +217,28 @@ public class NtmCommands {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity livingEntity) {
                 affectedTargets++;
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.ASTOLFIZATION, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.ASTOLFIZATION, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.CONTAMINATED, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.EXPLOSION, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.LEAD_POISONING, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.PHOSPHORUS_BURNS, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.POTION_SICKNESS, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.RAD_AWAY, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.RAD_X, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.STABILITY, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.TAINT, 30 * 20, 0, false, false, true));
-                livingEntity.addEffect(new MobEffectInstance(NtmStatusEffects.TAINTED_HEART, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.ASTOLFIZATION, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.ASTOLFIZATION, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.CONTAMINATED, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.EXPLOSION, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.LEAD_POISONING, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.PHOSPHORUS_BURNS, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.POTION_SICKNESS, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.RAD_AWAY, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.RAD_X, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.STABILITY, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.TAINT, 30 * 20, 0, false, false, true));
+                livingEntity.addEffect(new MobEffectInstance(NtmMobEffects.TAINTED_HEART, 30 * 20, 0, false, false, true));
             } else {
                 immuneTargets++;
             }
         }
 
         final int finalAffectedTargets = affectedTargets;
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.all_effects.affected_targets", finalAffectedTargets), true);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_ALL_EFFECTS_AFFECTED_TARGETS, finalAffectedTargets), true);
         if (immuneTargets > 0) {
             final int finalImmuneTargets = immuneTargets;
-            context.getSource().sendSuccess(() -> Component.translatable("message.ntm.all_effects.immune_targets", finalImmuneTargets), true);
+            context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_ALL_EFFECTS_IMMUNE_TARGETS, finalImmuneTargets), true);
         }
 
         return 0;
@@ -245,17 +246,17 @@ public class NtmCommands {
 
     private static int setEnergy(CommandContext<CommandSourceStack> context, long energy) {
         if (!context.getSource().isPlayer()) {
-            context.getSource().sendFailure(Component.literal("message.ntm.must_be_executed_by_player"));
+            context.getSource().sendFailure(Component.literal(NtmTranslations.MESSAGE_MUST_BE_EXECUTED_BY_PLAYER));
             return -2;
         }
         ItemStack stack = Objects.requireNonNull(context.getSource().getPlayer()).getMainHandItem();
 
         if (stack.getItem() instanceof EnergyContainingItem energyContainingItem) {
             energyContainingItem.setEnergy(stack, energy);
-            context.getSource().sendSuccess(() -> Component.translatable("message.ntm.set_energy.success", stack.getItem().getName(), energy), true);
+            context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_SET_ENERGY_SUCCESS, stack.getItem().getName(), energy), true);
             return 0;
         } else {
-            context.getSource().sendSuccess(() -> Component.translatable("message.ntm.set_energy.fail", stack.getItem().getName()), true);
+            context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_SET_ENERGY_FAIL, stack.getItem().getName()), true);
             return -1;
         }
     }
@@ -263,26 +264,26 @@ public class NtmCommands {
     private static int getNodeNetworkInfo(CommandContext<CommandSourceStack> context, NetworkType type, UUID networkID) {
         NodeNetwork network = type.getNetwork(networkID);
         if (network == null) {
-            context.getSource().sendSuccess(() -> Component.translatable("message.ntm.network_debug.no_network").withStyle(ChatFormatting.RED), false);
+            context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NO_NETWORK).withStyle(ChatFormatting.RED), false);
             return -1;
         }
 
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.network_debug.network_name", Component.literal(network.ID.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GOLD), false);
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.network_debug.network_type", network.TYPE.getName().withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.network_debug.node_count", Component.literal(String.valueOf(network.LOADED_NODES.size())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NETWORK_NAME, Component.literal(network.ID.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GOLD), false);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NETWORK_TYPE, network.TYPE.getName().withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NODE_COUNT, Component.literal(String.valueOf(network.LOADED_NODES.size())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
 
         return 0;
     }
 
     private static int getNodeNetworks(CommandContext<CommandSourceStack> context) {
         for (NetworkType type : NodeNetworkManager.getAllTypes()) {
-            context.getSource().sendSuccess(() -> Component.translatableEscape("message.ntm.get_node_networks", type.getName(), type.getId()).append(Component.literal(" " + type.getAllNetworks().size())), false);
+            context.getSource().sendSuccess(() -> Component.translatableEscape(NtmTranslations.MESSAGE_GET_NODE_NETWORKS, type.getName(), type.getId()).append(Component.literal(" " + type.getAllNetworks().size())), false);
         }
         return 0;
     }
 
     private static int getNodeNetworks(CommandContext<CommandSourceStack> context, NetworkType type) {
-        context.getSource().sendSuccess(() -> Component.translatableEscape("message.ntm.get_node_networks", type.getName(), type.getId()), false);
+        context.getSource().sendSuccess(() -> Component.translatableEscape(NtmTranslations.MESSAGE_GET_NODE_NETWORKS, type.getName(), type.getId()), false);
         for (NodeNetwork network : type.getAllNetworks()) {
             context.getSource().sendSuccess(() -> Component.literal(network.ID.toString()), false);
         }
@@ -305,14 +306,14 @@ public class NtmCommands {
         }
         final long finalFiles = files;
         final long finalData = data;
-        context.getSource().sendSuccess(() -> Component.translatable("message.ntm.clean_logs", finalFiles, finalData), true);
+        context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.MESSAGE_CLEAN_LOGS, finalFiles, finalData), true);
         return 0;
     }
 
     private static int getDataComponents(CommandContext<CommandSourceStack> context, int maxSize) {
         Player player = context.getSource().getPlayer();
         if (player == null || player.getMainHandItem() == ItemStack.EMPTY) {
-            context.getSource().sendFailure(Component.translatable("message.ntm.get_components.could_not_get_item"));
+            context.getSource().sendFailure(Component.translatable(NtmTranslations.MESSAGE_GET_COMPONENTS_NO_ITEM));
             return -1;
         }
 
@@ -322,7 +323,7 @@ public class NtmCommands {
             MutableComponent feedback = Component.literal("");
             feedback.append(Component.literal(type + ": ").withStyle(ChatFormatting.YELLOW));
             if (value.length() > maxSize) {
-                feedback.append(Component.translatable("message.ntm.get_components.value_max_length").withStyle(ChatFormatting.GRAY));
+                feedback.append(Component.translatable(NtmTranslations.MESSAGE_GET_COMPONENTS_MAX_LENGTH).withStyle(ChatFormatting.GRAY));
                 context.getSource().sendSuccess(() -> feedback, false);
                 continue;
             }

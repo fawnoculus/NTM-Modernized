@@ -5,6 +5,7 @@ import net.fawnoculus.ntm.client.api.radiation.ClientRadiationRegistry;
 import net.fawnoculus.ntm.client.misc.NtmKeybinds;
 import net.fawnoculus.ntm.items.custom.DangerousDrop;
 import net.fawnoculus.ntm.items.custom.ExtraInfo;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -35,30 +36,30 @@ public abstract class ClientsideItemStackMixin {
       shift = At.Shift.AFTER
     ))
     public void appendTooltip(
-      Item.TooltipContext context, TooltipDisplay displayComponent, @Nullable Player player, TooltipFlag type, Consumer<Component> tooltip, CallbackInfo ci
+      Item.TooltipContext context, TooltipDisplay tooltipDisplay, @Nullable Player player, TooltipFlag tooltipFlag, Consumer<Component> tooltipAdder, CallbackInfo ci
     ) {
         double milliRads = ClientRadiationRegistry.getRadioactivity(this.getItem());
         if (milliRads > 0) {
-            tooltip.accept(Component.translatable("tooltip.ntm.radioactive").withStyle(ChatFormatting.GREEN));
-            tooltip.accept(Component.translatable("generic.ntm.radiation.rad_s", milliRads / 1000.0).withStyle(ChatFormatting.YELLOW));
+            tooltipAdder.accept(Component.translatable(NtmTranslations.TOOLTIP_RADIOACTIVE).withStyle(ChatFormatting.GREEN));
+            tooltipAdder.accept(Component.literal("%.1f ".formatted(milliRads / 1000.0)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.YELLOW));
             if (this.count > 1) {
-                tooltip.accept(Component.translatable("tooltip.ntm.stack_rads", milliRads * this.count / 1000.0).withStyle(ChatFormatting.YELLOW));
+                tooltipAdder.accept(Component.translatable(NtmTranslations.TOOLTIP_STACK_RADS, milliRads * this.count / 1000.0).withStyle(ChatFormatting.YELLOW));
             }
         }
         double radiationResistance = ClientHazmatRegistry.getResistance(this.getItem());
         if (radiationResistance > 0) {
-            tooltip.accept(Component.translatable("tooltip.ntm.radiation_resistance", radiationResistance).withStyle(ChatFormatting.YELLOW));
+            tooltipAdder.accept(Component.translatable(NtmTranslations.TOOLTIP_RADIATION_RESISTANCE, radiationResistance).withStyle(ChatFormatting.YELLOW));
         }
 
         if (this.getItem() instanceof ExtraInfo extraInfo) {
             if (!NtmKeybinds.DISPLAY_EXTRA_INFO.isDown()) {
-                tooltip.accept(extraInfo.getHelpText(NtmKeybinds.DISPLAY_EXTRA_INFO.getTranslatedKeyMessage()));
+                tooltipAdder.accept(extraInfo.getHelpText(NtmKeybinds.DISPLAY_EXTRA_INFO.getTranslatedKeyMessage()));
             } else {
-                extraInfo.getInfo().forEach(tooltip);
+                extraInfo.getInfo().forEach(tooltipAdder);
             }
         }
         if (this.getItem() instanceof DangerousDrop) {
-            tooltip.accept(Component.translatable("tooltip.ntm.dangerous_drop").withStyle(ChatFormatting.RED));
+            tooltipAdder.accept(Component.translatable(NtmTranslations.TOOLTIP_DANGEROUS_DROP).withStyle(ChatFormatting.RED));
         }
     }
 }

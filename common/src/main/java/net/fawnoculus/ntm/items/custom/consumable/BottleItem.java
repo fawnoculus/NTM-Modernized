@@ -2,7 +2,9 @@ package net.fawnoculus.ntm.items.custom.consumable;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fawnoculus.ntm.items.NtmItems;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmPlayerUtil;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -34,8 +36,8 @@ public class BottleItem extends Item {
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, net.minecraft.world.item.@NonNull TooltipFlag type) {
-        tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5)).withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.needs_bottle_opener").withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_NEEDS_BOTTLE_OPENER).withStyle(ChatFormatting.GRAY));
     }
 
     @Override

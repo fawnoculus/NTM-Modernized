@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.Optional;
 
 /**
- * An Empty Interface
- * <p>
- * Everything that implements this is an ItemModifier
- * <p>
  * All modifiers can be found in {@link Modifiers}
  */
 public abstract class ItemModifier {
@@ -42,7 +38,11 @@ public abstract class ItemModifier {
     }
 
     public MutableComponent getName() {
-        return Component.translatable("tooltip." + getId().getNamespace() + ".modifier." + getId().getPath());
+        return Component.translatable(this.getTranslationKey());
+    }
+
+    public String getTranslationKey() {
+        return "tooltip." + this.ID.getNamespace() + ".modifier." + this.ID.getPath();
     }
 
     public MutableComponent getLevelText(int level) {

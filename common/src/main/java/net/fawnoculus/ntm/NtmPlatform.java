@@ -139,6 +139,12 @@ public class NtmPlatform {
         throw new AssertionError("Architectury has not remapped NtmPlatform.registerScreenFactory(), Something has gone Terribly Wrong");
     }
 
+    public enum PackActivationType {
+        ALWAYS_ON,
+        ON_BY_DEFAULT, // ON_BY_DEFAULT doesn't work neoforge as it has no support for on by default, but still disableable resource packs
+        OFF_BY_DEFAULT
+    }
+
     /**
      * Creates new screens.
      *
@@ -156,12 +162,6 @@ public class NtmPlatform {
          * @return A new {@link S} that extends {@link Screen}
          */
         S create(H containerMenu, Inventory inventory, Component component);
-    }
-
-    public enum PackActivationType {
-        ALWAYS_ON,
-        ON_BY_DEFAULT, // ON_BY_DEFAULT doesn't work neoforge as it has no support for on by default, but still disableable resource packs
-        OFF_BY_DEFAULT
     }
 
     @FunctionalInterface
@@ -197,9 +197,8 @@ public class NtmPlatform {
 
     /**
      * These Identifiers are equivalent to Fabrics VanillaHudElements.
-     * On neoforge the neoforge versions will be used automatically when you use these
-     *
-     * <p>The identifiers in this interface are the vanilla hud layers in the order they are drawn in.
+     * On neoforge the neoforge versions will be used automatically when you use these<br>
+     * The identifiers in this interface are the vanilla hud layers in the order they are drawn in.
      * The first element is drawn first, which means it is at the bottom.
      * All vanilla layers except {@link #SLEEP} are in sub drawers and have a render condition attached ({@link net.minecraft.client.Options#hideGui}).
      * Operations relative to any element will generally inherit that element's render condition.
@@ -279,9 +278,8 @@ public class NtmPlatform {
          */
         public static final Identifier OVERLAY_MESSAGE = Identifier.withDefaultNamespace("overlay_message");
         /**
-         * The identifier for the vanilla title and subtitle element.
-         *
-         * <p>Note that this is not the sound subtitles.
+         * The identifier for the vanilla title and subtitle element.<br>
+         * Note: this is not the sound subtitles.
          */
         public static final Identifier TITLE_AND_SUBTITLE = Identifier.withDefaultNamespace("title_and_subtitle");
         /**

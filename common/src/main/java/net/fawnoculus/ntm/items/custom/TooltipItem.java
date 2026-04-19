@@ -1,5 +1,6 @@
 package net.fawnoculus.ntm.items.custom;
 
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -27,11 +28,11 @@ public class TooltipItem extends Item {
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, @NonNull Consumer<Component> tooltip, @NonNull TooltipFlag type) {
         if (this.TOOLTIP_COUNT == 1) {
-            tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5)).withStyle(ChatFormatting.GRAY));
+            tooltip.accept(NtmTextUtil.tooltip(this).withStyle(ChatFormatting.GRAY));
             return;
         }
         for (int i = 1; i <= this.TOOLTIP_COUNT; i++) {
-            tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5) + i).withStyle(ChatFormatting.GRAY));
+            tooltip.accept(NtmTextUtil.tooltip(this, i).withStyle(ChatFormatting.GRAY));
         }
     }
 }

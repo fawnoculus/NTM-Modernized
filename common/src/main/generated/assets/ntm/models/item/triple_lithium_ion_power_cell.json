@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ntm:item/triple_lithium_ion_power_cell"
-  }
-}

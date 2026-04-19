@@ -1,6 +1,6 @@
 package net.fawnoculus.ntm.items.components;
 
-import net.fawnoculus.ntm.entity.NtmStatusEffects;
+import net.fawnoculus.ntm.entity.NtmMobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.component.Consumable;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class NtmConsumableComponents {
     public static final Consumable RAD_X = Consumables.defaultFood().consumeSeconds(0.8F)
-      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmStatusEffects.RAD_X, 3600, 0, false, false, true)))
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmMobEffects.RAD_X, 3600, 0, false, false, true)))
       .build();
     public static final Consumable IODINE_PILL = Consumables.defaultFood().consumeSeconds(0.8F)
       .onConsume(new ClearAllStatusEffectsConsumeEffect())
@@ -22,13 +22,13 @@ public class NtmConsumableComponents {
       .build();
 
     public static final Consumable BASIC_LEAD_APPLE = Consumables.defaultFood()
-      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmStatusEffects.LEAD_POISONING, 300, 2, false, false, true)))
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmMobEffects.LEAD_POISONING, 300, 2, false, false, true)))
       .build();
     public static final Consumable GOOD_LEAD_APPLE = Consumables.defaultFood()
-      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmStatusEffects.LEAD_POISONING, 1200, 4, false, false, true)))
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmMobEffects.LEAD_POISONING, 1200, 4, false, false, true)))
       .build();
     public static final Consumable EPIC_LEAD_APPLE = Consumables.defaultFood()
-      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmStatusEffects.LEAD_POISONING, 1200, 255, false, false, true)))
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(NtmMobEffects.LEAD_POISONING, 1200, 255, false, false, true)))
       .build();
 
     public static final Consumable BASIC_SCHRABIDIUM_APPLE = Consumables.defaultFood()

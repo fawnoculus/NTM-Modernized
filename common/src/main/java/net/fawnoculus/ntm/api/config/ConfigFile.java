@@ -7,6 +7,7 @@ import dev.architectury.event.events.client.ClientCommandRegistrationEvent;
 import dev.architectury.platform.Platform;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.annotations.ClientOnly;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -88,7 +89,7 @@ public class ConfigFile {
         return Commands.literal(commandName)
           .then(Commands.literal("reload")
             .executes(context -> {
-                context.getSource().sendSuccess(() -> Component.translatable("command.ntm.reload_configs", this.SUB_PATH), true);
+                context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.COMMAND_RELOAD_CONFIG, this.SUB_PATH), true);
                 this.readFile();
                 return 0;
             })
@@ -108,7 +109,7 @@ public class ConfigFile {
         return ClientCommandRegistrationEvent.literal(commandName)
           .then(ClientCommandRegistrationEvent.literal("reload")
             .executes(context -> {
-                context.getSource().arch$sendSuccess(() -> Component.translatable("command.ntm.reload_configs", this.SUB_PATH), true);
+                context.getSource().arch$sendSuccess(() -> Component.translatable(NtmTranslations.COMMAND_RELOAD_CONFIG, this.SUB_PATH), true);
                 this.readFile();
                 return 0;
             })

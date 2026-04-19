@@ -3,7 +3,6 @@ package net.fawnoculus.ntm.blocks;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.blocks.custom.*;
-import net.fawnoculus.ntm.blocks.custom.container.energy.SimpleEnergyStorageBlock;
 import net.fawnoculus.ntm.misc.NtmDeferredRegistries;
 import net.fawnoculus.ntm.util.NtmJavaUtil;
 import net.minecraft.core.registries.Registries;
@@ -46,16 +45,7 @@ public class NtmBlocks {
 
     // Energy Stuff
     public static final RegistrySupplier<Block> TEMP_CABLE = register("temp_cable", TempCableBlock::new, Properties.of());
-    public static final RegistrySupplier<Block> POTATO_BATTERY_BLOCK = register("potato_battery_block",
-      properties -> new SimpleEnergyStorageBlock(properties, 10_000L), machineSettings(Properties.of()));
-    public static final RegistrySupplier<Block> ENERGY_STORAGE_BLOCK = register("energy_storage_block",
-      properties -> new SimpleEnergyStorageBlock(properties, 1_000_000L), machineSettings(Properties.of()));
-    public static final RegistrySupplier<Block> LITHIUM_ION_ENERGY_STORAGE_BLOCK = register("lithium_ion_energy_storage_block",
-      properties -> new SimpleEnergyStorageBlock(properties, 50_000_000L), machineSettings(Properties.of()));
-    public static final RegistrySupplier<Block> SCHRABIDIUM_ENERGY_STORAGE_BLOCK = register("schrabidium_energy_storage_block",
-      properties -> new SimpleEnergyStorageBlock(properties, 25_000_000_000L), machineSettings(Properties.of()));
-    public static final RegistrySupplier<Block> SPARK_ENERGY_STORAGE_BLOCK = register("spark_energy_storage_block",
-      properties -> new SimpleEnergyStorageBlock(properties, 1_000_000_000_000L), machineSettings(Properties.of()));
+
     // Ore Blocks
     public static final RegistrySupplier<Block> URANIUM_ORE = register("uranium_ore", Block::new, stone());
     public static final RegistrySupplier<Block> SCORCHED_URANIUM_ORE = register("scorched_uranium_ore", Block::new, stone());
@@ -129,7 +119,6 @@ public class NtmBlocks {
     public static final RegistrySupplier<Block> PLUTONIUM_238_BLOCK = register("plutonium_238_block", Block::new, stone());
     public static final RegistrySupplier<Block> PLUTONIUM_239_BLOCK = register("plutonium_239_block", Block::new, stone());
     public static final RegistrySupplier<Block> PLUTONIUM_240_BLOCK = register("plutonium_240_block", Block::new, stone());
-    public static final RegistrySupplier<Block> PLUTONIUM_241_BLOCK = register("plutonium_241_block", Block::new, stone());
     public static final RegistrySupplier<Block> POLONIUM_210_BLOCK = register("polonium_210_block", Block::new, stone());
     public static final RegistrySupplier<Block> POLYMER_BLOCK = register("polymer_block", Block::new, stone());
     public static final RegistrySupplier<Block> RADIUM_226_BLOCK = register("radium_266_block", Block::new, stone());
@@ -189,7 +178,7 @@ public class NtmBlocks {
     public static final RegistrySupplier<Block> DEEPSLATE_LIGNITE_ORE = register("deepslate_lignite_ore", Block::new, deepslate());
     public static final RegistrySupplier<Block> DEEPSLATE_ASBESTOS_ORE = register("deepslate_asbestos_ore", Block::new, deepslate());
     public static final RegistrySupplier<Block> DEEPSLATE_OIL_DEPOSIT = register("deepslate_oil_deposit", Block::new, deepslate());
-    public static final RegistrySupplier<Block> DEEPSLATE_EMPTY_OIL_DEPOSIT = register("deepslate_empty_oil_deposit", Block::new, deepslate());
+    public static final RegistrySupplier<Block> EMPTY_DEEPSLATE_OIL_DEPOSIT = register("empty_deepslate_oil_deposit", Block::new, deepslate());
     public static final RegistrySupplier<Block> DEEPSLATE_ALUMINIUM_ORE_CLUSTER = register("deepslate_aluminium_ore_cluster", Block::new, deepslate());
     public static final RegistrySupplier<Block> DEEPSLATE_COPPER_ORE_CLUSTER = register("deepslate_copper_ore_cluster", Block::new, deepslate());
     public static final RegistrySupplier<Block> DEEPSLATE_IRON_ORE_CLUSTER = register("deepslate_iron_ore_cluster", Block::new, deepslate());
@@ -243,6 +232,11 @@ public class NtmBlocks {
     );
     public static final RegistrySupplier<Block> OILY_SAND = register("oily_sand", Block::new,
       Properties.ofFullCopy(Blocks.SAND)
+        .mapColor(MapColor.TERRACOTTA_BLACK)
+        .destroyTime(2f)
+    );
+    public static final RegistrySupplier<Block> RED_OILY_SAND = register("red_oily_sand", Block::new,
+      Properties.ofFullCopy(Blocks.RED_SAND)
         .mapColor(MapColor.TERRACOTTA_BLACK)
         .destroyTime(2f)
     );

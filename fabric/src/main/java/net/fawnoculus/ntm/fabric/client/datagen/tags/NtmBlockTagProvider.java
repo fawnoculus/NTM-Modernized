@@ -3,7 +3,6 @@ package net.fawnoculus.ntm.fabric.client.datagen.tags;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.tags.NtmBlockTags;
 import net.fawnoculus.ntm.blocks.NtmBlocks;
 import net.minecraft.core.HolderLookup;
@@ -11,6 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
@@ -23,6 +23,10 @@ public class NtmBlockTagProvider extends FabricTagProvider<Block> {
 
     private static Identifier id(RegistrySupplier<Block> block) {
         return BuiltInRegistries.BLOCK.getKey(block.get());
+    }
+
+    private static TagKey<Block> cTag(String name) {
+        return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("c", name));
     }
 
     @Override
@@ -69,7 +73,7 @@ public class NtmBlockTagProvider extends FabricTagProvider<Block> {
           .addElement(id(NtmBlocks.OIL_DEPOSIT))
           .addElement(id(NtmBlocks.DEEPSLATE_OIL_DEPOSIT))
           .addElement(id(NtmBlocks.EMPTY_OIL_DEPOSIT))
-          .addElement(id(NtmBlocks.DEEPSLATE_EMPTY_OIL_DEPOSIT))
+          .addElement(id(NtmBlocks.EMPTY_DEEPSLATE_OIL_DEPOSIT))
           .addElement(id(NtmBlocks.ALUMINIUM_ORE_CLUSTER))
           .addElement(id(NtmBlocks.DEEPSLATE_ALUMINIUM_ORE_CLUSTER))
           .addElement(id(NtmBlocks.COPPER_ORE_CLUSTER))
@@ -243,7 +247,7 @@ public class NtmBlockTagProvider extends FabricTagProvider<Block> {
           .addElement(id(NtmBlocks.OIL_DEPOSIT))
           .addElement(id(NtmBlocks.DEEPSLATE_OIL_DEPOSIT))
           .addElement(id(NtmBlocks.EMPTY_OIL_DEPOSIT))
-          .addElement(id(NtmBlocks.DEEPSLATE_EMPTY_OIL_DEPOSIT))
+          .addElement(id(NtmBlocks.EMPTY_DEEPSLATE_OIL_DEPOSIT))
           .addElement(id(NtmBlocks.ALUMINIUM_ORE_CLUSTER))
           .addElement(id(NtmBlocks.DEEPSLATE_ALUMINIUM_ORE_CLUSTER))
           .addElement(id(NtmBlocks.COPPER_ORE_CLUSTER))
@@ -346,7 +350,6 @@ public class NtmBlockTagProvider extends FabricTagProvider<Block> {
           .addElement(id(NtmBlocks.PLUTONIUM_238_BLOCK))
           .addElement(id(NtmBlocks.PLUTONIUM_239_BLOCK))
           .addElement(id(NtmBlocks.PLUTONIUM_240_BLOCK))
-          .addElement(id(NtmBlocks.PLUTONIUM_241_BLOCK))
           .addElement(id(NtmBlocks.POLONIUM_210_BLOCK))
           .addElement(id(NtmBlocks.POLYMER_BLOCK))
           .addElement(id(NtmBlocks.RADIUM_226_BLOCK))
@@ -377,12 +380,7 @@ public class NtmBlockTagProvider extends FabricTagProvider<Block> {
           .addElement(id(NtmBlocks.ZIRCONIUM_BLOCK))
           .addElement(id(NtmBlocks.ALLOY_FURNACE))
           .addElement(id(NtmBlocks.ALLOY_FURNACE_EXTENSION))
-          .addElement(id(NtmBlocks.ELECTRIC_FURNACE))
-          .addElement(id(NtmBlocks.POTATO_BATTERY_BLOCK))
-          .addElement(id(NtmBlocks.ENERGY_STORAGE_BLOCK))
-          .addElement(id(NtmBlocks.LITHIUM_ION_ENERGY_STORAGE_BLOCK))
-          .addElement(id(NtmBlocks.SCHRABIDIUM_ENERGY_STORAGE_BLOCK))
-          .addElement(id(NtmBlocks.SPARK_ENERGY_STORAGE_BLOCK));
+          .addElement(id(NtmBlocks.ELECTRIC_FURNACE));
 
         getOrCreateRawBuilder(NtmBlockTags.BIG_AXE_MINEABLE)
           .addOptionalTag(BlockTags.MINEABLE_WITH_AXE.location())
@@ -395,6 +393,6 @@ public class NtmBlockTagProvider extends FabricTagProvider<Block> {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Block-Tag Provider";
+        return "Block-Tag Provider";
     }
 }

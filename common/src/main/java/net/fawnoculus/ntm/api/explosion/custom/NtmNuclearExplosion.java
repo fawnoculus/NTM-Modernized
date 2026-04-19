@@ -18,6 +18,9 @@ import java.util.*;
 public class NtmNuclearExplosion implements NtmExplosionType<NtmNuclearExplosion.ExtraData, NtmNuclearExplosion.ExplosionState> {
     private static final NtmNuclearExplosion INSTANCE = new NtmNuclearExplosion();
 
+    protected NtmNuclearExplosion() {
+    }
+
     public static void addExplosion(ServerLevel level, BlockPos pos, int radius) {
         if (radius < 1) {
             radius = 25;
@@ -32,9 +35,6 @@ public class NtmNuclearExplosion implements NtmExplosionType<NtmNuclearExplosion
 
     public static void addExplosion(NtmExplosionData explosionData, NtmNuclearExplosion.ExtraData extraData) {
         NtmExplosionSystem.addExplosion(INSTANCE, explosionData, extraData);
-    }
-
-    protected NtmNuclearExplosion() {
     }
 
     @Override

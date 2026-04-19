@@ -90,11 +90,11 @@ public class NodeNetwork {
 
     /**
      * removes all connections from a node &AMP; removes the node from the network
-     * <p>TODO: make the performance of this not suck
      *
      * @param originNode the Node to me removed
      */
     public void disconnectNode(@NotNull Node originNode) {
+        // TODO: optimize this (aka: make the performance of this not suck ass)
         this.clearNetwork();
 
         final ImmutableList<Node> disconnectedNodeList = ImmutableList.copyOf(originNode.getConnectedNodes());

@@ -4,6 +4,7 @@ import dev.architectury.networking.NetworkManager;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.messages.AdvancedMessage;
 import net.fawnoculus.ntm.items.components.NtmFoodComponents;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.s2c.AdvancedMessagePayload;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -27,7 +28,7 @@ public class ScrapPancakeItem extends Item {
         // TODO: this, once we have lunar cybernetic armor
         NetworkManager.sendToPlayer((ServerPlayer) player, new AdvancedMessagePayload(new AdvancedMessage(
           Ntm.id("scrap_pancake"),
-          Component.translatable("message.ntm.teeth_to_soft").withStyle(ChatFormatting.YELLOW),
+          Component.translatable(NtmTranslations.MESSAGE_TEETH_TO_SOFT).withStyle(ChatFormatting.YELLOW),
           1000.0f)));
         return InteractionResult.FAIL;
     }

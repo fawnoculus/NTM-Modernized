@@ -8,6 +8,7 @@ import net.fawnoculus.ntm.blocks.entities.container.energy.EnergyInventoryBE;
 import net.fawnoculus.ntm.gui.NtmMenuProvider;
 import net.fawnoculus.ntm.gui.menus.ElectricFurnaceMenu;
 import net.fawnoculus.ntm.items.custom.container.energy.EnergyContainingItem;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.misc.stack.EnergyStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.registries.VanillaRegistries;
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ElectricFurnaceBE extends EnergyInventoryBE implements NtmMenuProvider<BlockPos> {
-    public static final Component NAME = Component.translatable("container.ntm.electric_furnace");
     public static final int OUTPUT_SLOT_INDEX = 0;
     public static final int INPUT_SLOT_INDEX = 1;
     public static final int BATTERY_SLOT_INDEX = 2;
@@ -69,7 +69,7 @@ public class ElectricFurnaceBE extends EnergyInventoryBE implements NtmMenuProvi
     }
 
     public static void tick(Level ignored, BlockPos ignored2, BlockState ignored3, ElectricFurnaceBE entity) {
-       entity.processBattery();
+        entity.processBattery();
 
         if (entity.canCraft()) {
             entity.addProgress();
@@ -191,7 +191,7 @@ public class ElectricFurnaceBE extends EnergyInventoryBE implements NtmMenuProvi
 
     @Override
     public @NonNull Component getDisplayName() {
-        return NAME;
+        return Component.translatable(NtmTranslations.CONTAINER_ELECTRIC_FURNACE);
     }
 
     @Override

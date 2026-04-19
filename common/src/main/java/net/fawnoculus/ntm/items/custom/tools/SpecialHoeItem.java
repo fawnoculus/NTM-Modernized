@@ -6,6 +6,7 @@ import net.fawnoculus.ntm.api.messages.AdvancedMessage;
 import net.fawnoculus.ntm.api.tool.AbilityHandler;
 import net.fawnoculus.ntm.api.tool.ModifierHandler;
 import net.fawnoculus.ntm.api.tool.SpecialTool;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.s2c.AdvancedMessagePayload;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -106,7 +107,7 @@ public class SpecialHoeItem extends HoeItem implements SpecialTool {
 
         if (this.CAN_BREAK_DEPTH_ROCK) {
             tooltip.accept(Component.empty());
-            tooltip.accept(Component.translatable("tooltip.ntm.can_break_depth_rock").withStyle(ChatFormatting.RED));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_CAN_BREAK_DEPTH_ROCK).withStyle(ChatFormatting.RED));
         }
     }
 }

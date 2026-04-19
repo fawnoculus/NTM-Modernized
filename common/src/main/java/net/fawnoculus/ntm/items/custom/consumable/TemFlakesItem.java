@@ -1,6 +1,7 @@
 package net.fawnoculus.ntm.items.custom.consumable;
 
 import net.fawnoculus.ntm.items.components.NtmFoodComponents;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,6 +28,6 @@ public class TemFlakesItem extends Item {
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
-        tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5)).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this).withStyle(ChatFormatting.GRAY));
     }
 }

@@ -4,6 +4,7 @@ import dev.architectury.networking.NetworkManager;
 import net.fawnoculus.ntm.client.misc.NtmKeybinds;
 import net.fawnoculus.ntm.fluid.data.FluidDataRegistry;
 import net.fawnoculus.ntm.fluid.data.FluidDataType;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.s2c.FluidDataRegistryPayload;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -89,7 +90,7 @@ public class ClientFluidDataRegistry {
             }
 
             if (hasExtraInfo && !showExtraInfo) {
-                tooltip.accept(Component.translatable("tooltip.ntm.hold_for_info", NtmKeybinds.DISPLAY_EXTRA_INFO.getTranslatedKeyMessage()));
+                tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_HOLD_FOR_INFO, NtmKeybinds.DISPLAY_EXTRA_INFO.getTranslatedKeyMessage()));
             }
         }
 

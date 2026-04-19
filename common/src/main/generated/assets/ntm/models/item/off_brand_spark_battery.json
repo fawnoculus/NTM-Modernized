@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ntm:item/off_brand_spark_battery"
-  }
-}

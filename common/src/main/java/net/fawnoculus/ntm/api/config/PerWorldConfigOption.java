@@ -7,6 +7,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -76,25 +77,25 @@ public class PerWorldConfigOption<T> {
     }
 
     private int getOptionInfo(Consumer<Component> consumer) {
-        Component nameText = Component.translatable("command.ntm.get_option_info.name").withStyle(ChatFormatting.BLUE)
+        Component nameText = Component.translatable(NtmTranslations.COMMAND_GET_OPTION_INFO_NAME).withStyle(ChatFormatting.BLUE)
           .append(Component.literal(this.NAME).withStyle(ChatFormatting.WHITE));
         consumer.accept(nameText);
 
         if (this.COMMENT != null) {
-            Component commentText = Component.translatable("command.ntm.get_option_info.comment").withStyle(ChatFormatting.YELLOW)
+            Component commentText = Component.translatable(NtmTranslations.COMMAND_GET_OPTION_INFO_COMMENT).withStyle(ChatFormatting.YELLOW)
               .append(Component.literal(this.COMMENT).withStyle(ChatFormatting.WHITE));
             consumer.accept(commentText);
         }
 
-        Component defaultValueText = Component.translatable("command.ntm.get_option_info.default").withStyle(ChatFormatting.YELLOW)
+        Component defaultValueText = Component.translatable(NtmTranslations.COMMAND_GET_OPTION_INFO_DEFAULT).withStyle(ChatFormatting.YELLOW)
           .append(Component.literal(this.CODEC.encodeStart(JsonOps.INSTANCE, this.DEFAULT.getValue()).getOrThrow().toString()).withStyle(ChatFormatting.WHITE));
         consumer.accept(defaultValueText);
 
-        Component worldDefaultValueText = Component.translatable("command.ntm.get_option_info.world-default").withStyle(ChatFormatting.YELLOW)
+        Component worldDefaultValueText = Component.translatable(NtmTranslations.COMMAND_GET_OPTION_INFO_WORLD_DEFAULT).withStyle(ChatFormatting.YELLOW)
           .append(Component.literal(this.CODEC.encodeStart(JsonOps.INSTANCE, this.DEFAULT.getValue()).getOrThrow().toString()).withStyle(ChatFormatting.WHITE));
         consumer.accept(worldDefaultValueText);
 
-        Component currentValueText = Component.translatable("command.ntm.get_option_info.current_value").withStyle(ChatFormatting.YELLOW)
+        Component currentValueText = Component.translatable(NtmTranslations.COMMAND_GET_OPTION_INFO_VALUE).withStyle(ChatFormatting.YELLOW)
           .append(Component.literal(this.CODEC.encodeStart(JsonOps.INSTANCE, this.getValue()).getOrThrow().toString()).withStyle(ChatFormatting.WHITE));
         consumer.accept(currentValueText);
 
@@ -106,17 +107,17 @@ public class PerWorldConfigOption<T> {
         try {
             element = JsonParser.parseString(value);
         } catch (JsonSyntaxException exception) {
-            onFailure.accept(Component.translatable("command.ntm.set_config_value.invalid_json", value));
+            onFailure.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG_INVALID_JSON, value));
             return -2;
         }
 
         if (this.DEFAULT.setValueFrom(element, JsonOps.INSTANCE)) {
-            onSuccess.accept(Component.translatable("command.ntm.set_config_value", this.NAME, value));
+            onSuccess.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG_WORLD_DEFAULT, this.NAME, value));
             file.writeFile();
             return 0;
         }
 
-        onFailure.accept(Component.translatable("command.ntm.set_config_value.failed", this.NAME, value));
+        onFailure.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG_FAILED_WORLD_DEFAULT, this.NAME, value));
         return -1;
     }
 
@@ -125,22 +126,22 @@ public class PerWorldConfigOption<T> {
         try {
             element = JsonParser.parseString(value);
         } catch (JsonSyntaxException exception) {
-            onFailure.accept(Component.translatable("command.ntm.set_config_value.invalid_json", value));
+            onFailure.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG_INVALID_JSON, value));
             return -2;
         }
 
         if (this.PER_WORLD == null) {
-            onFailure.accept(Component.translatable("command.ntm.set_config_value.per_world_doesnt_exit", value));
+            onFailure.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG_PER_WORLD_NOT_EXIST, value));
             return -3;
         }
 
         if (this.PER_WORLD.setValueFrom(element, JsonOps.INSTANCE)) {
-            onSuccess.accept(Component.translatable("command.ntm.set_config_value", this.NAME, value));
+            onSuccess.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG, this.NAME, value));
             file.writeFile();
             return 0;
         }
 
-        onFailure.accept(Component.translatable("command.ntm.set_config_value.failed", this.NAME, value));
+        onFailure.accept(Component.translatable(NtmTranslations.COMMAND_SET_CONFIG_FAILED, this.NAME, value));
         return -1;
     }
 }

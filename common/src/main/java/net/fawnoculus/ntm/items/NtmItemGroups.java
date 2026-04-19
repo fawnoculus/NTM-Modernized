@@ -16,28 +16,37 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
-
 public class NtmItemGroups {
-    public static final ResourceKey<CreativeModeTab> RESOURCES_AND_PARTS_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("resources_and_parts"));
+    public static final ResourceKey<CreativeModeTab> RESOURCES_AND_PARTS_KEY = keyOf("resources_and_parts");
+    public static final ResourceKey<CreativeModeTab> MACHINE_ITEMS_AND_FUEL_KEY = keyOf("machine_items_and_fuel");
+    public static final ResourceKey<CreativeModeTab> TEMPLATES_KEY = keyOf("templates");
+    public static final ResourceKey<CreativeModeTab> ORES_AND_BLOCKS_KEY = keyOf("ores_and_blocks");
+    public static final ResourceKey<CreativeModeTab> MACHINES_KEY = keyOf("machines");
+    public static final ResourceKey<CreativeModeTab> BOMBS_KEY = keyOf("bombs");
+    public static final ResourceKey<CreativeModeTab> WEAPONS_AND_TURRETS_KEY = keyOf("weapons_and_turrets");
+    public static final ResourceKey<CreativeModeTab> MISSILES_AND_SATELLITES_KEY = keyOf("missiles_and_satellites");
+    public static final ResourceKey<CreativeModeTab> CONSUMABLES_AND_GEAR_KEY = keyOf("consumables_and_gear");
+    public static final ResourceKey<CreativeModeTab> TOOLS_KEY = keyOf("tools");
+
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> RESOURCES_AND_PARTS = register(RESOURCES_AND_PARTS_KEY, NtmItems.URANIUM_INGOT);
-    public static final ResourceKey<CreativeModeTab> MACHINE_ITEMS_AND_FUEL_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("machine_items_and_fuel"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> PLUTONIUM_238_RTG_PELLET = register(MACHINE_ITEMS_AND_FUEL_KEY, NtmItems.PLUTONIUM_238_RTG_PELLET);
-    public static final ResourceKey<CreativeModeTab> TEMPLATES_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("templates"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> TEMPLATES = register(TEMPLATES_KEY, NtmItems.NULL);
-    public static final ResourceKey<CreativeModeTab> ORES_AND_BLOCKS_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("ores_and_blocks"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> ORES_AND_BLOCKS = register(ORES_AND_BLOCKS_KEY, NtmBlocks.URANIUM_ORE);
-    public static final ResourceKey<CreativeModeTab> MACHINES_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("machines"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> MACHINES = register(MACHINES_KEY, NtmBlocks.PWR_CONTROLLER);
-    public static final ResourceKey<CreativeModeTab> BOMBS_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("bombs"));
-    // TODO: somehow set the background texture of BOMBS to Ntm.id("textures/gui/creative_inventory/tab_nuke.png")
-    public static final RegistrySupplier<CreativeModeTab> BOMBS = register(BOMBS_KEY, NtmItems.NULL);
-    public static final ResourceKey<CreativeModeTab> MISSILES_AND_SATELLITES_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("missiles_and_satellites"));
+    @SuppressWarnings("unused")
+    public static final RegistrySupplier<CreativeModeTab> BOMBS = register(BOMBS_KEY, NtmItems.NULL); // TODO: set background texture of BOMBS "textures/gui/creative_inventory/tab_nuke.png"
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> MISSILES_AND_SATELLITES = register(MISSILES_AND_SATELLITES_KEY, NtmItems.NULL);
-    public static final ResourceKey<CreativeModeTab> WEAPONS_AND_TURRETS_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("weapons_and_turrets"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> WEAPONS_AND_TURRETS = register(WEAPONS_AND_TURRETS_KEY, NtmItems.NULL);
-    public static final ResourceKey<CreativeModeTab> CONSUMABLES_AND_GEAR_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("consumables_and_gear"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> CONSUMABLES_AND_GEAR = register(CONSUMABLES_AND_GEAR_KEY, NtmItems.BOTTLE_OF_NUKA_COLA);
-    public static final ResourceKey<CreativeModeTab> TOOLS_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id("tools"));
+    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> TOOLS = register(TOOLS_KEY, NtmItems.ADVANCED_ALLOY_PICKAXE);
 
     private static RegistrySupplier<CreativeModeTab> register(ResourceKey<CreativeModeTab> resourceKey, RegistrySupplier<? extends ItemLike> icon) {
@@ -47,6 +56,10 @@ public class NtmItemGroups {
             () -> new ItemStack(icon.get())
           )
         );
+    }
+
+    private static ResourceKey<CreativeModeTab> keyOf(String name) {
+        return ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Ntm.id(name));
     }
 
     public static void init() {
@@ -135,7 +148,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.BISMUTH_BRONZE_INGOT);
             tabModifier.accept(NtmItems.CAST_BISMUTH_BRONZE_PLATE);
 
-            tabModifier.accept(NtmItems.BORAX_POWDER);
+            tabModifier.accept(NtmItems.BORAX);
 
             tabModifier.accept(NtmItems.BORON_INGOT);
             tabModifier.accept(NtmItems.BORON_POWDER);
@@ -185,6 +198,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.CARBON_WIRE);
             tabModifier.accept(NtmItems.COAL_BRIQUETTE);
             tabModifier.accept(NtmItems.COAL_COKE);
+            tabModifier.accept(NtmItems.COAL_CRYSTALS);
 
             tabModifier.accept(NtmItems.COBALT_INGOT);
             tabModifier.accept(NtmItems.COBALT_BILLET);
@@ -215,6 +229,9 @@ public class NtmItemGroups {
 
             tabModifier.accept(NtmItems.CRYOLITE_CHUNK);
 
+            tabModifier.accept(NtmItems.CRYSTAL_HORN);
+            tabModifier.accept(NtmItems.CRYSTAL_CHARRED);
+
             tabModifier.accept(NtmItems.DESH_INGOT);
             tabModifier.accept(NtmItems.DESH_BLEND);
             tabModifier.accept(NtmItems.DESHREADY_BLEND);
@@ -240,17 +257,17 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.EUPHEMIUM_POWDER);
             tabModifier.accept(NtmItems.EUPHEMIUM_NUGGET);
 
-            tabModifier.accept(NtmItems.FERRIC_SCHARBIDATE_INGOT);
-            tabModifier.accept(NtmItems.FERRIC_SCHARBIDATE_POWDER);
-            tabModifier.accept(NtmItems.CAST_FERRIC_SCHARBIDATE_PLATE);
-            tabModifier.accept(NtmItems.DENSE_FERRIC_SCHARBIDATE_WIRE);
+            tabModifier.accept(NtmItems.FERRIC_SCHRABIDATE_INGOT);
+            tabModifier.accept(NtmItems.FERRIC_SCHRABIDATE_POWDER);
+            tabModifier.accept(NtmItems.CAST_FERRIC_SCHRABIDATE_PLATE);
+            tabModifier.accept(NtmItems.DENSE_FERRIC_SCHRABIDATE_WIRE);
 
             tabModifier.accept(NtmItems.FERROURANIUM_INGOT);
             tabModifier.accept(NtmItems.CAST_FERROURANIUM_PLATE);
 
-            tabModifier.accept(NtmItems.FLASH_GOLD);
+            tabModifier.accept(NtmItems.FLASH_GOLD_BILLET);
 
-            tabModifier.accept(NtmItems.FLASH_LEAD);
+            tabModifier.accept(NtmItems.FLASH_LEAD_BILLET);
 
             tabModifier.accept(NtmItems.FLUORITE);
             tabModifier.accept(NtmItems.FLUORITE_CRYSTALS);
@@ -258,7 +275,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.FLUX);
 
             tabModifier.accept(NtmItems.FULLERENE);
-            tabModifier.accept(NtmItems.CRYSTALLINE_FULLERENE);
+            tabModifier.accept(NtmItems.CRYSTALLINE_FULLERITE);
 
             tabModifier.accept(NtmItems.GHIORSIUM_336_INGOT);
             tabModifier.accept(NtmItems.GHIORSIUM_336_BILLET);
@@ -376,7 +393,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.DENSE_NIOBIUM_WIRE);
             tabModifier.accept(NtmItems.NIOBIUM_FRAGMENT);
 
-            tabModifier.accept(NtmItems.NITAN_BLEND);
+            tabModifier.accept(NtmItems.NITANIUM_BLEND);
 
             tabModifier.accept(NtmItems.NITER);
             tabModifier.accept(NtmItems.NITER_CRYSTALS);
@@ -466,7 +483,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.CAST_SATURNITE_PLATE);
             tabModifier.accept(NtmItems.SATURNITE_SHELL);
 
-            tabModifier.accept(NtmItems.SAWDUST_POWDER);
+            tabModifier.accept(NtmItems.SAWDUST);
             tabModifier.accept(NtmItems.SAWDUST_BRIQUETTE);
 
             tabModifier.accept(NtmItems.SCHRABIDIUM_INGOT);
@@ -499,7 +516,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.PRINTED_SILICON_WAFER);
             tabModifier.accept(NtmItems.SILICON_NUGGET);
 
-            tabModifier.accept(NtmItems.SODIUM_POWDER);
+            tabModifier.accept(NtmItems.SODIUM);
 
             tabModifier.accept(NtmItems.SOLINIUM_INGOT);
             tabModifier.accept(NtmItems.SOLINIUM_BILLET);
@@ -596,6 +613,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.URANIUM_238_INGOT);
             tabModifier.accept(NtmItems.URANIUM_238_BILLET);
             tabModifier.accept(NtmItems.URANIUM_238_NUGGET);
+            tabModifier.accept(NtmItems.URANIUM_ZIRCONIUM_HYDRIDE_BILLET);
             tabModifier.accept(NtmItems.URANIUM_POWDER);
             tabModifier.accept(NtmItems.URANIUM_CRYSTALS);
 
@@ -622,6 +640,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.ZIRCONIUM_WIRE);
         });
         NtmPlatform.modifyCreativeTab(MACHINE_ITEMS_AND_FUEL_KEY, tabModifier -> {
+            /*
             tabModifier.accept(NtmItems.BATTERY);
             tabModifier.accept(charged(NtmItems.BATTERY, 5_000L));
             tabModifier.accept(NtmItems.REDSTONE_POWER_CELL);
@@ -684,6 +703,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.SELF_CHARGING_GOLD_198_BATTERY);
             tabModifier.accept(NtmItems.SELF_CHARGING_LEAD_209_BATTERY);
             tabModifier.accept(NtmItems.SELF_CHARGING_AMERICIUM_241_BATTERY);
+             */
         });
         NtmPlatform.modifyCreativeTab(TEMPLATES_KEY, tabModifier -> {
             tabModifier.accept(NtmItems.NULL);
@@ -730,7 +750,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmBlocks.OIL_DEPOSIT);
             tabModifier.accept(NtmBlocks.DEEPSLATE_OIL_DEPOSIT);
             tabModifier.accept(NtmBlocks.EMPTY_OIL_DEPOSIT);
-            tabModifier.accept(NtmBlocks.DEEPSLATE_EMPTY_OIL_DEPOSIT);
+            tabModifier.accept(NtmBlocks.EMPTY_DEEPSLATE_OIL_DEPOSIT);
             tabModifier.accept(NtmBlocks.ALUMINIUM_ORE_CLUSTER);
             tabModifier.accept(NtmBlocks.DEEPSLATE_ALUMINIUM_ORE_CLUSTER);
             tabModifier.accept(NtmBlocks.COPPER_ORE_CLUSTER);
@@ -742,6 +762,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmBlocks.DEAD_DIRT);
             tabModifier.accept(NtmBlocks.OILY_DIRT);
             tabModifier.accept(NtmBlocks.OILY_SAND);
+            tabModifier.accept(NtmBlocks.RED_OILY_SAND);
             tabModifier.accept(NtmBlocks.DEPTH_ROCK);
             tabModifier.accept(NtmBlocks.DEPTH_CINNABAR_ORE);
             tabModifier.accept(NtmBlocks.DEPTH_ZIRCONIUM_ORE);
@@ -857,7 +878,6 @@ public class NtmItemGroups {
             tabModifier.accept(NtmBlocks.PLUTONIUM_238_BLOCK);
             tabModifier.accept(NtmBlocks.PLUTONIUM_239_BLOCK);
             tabModifier.accept(NtmBlocks.PLUTONIUM_240_BLOCK);
-            tabModifier.accept(NtmBlocks.PLUTONIUM_241_BLOCK);
             tabModifier.accept(NtmBlocks.POLONIUM_210_BLOCK);
             tabModifier.accept(NtmBlocks.POLYMER_BLOCK);
             tabModifier.accept(NtmBlocks.RADIUM_226_BLOCK);
@@ -889,11 +909,6 @@ public class NtmItemGroups {
         });
         NtmPlatform.modifyCreativeTab(MACHINES_KEY, tabModifier -> {
             tabModifier.accept(NtmBlocks.TEMP_CABLE);
-            tabModifier.accept(NtmBlocks.POTATO_BATTERY_BLOCK);
-            tabModifier.accept(NtmBlocks.ENERGY_STORAGE_BLOCK);
-            tabModifier.accept(NtmBlocks.LITHIUM_ION_ENERGY_STORAGE_BLOCK);
-            tabModifier.accept(NtmBlocks.SCHRABIDIUM_ENERGY_STORAGE_BLOCK);
-            tabModifier.accept(NtmBlocks.SPARK_ENERGY_STORAGE_BLOCK);
             tabModifier.accept(NtmBlocks.ALLOY_FURNACE);
             tabModifier.accept(NtmBlocks.ALLOY_FURNACE_EXTENSION);
             tabModifier.accept(NtmBlocks.ELECTRIC_FURNACE);
@@ -949,7 +964,7 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.EXPENSIVE_TEM_FLAKES);
             tabModifier.accept(NtmItems.GLOWING_MUSHROOM_STEW);
             tabModifier.accept(NtmItems.SCRAMBLED_BALEFIRE_EGG);
-            tabModifier.accept(NtmItems.SCRAMBLED_BALEFIRE_EGG_AND_HAM);
+            tabModifier.accept(NtmItems.HAM_AND_BALEFIRE_EGGS);
             tabModifier.accept(NtmItems.LEMON);
             tabModifier.accept(NtmItems.MRE);
             tabModifier.accept(NtmItems.LOOPS);
@@ -1005,6 +1020,8 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.BOTTLE_OF_FRITZ_COLA);
             tabModifier.accept(NtmItems.FIRST_BOTTLE_OF_FRITZ_COLA);
             tabModifier.accept(NtmItems.BOTTLE_OPENER);
+
+            tabModifier.accept(NtmItems.ROD_OF_DISCORD);
 
             tabModifier.accept(NtmItems.CONSTRUCTION_WAND);
             tabModifier.accept(NtmItems.DEBUG_WAND);
@@ -1065,10 +1082,6 @@ public class NtmItemGroups {
             tabModifier.accept(NtmItems.MESE_PICKAXE);
             tabModifier.accept(NtmItems.MESE_AXE);
         });
-    }
-
-    private static ItemStack charged(RegistrySupplier<Item> item, long charge) {
-        return component(item, NtmDataComponentTypes.ENERGY_COMPONENT_TYPE.get(), charge);
     }
 
     private static <T> ItemStack component(RegistrySupplier<Item> item, DataComponentType<T> componentType, T value) {

@@ -9,6 +9,7 @@ import net.fawnoculus.ntm.client.gui.widget.HoverButtonWidget;
 import net.fawnoculus.ntm.client.gui.widget.ToolAbilityWidget;
 import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.fawnoculus.ntm.client.util.NtmRenderUtil;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.c2s.ToolAbilityPresetPayload;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -44,7 +45,7 @@ public class ToolAbilityCustomizationScreen extends Screen {
     private int y = 0;
 
     public ToolAbilityCustomizationScreen(SpecialTool specialTool, ItemStack stack) {
-        super(Component.translatable("screen.ntm.tool_abilities"));
+        super(Component.translatable(NtmTranslations.SCREEN_TOOL_ABILITIES));
 
         this.TOOL = specialTool;
         this.ABILITY_HANDLER = specialTool.abilityHandler();
@@ -95,13 +96,13 @@ public class ToolAbilityCustomizationScreen extends Screen {
         this.y = (this.height - BACKGROUND_HEIGHT) / 2;
 
         List<Component> names = List.of(
-          Component.translatable("tooltip.ntm.ability.gui.reset_presets"),
-          Component.translatable("tooltip.ntm.ability.gui.delete_current"),
-          Component.translatable("tooltip.ntm.ability.gui.add_new"),
-          Component.translatable("tooltip.ntm.ability.gui.select_first"),
-          Component.translatable("tooltip.ntm.ability.gui.next"),
-          Component.translatable("tooltip.ntm.ability.gui.previous"),
-          Component.translatable("tooltip.ntm.ability.gui.close_gui")
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_RESET_PRESETS),
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_DELETE_CURRENT),
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_ADD_NEW),
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_SELECT_FIRST),
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_NEXT),
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_PREVIOUS),
+          Component.translatable(NtmTranslations.TOOLTIP_ABILITY_GUI_CLOSE)
         );
         List<Runnable> onPressed = List.of(
           this::resetPresets,

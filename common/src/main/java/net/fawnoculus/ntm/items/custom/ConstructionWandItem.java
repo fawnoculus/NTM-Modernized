@@ -1,6 +1,8 @@
 package net.fawnoculus.ntm.items.custom;
 
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
+import net.fawnoculus.ntm.misc.NtmTranslations;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -38,7 +40,7 @@ public class ConstructionWandItem extends Item {
         if (player.isShiftKeyDown()) {
             stack.set(NtmDataComponentTypes.BLOCK_STATE_COMPONENT_TYPE.get(), world.getBlockState(context.getClickedPos()));
             player.displayClientMessage(Component.translatable(
-              "message.ntm.construction_wand.set_block",
+              NtmTranslations.MESSAGE_CONSTRUCTION_WAND_SET_BLOCK,
               world.getBlockState(context.getClickedPos()).getBlock().getName()
             ), false);
             return InteractionResult.SUCCESS_SERVER;
@@ -48,7 +50,7 @@ public class ConstructionWandItem extends Item {
         if (selectedPos == null) {
             stack.set(NtmDataComponentTypes.BLOCK_POS_COMPONENT_TYPE.get(), context.getClickedPos());
             player.displayClientMessage(Component.translatable(
-              "message.ntm.construction_wand.set_pos",
+              NtmTranslations.MESSAGE_CONSTRUCTION_WAND_SET_POS,
               context.getClickedPos().getX(),
               context.getClickedPos().getY(),
               context.getClickedPos().getZ()
@@ -64,7 +66,7 @@ public class ConstructionWandItem extends Item {
         int lesserZ = Math.min(selectedPos.getZ(), context.getClickedPos().getZ());
         int blocksToFill = (greaterX - lesserX) * (greaterY - lesserY) * (greaterZ - lesserZ);
 
-        player.displayClientMessage(Component.translatable("message.ntm.construction_wand.filling", blocksToFill), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_CONSTRUCTION_WAND_FILLING, blocksToFill), false);
 
         for (int x = lesserX; x <= greaterX; x++) {
             for (int y = lesserY; y <= greaterY; y++) {
@@ -74,7 +76,7 @@ public class ConstructionWandItem extends Item {
             }
         }
         stack.set(NtmDataComponentTypes.BLOCK_POS_COMPONENT_TYPE.get(), null);
-        player.displayClientMessage(Component.translatable("message.ntm.construction_wand.filled", blocksToFill), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_CONSTRUCTION_WAND_FILLED, blocksToFill), false);
         return InteractionResult.SUCCESS_SERVER;
     }
 
@@ -90,17 +92,17 @@ public class ConstructionWandItem extends Item {
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
-        tooltip.accept(Component.translatable("tooltip.ntm.creative_only").withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.construction_wand1").withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.construction_wand2").withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.construction_wand3").withStyle(ChatFormatting.GRAY));
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_CREATIVE_ONLY).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 1).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 2).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 3).withStyle(ChatFormatting.GRAY));
         BlockPos pos = getBlockPos(stack);
         if (pos != null) {
-            tooltip.accept(Component.translatable("tooltip.ntm.construction_wand.pos", pos.getX(), pos.getY(), pos.getZ()).withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_CONSTRUCTION_WAND_POS, pos.getX(), pos.getY(), pos.getZ()).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltip.accept(Component.translatable("tooltip.ntm.construction_wand.no_pos").withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_CONSTRUCTION_WAND_NO_POS).withStyle(ChatFormatting.GRAY));
         }
         String blockIdentifier = BuiltInRegistries.BLOCK.wrapAsHolder(getBlockState(stack).getBlock()).getRegisteredName();
-        tooltip.accept(Component.translatable("tooltip.ntm.construction_wand.block", blockIdentifier).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_CONSTRUCTION_WAND_BLOCK, blockIdentifier).withStyle(ChatFormatting.GRAY));
     }
 }

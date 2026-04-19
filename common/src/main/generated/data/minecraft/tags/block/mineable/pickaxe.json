@@ -41,7 +41,7 @@
     "ntm:oil_deposit",
     "ntm:deepslate_oil_deposit",
     "ntm:empty_oil_deposit",
-    "ntm:deepslate_empty_oil_deposit",
+    "ntm:empty_deepslate_oil_deposit",
     "ntm:aluminium_ore_cluster",
     "ntm:deepslate_aluminium_ore_cluster",
     "ntm:copper_ore_cluster",
@@ -144,7 +144,6 @@
     "ntm:plutonium_238_block",
     "ntm:plutonium_239_block",
     "ntm:plutonium_240_block",
-    "ntm:plutonium_241_block",
     "ntm:polonium_210_block",
     "ntm:polymer_block",
     "ntm:radium_266_block",
@@ -175,11 +174,6 @@
     "ntm:zirconium_block",
     "ntm:alloy_furnace",
     "ntm:alloy_furnace_extension",
-    "ntm:electric_furnace",
-    "ntm:potato_battery_block",
-    "ntm:energy_storage_block",
-    "ntm:lithium_ion_energy_storage_block",
-    "ntm:schrabidium_energy_storage_block",
-    "ntm:spark_energy_storage_block"
+    "ntm:electric_furnace"
   ]
 }

@@ -2,7 +2,6 @@ package net.fawnoculus.ntm.fabric.client.datagen.recipes;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.blocks.NtmBlocks;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.minecraft.core.HolderLookup;
@@ -69,6 +68,6 @@ public class NtmSmeltingRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Smelting-Recipe Provider";
+        return "Smelting-Recipe Provider";
     }
 }

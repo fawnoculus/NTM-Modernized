@@ -7,7 +7,6 @@ import net.fawnoculus.ntm.blocks.entities.AlloyFurnaceBE;
 import net.fawnoculus.ntm.blocks.entities.AlloyFurnaceExtensionBE;
 import net.fawnoculus.ntm.blocks.entities.ElectricFurnaceBE;
 import net.fawnoculus.ntm.blocks.entities.container.energy.EnergyConnectorBE;
-import net.fawnoculus.ntm.blocks.entities.container.energy.SimpleEnergyStorageBE;
 import net.fawnoculus.ntm.misc.NtmDeferredRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
@@ -40,13 +39,4 @@ public class NtmBlockEntities {
     public static final RegistrySupplier<BlockEntityType<EnergyConnectorBE>> SIMPLE_ENERGY_CONNECTOR_BE = register("simple_energy_connector", EnergyConnectorBE::new,
       NtmBlocks.TEMP_CABLE
     );
-    public static final RegistrySupplier<BlockEntityType<SimpleEnergyStorageBE>> SIMPLE_ENERGY_STORAGE_BE = register("simple_energy_storage", SimpleEnergyStorageBE::new,
-      NtmBlocks.POTATO_BATTERY_BLOCK,
-      NtmBlocks.ENERGY_STORAGE_BLOCK,
-      NtmBlocks.LITHIUM_ION_ENERGY_STORAGE_BLOCK,
-      NtmBlocks.SCHRABIDIUM_ENERGY_STORAGE_BLOCK,
-      NtmBlocks.SPARK_ENERGY_STORAGE_BLOCK
-    );
-
-
 }

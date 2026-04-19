@@ -2,7 +2,6 @@ package net.fawnoculus.ntm.fabric.client.datagen.recipes;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.blocks.NtmBlocks;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.minecraft.core.HolderLookup;
@@ -51,7 +50,7 @@ public class NtmCraftingRecipeProvider extends FabricRecipeProvider {
                 make3x3Reversible(NtmItems.DESH_INGOT, NtmBlocks.DESH_BLOCK);
                 make3x3Reversible(NtmItems.DINEUTRONIUM_INGOT, NtmBlocks.DINEUTRONIUM_BLOCK);
                 make3x3Reversible(NtmItems.EUPHEMIUM_INGOT, NtmBlocks.EUPHEMIUM_BLOCK);
-                make3x3Reversible(NtmItems.FERRIC_SCHARBIDATE_INGOT, NtmBlocks.FERRIC_SCHRABIDATE_BLOCK);
+                make3x3Reversible(NtmItems.FERRIC_SCHRABIDATE_INGOT, NtmBlocks.FERRIC_SCHRABIDATE_BLOCK);
                 make3x3Reversible(NtmItems.FLUORITE, NtmBlocks.FLUORITE_BLOCK);
                 make3x3Reversible(NtmItems.GRAPHITE_INGOT, NtmBlocks.GRAPHITE_BLOCK);
                 make3x3Reversible(NtmItems.HIGH_SPEED_STEEL_INGOT, NtmBlocks.HIGH_SPEED_STEEL_BLOCK);
@@ -70,7 +69,6 @@ public class NtmCraftingRecipeProvider extends FabricRecipeProvider {
                 make3x3Reversible(NtmItems.PLUTONIUM_238_INGOT, NtmBlocks.PLUTONIUM_238_BLOCK);
                 make3x3Reversible(NtmItems.PLUTONIUM_239_INGOT, NtmBlocks.PLUTONIUM_239_BLOCK);
                 make3x3Reversible(NtmItems.PLUTONIUM_240_INGOT, NtmBlocks.PLUTONIUM_240_BLOCK);
-                make3x3Reversible(NtmItems.PLUTONIUM_241_INGOT, NtmBlocks.PLUTONIUM_241_BLOCK);
                 make3x3Reversible(NtmItems.POLONIUM_210_INGOT, NtmBlocks.POLONIUM_210_BLOCK);
                 make3x3Reversible(NtmItems.POLYMER_BAR, NtmBlocks.POLYMER_BLOCK);
                 make3x3Reversible(NtmItems.RADIUM_226_INGOT, NtmBlocks.RADIUM_226_BLOCK);
@@ -228,6 +226,6 @@ public class NtmCraftingRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Crafting-Recipe Provider";
+        return "Crafting-Recipe Provider";
     }
 }

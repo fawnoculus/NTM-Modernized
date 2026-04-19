@@ -2,10 +2,6 @@ architectury {
     common enabled_platforms.split(',')
 }
 
-
-dependencies {
-}
-
 dependencies {
     // Not compiling against Fabric-Loader will cause Compiler warnings
     // I'm honestly not sure why, but it's probably because architectury uses @Environment from Fabric-Loader internally

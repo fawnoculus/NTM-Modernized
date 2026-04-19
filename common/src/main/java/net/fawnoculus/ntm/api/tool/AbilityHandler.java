@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmWorldUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,18 +137,18 @@ public record AbilityHandler(List<Tuple<ItemAbility, @NotNull @Range(from = 1, t
         ItemAbility bottom = preset.bottomAbility;
 
         if (top.isNotNone() && bottom.isNotNone()) {
-            return Component.translatable("message.ntm.ability.enable_2", top.getFullName(preset.topAbilityLevel), bottom.getFullName(preset.bottomAbilityLevel)).withStyle(ChatFormatting.YELLOW);
+            return Component.translatable(NtmTranslations.MESSAGE_ABILITY_ENABLE_2, top.getFullName(preset.topAbilityLevel), bottom.getFullName(preset.bottomAbilityLevel)).withStyle(ChatFormatting.YELLOW);
         }
 
         if (top.isNotNone()) {
-            return Component.translatable("message.ntm.ability.enable_1", top.getFullName(preset.topAbilityLevel)).withStyle(ChatFormatting.YELLOW);
+            return Component.translatable(NtmTranslations.MESSAGE_ABILITY_ENABLE_1, top.getFullName(preset.topAbilityLevel)).withStyle(ChatFormatting.YELLOW);
         }
 
         if (bottom.isNotNone()) {
-            return Component.translatable("message.ntm.ability.enable_1", bottom.getFullName(preset.bottomAbilityLevel)).withStyle(ChatFormatting.YELLOW);
+            return Component.translatable(NtmTranslations.MESSAGE_ABILITY_ENABLE_1, bottom.getFullName(preset.bottomAbilityLevel)).withStyle(ChatFormatting.YELLOW);
         }
 
-        return Component.translatable("message.ntm.ability.deactivate").withStyle(ChatFormatting.GOLD);
+        return Component.translatable(NtmTranslations.MESSAGE_ABILITY_DEACTIVATE).withStyle(ChatFormatting.GOLD);
     }
 
     public void preBreak(ItemStack stack, Level world, BlockState state, BlockPos pos, Player miner) {
@@ -168,13 +170,13 @@ public record AbilityHandler(List<Tuple<ItemAbility, @NotNull @Range(from = 1, t
 
     public void appendTooltip(Consumer<Component> tooltip) {
         if (!this.ABILITIES().isEmpty()) {
-            tooltip.accept(Component.translatable("tooltip.ntm.ability.start").withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ABILITY_START).withStyle(ChatFormatting.GRAY));
             for (Tuple<ItemAbility, @NotNull @Range(from = 0, to = 10) Integer> pair : ABILITIES) {
                 tooltip.accept(Component.literal("  ").append(pair.getA().getFullName(pair.getB())).withStyle(ChatFormatting.GOLD));
             }
-            tooltip.accept(Component.translatable("tooltip.ntm.ability.end1").withStyle(ChatFormatting.GRAY));
-            tooltip.accept(Component.translatable("tooltip.ntm.ability.end2").withStyle(ChatFormatting.GRAY));
-            tooltip.accept(Component.translatable("tooltip.ntm.ability.end3", Ntm.PROXY.getKeyText("key.ntm.open_tool_ability_gui").withStyle(ChatFormatting.YELLOW)).withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ABILITY_END_1).withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ABILITY_END_2).withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ABILITY_END_3, Ntm.PROXY.getKeyText("key.ntm.open_tool_ability_gui").withStyle(ChatFormatting.YELLOW)).withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -268,7 +270,7 @@ public record AbilityHandler(List<Tuple<ItemAbility, @NotNull @Range(from = 1, t
         );
         public static final StreamCodec<ByteBuf, StackData> STREAM_CODEC = new StreamCodec<>() {
             @Override
-            public StackData decode(ByteBuf buf) {
+            public @NonNull StackData decode(@NonNull ByteBuf buf) {
                 CompoundTag nbt = Objects.requireNonNull(FriendlyByteBuf.readNbt(buf));
                 return new StackData(
                   nbt.read("presets", Preset.CODEC.listOf()).orElseThrow(),
@@ -277,7 +279,7 @@ public record AbilityHandler(List<Tuple<ItemAbility, @NotNull @Range(from = 1, t
             }
 
             @Override
-            public void encode(ByteBuf buf, StackData value) {
+            public void encode(@NonNull ByteBuf buf, StackData value) {
                 CompoundTag nbt = new CompoundTag();
                 nbt.store("presets", Preset.CODEC.listOf(), value.presets);
                 nbt.putInt("selectedPreset", value.selectedPreset);

@@ -41,7 +41,7 @@
     "ntm:oil_deposit",
     "ntm:deepslate_oil_deposit",
     "ntm:empty_oil_deposit",
-    "ntm:deepslate_empty_oil_deposit",
+    "ntm:empty_deepslate_oil_deposit",
     "ntm:aluminium_ore_cluster",
     "ntm:deepslate_aluminium_ore_cluster",
     "ntm:copper_ore_cluster",

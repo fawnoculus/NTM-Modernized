@@ -19,7 +19,7 @@ public class NtmResourceLoading {
     public static void init() {
         ReloadListenerRegistry.register(PackType.CLIENT_RESOURCES, new ReloadListener(), Ntm.id("reload_listener"));
 
-        if (!NtmPlatform.registerBuiltinResourcePack(Ntm.id("legacy"), Component.translatable("resourcePack.ntm_legacy.name"), NtmPlatform.PackActivationType.OFF_BY_DEFAULT)) {
+        if (!NtmPlatform.registerBuiltinResourcePack(Ntm.id("legacy"), Component.translatable(NtmTranslations.RESOURCE_PACK_LEGACY_NAME), NtmPlatform.PackActivationType.OFF_BY_DEFAULT)) {
             NtmClient.LOGGER.warn("Failed to register Legacy Resource Pack, it will not be available");
         }
     }

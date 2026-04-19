@@ -17,7 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.ApiStatus;
 
-// This class is technically acceptable in both environments
+@ClientOnly
 public class NtmClientProxy extends NtmProxy {
     @ClientOnly
     @ApiStatus.Internal

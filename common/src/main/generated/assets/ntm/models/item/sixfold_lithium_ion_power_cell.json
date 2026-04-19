@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ntm:item/sixfold_lithium_ion_power_cell"
-  }
-}

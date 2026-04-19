@@ -9,7 +9,7 @@
     ],
     "contributors": [
         "Elo3000",
-        "Random_Player_MC",
+        "Randomspear",
         "OrdenEnderman"
     ],
     "contact": {
@@ -20,8 +20,6 @@
     "custom": {
         "modmenu": {
             "links": {
-                "modmenu.modrinth": "TODO:Don't_forget_to_add_this_link",
-                "modmenu.curseforge": "TODO:Don't_forget_to_add_this_link",
                 "modmenu.wiki": "https://nucleartech.wiki/wiki/Main_Page",
                 "modmenu.github_releases": "https://github.com/fawnoculus/NTM-Fabric/releases"
             }

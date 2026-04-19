@@ -4,6 +4,7 @@ import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.client.api.radiation.ClientRadiationManager;
 import net.fawnoculus.ntm.client.util.NtmClientUtil;
 import net.fawnoculus.ntm.items.NtmItems;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmPlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
@@ -56,7 +57,7 @@ public class GeigerCounterRender {
             }
 
             Font textRenderer = Minecraft.getInstance().font;
-            Component text = Component.translatable("generic.ntm.radiation.rad_s", rads).withStyle(ChatFormatting.RED);
+            Component text = Component.literal(rads).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.RED);
             guiGraphics.drawString(textRenderer, text, x + 2, y - textRenderer.lineHeight, COLOR, true);
         }
     }

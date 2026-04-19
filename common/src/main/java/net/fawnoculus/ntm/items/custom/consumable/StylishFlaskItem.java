@@ -1,8 +1,10 @@
 package net.fawnoculus.ntm.items.custom.consumable;
 
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -87,10 +89,10 @@ public class StylishFlaskItem extends Item {
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
-        tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5) + 1).withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5) + 2).withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5) + 3).withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.literal(""));
-        tooltip.accept(Component.translatable("tooltip." + this.getDescriptionId().substring(5) + 4).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 1).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 2).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 3).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(CommonComponents.EMPTY);
+        tooltip.accept(NtmTextUtil.tooltip(this, 4).withStyle(ChatFormatting.GRAY));
     }
 }

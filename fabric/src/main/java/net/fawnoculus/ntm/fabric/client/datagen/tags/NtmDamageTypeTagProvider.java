@@ -2,11 +2,12 @@ package net.fawnoculus.ntm.fabric.client.datagen.tags;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.entity.NtmDamageTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import org.jspecify.annotations.NonNull;
 
@@ -15,6 +16,10 @@ import java.util.concurrent.CompletableFuture;
 public class NtmDamageTypeTagProvider extends FabricTagProvider<DamageType> {
     public NtmDamageTypeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, Registries.DAMAGE_TYPE, registriesFuture);
+    }
+
+    private static TagKey<DamageType> cTag(String name) {
+        return TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath("c", name));
     }
 
     @Override
@@ -61,6 +66,6 @@ public class NtmDamageTypeTagProvider extends FabricTagProvider<DamageType> {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " DamageType-Tag Provider";
+        return "DamageType-Tag Provider";
     }
 }

@@ -24,9 +24,9 @@ public class NtmProxy {
     }
 
     /**
-     * Gets the mod-loader specific Proxy for the Server
-     * You can technically call this on the client to get a version of the server proxy, but why would you do that?
-     * This is a Singleton
+     * Gets the Proxy for the Server
+     * You can technically call this on the client to get a version of the server proxy, but why would you do that?</br>
+     * The proxy is a Singleton
      *
      * @return The proxy to be used on Servers
      */

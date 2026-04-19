@@ -3,6 +3,7 @@ package net.fawnoculus.ntm.api.config;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.serialization.Codec;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -66,18 +67,18 @@ public class PerWorldConfigFile {
           .then(Commands.literal("reload")
             .executes(context -> {
                 if (this.WORLD_CONFIG == null) {
-                    context.getSource().sendFailure(Component.translatable("command.ntm.reload_world_configs.doesnt_exist"));
+                    context.getSource().sendFailure(Component.translatable(NtmTranslations.COMMAND_RELOAD_WORLD_CONFIG_NOT_EXIST));
                     return -1;
                 }
                 this.WORLD_CONFIG.readFile();
-                context.getSource().sendSuccess(() -> Component.translatable("command.ntm.reload_world_configs", this.WORLD_SUB_PATH), true);
+                context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.COMMAND_RELOAD_WORLD_CONFIG, this.WORLD_SUB_PATH), true);
                 return 0;
             })
           )
           .then(Commands.literal("reload-default")
             .executes(context -> {
                 this.DEFAULT_CONFIG.readFile();
-                context.getSource().sendSuccess(() -> Component.translatable("command.ntm.reload_world_default_configs", this.DEFAULT_SUB_PATH), true);
+                context.getSource().sendSuccess(() -> Component.translatable(NtmTranslations.COMMAND_RELOAD_WORLD_DEFAULT_CONFIG, this.DEFAULT_SUB_PATH), true);
                 return 0;
             })
           )

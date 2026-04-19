@@ -3,7 +3,6 @@ package net.fawnoculus.ntm.fabric.client.datagen.tags;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.api.tags.NtmItemTags;
 import net.fawnoculus.ntm.blocks.NtmBlocks;
 import net.fawnoculus.ntm.items.NtmItems;
@@ -11,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.NonNull;
@@ -26,8 +26,15 @@ public class NtmItemTagProvider extends FabricTagProvider<Item> {
         return BuiltInRegistries.ITEM.getKey(itemConvertible.get().asItem());
     }
 
+    private static TagKey<Item> cTag(String name) {
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", name));
+    }
+
     @Override
     protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
+        // Hidden Items (once we have them)
+        getOrCreateRawBuilder(cTag("hidden_from_recipe_viewers"));
+
         // Tool Materials
         getOrCreateRawBuilder(NtmItemTags.STEEL_TOOL_MATERIALS)
           .addElement(id(NtmItems.STEEL_INGOT));
@@ -183,6 +190,6 @@ public class NtmItemTagProvider extends FabricTagProvider<Item> {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Item-Tag Provider";
+        return "Item-Tag Provider";
     }
 }

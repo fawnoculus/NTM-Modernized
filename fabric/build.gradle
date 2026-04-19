@@ -51,16 +51,22 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
     modImplementation "dev.architectury:architectury-fabric:${architectury_api_version}"
 
-    // Libraries required by REI
-    // modApi "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
-
     // Compatibility Tests & better Dev Environment
-    modLocalRuntime "com.terraformersmc:modmenu:${fabric_modmenu_version}"                 // ModMenu
-    //modLocalRuntime "maven.modrinth:jade:${fabric_jade_version}"                         // Jade (Uses Loom 1.14 but architectury currently only supports 1.13)
-    modLocalRuntime "maven.modrinth:sodium:${fabric_sodium_version}"                       // Sodium
-    //modLocalRuntime "mezz.jei:jei-${fabric_jei_mc_version}-fabric:${fabric_jei_version}" // JEI (Uses Loom 1.14 but architectury currently only supports 1.13)
-    //modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"              // REI (there is no version for 1.21.11 yet)
-    //modLocalRuntime "dev.emi:emi-fabric:${emi_version}+${emi_mc_version}"                // EMI (there is no version for 1.21.11 yet)
+    modLocalRuntime "com.terraformersmc:modmenu:${fabric_modmenu_version}"  // ModMenu
+    modLocalRuntime "maven.modrinth:jade:${fabric_jade_version}"            // Jade
+    modLocalRuntime "maven.modrinth:sodium:${fabric_sodium_version}"        // Sodium
+    switch(recipe_viewer.toLowerCase()) {
+        case "rei":
+            modLocalRuntime "me.shedaniel.cloth:cloth-config-fabric:${fabric_cloth_config_version}"
+            modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${fabric_rei_version}"
+            break
+        case "jei":
+            modLocalRuntime "mezz.jei:jei-${fabric_jei_mc_version}-fabric:${fabric_jei_version}"
+            break
+        case "emi":
+            modLocalRuntime "dev.emi:emi-fabric:${fabric_emi_version}+${fabric_emi_mc_version}"
+            break
+    }
 
     // Compile Time Stuff
     modCompileOnly "com.terraformersmc:modmenu:${fabric_modmenu_version}"                        // ModMenu

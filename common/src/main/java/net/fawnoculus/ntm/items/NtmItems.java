@@ -7,14 +7,12 @@ import net.fawnoculus.ntm.api.tool.AbilityHandler;
 import net.fawnoculus.ntm.api.tool.ModifierHandler;
 import net.fawnoculus.ntm.api.tool.Modifiers;
 import net.fawnoculus.ntm.entity.NtmDamageTypes;
-import net.fawnoculus.ntm.entity.NtmStatusEffects;
+import net.fawnoculus.ntm.entity.NtmMobEffects;
 import net.fawnoculus.ntm.items.components.NtmConsumableComponents;
 import net.fawnoculus.ntm.items.components.NtmFoodComponents;
 import net.fawnoculus.ntm.items.custom.*;
 import net.fawnoculus.ntm.items.custom.consumable.*;
-import net.fawnoculus.ntm.items.custom.container.energy.*;
 import net.fawnoculus.ntm.items.custom.tools.*;
-import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
 import net.fawnoculus.ntm.misc.NtmDeferredRegistries;
 import net.fawnoculus.ntm.misc.NtmSounds;
 import net.fawnoculus.ntm.util.NtmEntityUtil;
@@ -101,16 +99,16 @@ public class NtmItems {
     public static final RegistrySupplier<Item> AUSTRALIUM_INGOT = register("australium_ingot", Item::new);
     public static final RegistrySupplier<Item> AUSTRALIUM_BILLET = register("australium_billet", Item::new);
     public static final RegistrySupplier<Item> AUSTRALIUM_NUGGET = register("australium_nugget", Item::new);
-    public static final RegistrySupplier<Item> LESSER_AUSTRALIUM_BILLET = register("lesser_australium_billet", Item::new);
-    public static final RegistrySupplier<Item> LESSER_AUSTRALIUM_NUGGET = register("lesser_australium_nugget", Item::new);
     public static final RegistrySupplier<Item> GREATER_AUSTRALIUM_BILLET = register("greater_australium_billet", Item::new);
     public static final RegistrySupplier<Item> GREATER_AUSTRALIUM_NUGGET = register("greater_australium_nugget", Item::new);
+    public static final RegistrySupplier<Item> LESSER_AUSTRALIUM_BILLET = register("lesser_australium_billet", Item::new);
+    public static final RegistrySupplier<Item> LESSER_AUSTRALIUM_NUGGET = register("lesser_australium_nugget", Item::new);
     public static final RegistrySupplier<Item> AUSTRALIUM_POWDER = register("australium_powder", Item::new);
 
     public static final RegistrySupplier<Item> BAKELITE_BAR = register("bakelite_bar", Item::new);
     public static final RegistrySupplier<Item> BAKELITE_POWDER = register("bakelite_powder", Item::new);
 
-    public static final RegistrySupplier<Item> BALEFIRE_EGG = register("balefire_egg", Item::new);
+    public static final RegistrySupplier<Item> BALEFIRE_EGG = register("balefire_egg", TooltipItem::new);
     public static final RegistrySupplier<Item> BALEFIRE_SHARD = register("balefire_shard", Item::new);
     public static final RegistrySupplier<Item> THERMONUCLEAR_ASHES = register("thermonuclear_ashes", Item::new);
 
@@ -130,7 +128,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> BISMUTH_BRONZE_INGOT = register("bismuth_bronze_ingot", Item::new);
     public static final RegistrySupplier<Item> CAST_BISMUTH_BRONZE_PLATE = register("cast_bismuth_bronze_plate", Item::new);
 
-    public static final RegistrySupplier<Item> BORAX_POWDER = register("borax_powder", Item::new);
+    public static final RegistrySupplier<Item> BORAX = register("borax", Item::new);
 
     public static final RegistrySupplier<Item> BORON_INGOT = register("boron_ingot", Item::new);
     public static final RegistrySupplier<Item> BORON_POWDER = register("boron_powder", Item::new);
@@ -180,6 +178,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> CARBON_WIRE = register("carbon_wire", Item::new);
     public static final RegistrySupplier<Item> COAL_BRIQUETTE = register("coal_briquette", Item::new);
     public static final RegistrySupplier<Item> COAL_COKE = register("coal_coke", Item::new);
+    public static final RegistrySupplier<Item> COAL_CRYSTALS = register("coal_crystals", Item::new);
 
     public static final RegistrySupplier<Item> COBALT_INGOT = register("cobalt_ingot", Item::new);
     public static final RegistrySupplier<Item> COBALT_BILLET = register("cobalt_billet", Item::new);
@@ -213,6 +212,9 @@ public class NtmItems {
     public static final RegistrySupplier<Item> RAW_CRYOLITE = register("raw_cryolite", Item::new);
     public static final RegistrySupplier<Item> CRYOLITE_CHUNK = register("cryolite_chunk", Item::new);
 
+    public static final RegistrySupplier<Item> CRYSTAL_HORN = register("crystal_horn", TooltipItemP11::new);
+    public static final RegistrySupplier<Item> CRYSTAL_CHARRED = register("crystal_charred", TooltipItemP11::new);
+
     public static final RegistrySupplier<Item> DESH_INGOT = register("desh_ingot", Item::new);
     public static final RegistrySupplier<Item> DESH_BLEND = register("desh_blend", Item::new);
     public static final RegistrySupplier<Item> DESHREADY_BLEND = register("deshready_blend", Item::new);
@@ -234,21 +236,21 @@ public class NtmItems {
 
     public static final RegistrySupplier<Item> ENERGY_POWDER = register("energy_powder", Item::new);
 
-    public static final RegistrySupplier<Item> EUPHEMIUM_INGOT = register("euphemium_ingot", Item::new);
-    public static final RegistrySupplier<Item> EUPHEMIUM_POWDER = register("euphemium_powder", Item::new);
-    public static final RegistrySupplier<Item> EUPHEMIUM_NUGGET = register("euphemium_nugget", Item::new);
+    public static final RegistrySupplier<Item> EUPHEMIUM_INGOT = register("euphemium_ingot", TooltipItem::new);
+    public static final RegistrySupplier<Item> EUPHEMIUM_POWDER = register("euphemium_powder", properties -> new TooltipItem(properties, 2));
+    public static final RegistrySupplier<Item> EUPHEMIUM_NUGGET = register("euphemium_nugget", properties -> new TooltipItem(properties, 3));
 
-    public static final RegistrySupplier<Item> FERRIC_SCHARBIDATE_INGOT = register("ferric_schrabidate_ingot", Item::new);
-    public static final RegistrySupplier<Item> FERRIC_SCHARBIDATE_POWDER = register("ferric_schrabidate_powder", Item::new);
-    public static final RegistrySupplier<Item> CAST_FERRIC_SCHARBIDATE_PLATE = register("cast_ferric_schrabidate_plate", Item::new);
-    public static final RegistrySupplier<Item> DENSE_FERRIC_SCHARBIDATE_WIRE = register("dense_ferric_schrabidate_wire", Item::new);
+    public static final RegistrySupplier<Item> FERRIC_SCHRABIDATE_INGOT = register("ferric_schrabidate_ingot", Item::new);
+    public static final RegistrySupplier<Item> FERRIC_SCHRABIDATE_POWDER = register("ferric_schrabidate_powder", Item::new);
+    public static final RegistrySupplier<Item> CAST_FERRIC_SCHRABIDATE_PLATE = register("cast_ferric_schrabidate_plate", Item::new);
+    public static final RegistrySupplier<Item> DENSE_FERRIC_SCHRABIDATE_WIRE = register("dense_ferric_schrabidate_wire", Item::new);
 
     public static final RegistrySupplier<Item> FERROURANIUM_INGOT = register("ferrouranium_ingot", Item::new);
     public static final RegistrySupplier<Item> CAST_FERROURANIUM_PLATE = register("cast_ferrouranium_plate", Item::new);
 
-    public static final RegistrySupplier<Item> FLASH_GOLD = register("flash_gold", Item::new);
+    public static final RegistrySupplier<Item> FLASH_GOLD_BILLET = register("flash_gold_billet", Item::new);
 
-    public static final RegistrySupplier<Item> FLASH_LEAD = register("flash_lead", Item::new);
+    public static final RegistrySupplier<Item> FLASH_LEAD_BILLET = register("flash_lead_billet", properties -> new TooltipItem(properties, 5));
 
     public static final RegistrySupplier<Item> FLUORITE = register("fluorite", Item::new);
     public static final RegistrySupplier<Item> FLUORITE_CRYSTALS = register("fluorite_crystals", Item::new);
@@ -256,11 +258,11 @@ public class NtmItems {
     public static final RegistrySupplier<Item> FLUX = register("flux", Item::new);
 
     public static final RegistrySupplier<Item> FULLERENE = register("fullerene", Item::new);
-    public static final RegistrySupplier<Item> CRYSTALLINE_FULLERENE = register("crystalline_fullerene", Item::new);
+    public static final RegistrySupplier<Item> CRYSTALLINE_FULLERITE = register("crystalline_fullerite", Item::new);
 
-    public static final RegistrySupplier<Item> GHIORSIUM_336_INGOT = register("ghiorsium_336_ingot", Item::new);
-    public static final RegistrySupplier<Item> GHIORSIUM_336_BILLET = register("ghiorsium_336_billet", Item::new);
-    public static final RegistrySupplier<Item> GHIORSIUM_336_NUGGET = register("ghiorsium_336_nugget", Item::new);
+    public static final RegistrySupplier<Item> GHIORSIUM_336_INGOT = register("ghiorsium_336_ingot", TooltipItem::new);
+    public static final RegistrySupplier<Item> GHIORSIUM_336_BILLET = register("ghiorsium_336_billet", TooltipItem::new);
+    public static final RegistrySupplier<Item> GHIORSIUM_336_NUGGET = register("ghiorsium_336_nugget", TooltipItem::new);
 
     public static final RegistrySupplier<Item> GOLD_POWDER = register("gold_powder", Item::new);
     public static final RegistrySupplier<Item> GOLD_PLATE = register("gold_plate", Item::new);
@@ -353,15 +355,15 @@ public class NtmItems {
     public static final RegistrySupplier<Item> MOLYSITE = register("molysite", Item::new);
 
     public static final RegistrySupplier<Item> MOX_FUEL_INGOT = register("mox_fuel_ingot", Item::new);
-    public static final RegistrySupplier<Item> MOX_FUEL_BILLET = register("mox_fuel_billet", Item::new);
-    public static final RegistrySupplier<Item> MOX_FUEL_NUGGET = register("mox_fuel_nugget", Item::new);
+    public static final RegistrySupplier<Item> MOX_FUEL_BILLET = register("mox_fuel_billet", TooltipItem::new);
+    public static final RegistrySupplier<Item> MOX_FUEL_NUGGET = register("mox_fuel_nugget", TooltipItem::new);
 
     public static final RegistrySupplier<Item> NEODYMIUM_POWDER = register("neodymium_powder", Item::new);
     public static final RegistrySupplier<Item> TINY_PILE_OF_NEODYMIUM_POWDER = register("tiny_pile_of_neodymium_powder", Item::new);
     public static final RegistrySupplier<Item> DENSE_NEODYMIUM_WIRE = register("dense_neodymium_wire", Item::new);
     public static final RegistrySupplier<Item> NEODYMIUM_FRAGMENT = register("neodymium_fragment", Item::new);
 
-    public static final RegistrySupplier<Item> NEPTUNIUM_INGOT = register("neptunium_ingot", Item::new);
+    public static final RegistrySupplier<Item> NEPTUNIUM_INGOT = register("neptunium_ingot", TooltipItemP11::new);
     public static final RegistrySupplier<Item> NEPTUNIUM_POWDER = register("neptunium_powder", Item::new);
     public static final RegistrySupplier<Item> NEPTUNIUM_BILLET = register("neptunium_billet", Item::new);
     public static final RegistrySupplier<Item> NEPTUNIUM_NUGGET = register("neptunium_nugget", Item::new);
@@ -376,7 +378,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> DENSE_NIOBIUM_WIRE = register("dense_niobium_wire", Item::new);
     public static final RegistrySupplier<Item> NIOBIUM_FRAGMENT = register("niobium_fragment", Item::new);
 
-    public static final RegistrySupplier<Item> NITAN_BLEND = register("nitan_blend", Item::new);
+    public static final RegistrySupplier<Item> NITANIUM_BLEND = register("nitanium_blend", Item::new);
 
     public static final RegistrySupplier<Item> NITER = register("niter", Item::new);
     public static final RegistrySupplier<Item> NITER_CRYSTALS = register("niter_crystals", Item::new);
@@ -469,7 +471,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> CAST_SATURNITE_PLATE = register("cast_saturnite_plate", Item::new);
     public static final RegistrySupplier<Item> SATURNITE_SHELL = register("saturnite_shell", Item::new);
 
-    public static final RegistrySupplier<Item> SAWDUST_POWDER = register("sawdust_powder", Item::new);
+    public static final RegistrySupplier<Item> SAWDUST = register("sawdust", Item::new);
     public static final RegistrySupplier<Item> SAWDUST_BRIQUETTE = register("sawdust_briquette", Item::new);
 
     public static final RegistrySupplier<Item> RAW_SCHRABIDIUM = register("raw_schrabidium", Item::new);
@@ -492,7 +494,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> DENSE_SCHRABIDIUM_WIRE = register("dense_schrabidium_wire", Item::new);
     public static final RegistrySupplier<Item> SCHRABIDIUM_CRYSTALS = register("schrabidium_crystals", Item::new);
 
-    public static final RegistrySupplier<Item> SCHRARANIUM_INGOT = register("schraranium_ingot", Item::new);
+    public static final RegistrySupplier<Item> SCHRARANIUM_INGOT = register("schraranium_ingot", TooltipItem::new);
     public static final RegistrySupplier<Item> SCHRARANIUM_CRYSTALS = register("schraranium_crystals", Item::new);
 
     public static final RegistrySupplier<Item> SEMTEX_BLEND = register("semtex_blend", Item::new);
@@ -503,7 +505,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> PRINTED_SILICON_WAFER = register("printed_silicon_wafer", Item::new);
     public static final RegistrySupplier<Item> SILICON_NUGGET = register("silicon_nugget", Item::new);
 
-    public static final RegistrySupplier<Item> SODIUM_POWDER = register("sodium_powder", Item::new);
+    public static final RegistrySupplier<Item> SODIUM = register("sodium", Item::new);
 
     public static final RegistrySupplier<Item> SOLINIUM_INGOT = register("solinium_ingot", Item::new);
     public static final RegistrySupplier<Item> SOLINIUM_BILLET = register("solinium_billet", Item::new);
@@ -606,6 +608,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> URANIUM_238_INGOT = register("uranium_238_ingot", Item::new);
     public static final RegistrySupplier<Item> URANIUM_238_BILLET = register("uranium_238_billet", Item::new);
     public static final RegistrySupplier<Item> URANIUM_238_NUGGET = register("uranium_238_nugget", Item::new);
+    public static final RegistrySupplier<Item> URANIUM_ZIRCONIUM_HYDRIDE_BILLET = register("uranium_zirconium_hydride_billet", Item::new);
     public static final RegistrySupplier<Item> URANIUM_POWDER = register("uranium_powder", Item::new);
     public static final RegistrySupplier<Item> URANIUM_CRYSTALS = register("uranium_crystals", Item::new);
 
@@ -643,7 +646,9 @@ public class NtmItems {
     public static final RegistrySupplier<Item> NETWORK_DEBUG_TOOL = register("network_debug_tool", NetworkDebuggingToolItem::new);
     public static final RegistrySupplier<Item> GEIGER_COUNTER = register("geiger_counter", GeigerCounterItem::new);
     public static final RegistrySupplier<Item> DOSIMETER = register("dosimeter", DosimeterItem::new);
+    public static final RegistrySupplier<Item> ROD_OF_DISCORD = register("rod_of_discord", RodOfDiscordItem::new);
 
+    /* TODO: new battery types
     // Batteries
     public static final RegistrySupplier<Item> BATTERY = register("battery",
       settings -> new SimpleBatteryItem(settings, 5_000L, 100L));
@@ -697,7 +702,6 @@ public class NtmItems {
       settings -> new SimpleBatteryItem(settings, 100_000_000_000_000L, 200_000_000L));
     public static final RegistrySupplier<Item> ELECTRONIUM_CUBE = register("electronium_cube",
       settings -> new SimpleBatteryItem(settings, 1_000_000_000_000_000_000L, 1_000_000_000_000_000L));
-    public static final RegistrySupplier<Item> INFINITE_BATTERY = register("infinite_battery", InfiniteBatteryItem::new);
     public static final RegistrySupplier<Item> POTATO_BATTERY = register("potato_battery", settings -> new SimpleBatteryItem(settings, 1_000L, 0L, 100L),
       () -> new Item.Properties().component(NtmDataComponentTypes.ENERGY_COMPONENT_TYPE.get(), 1_000L));
     public static final RegistrySupplier<Item> POTATOS = register("potatos", settings -> new PotatOSItem(settings, 500_000L, 0L, 100L),
@@ -709,6 +713,8 @@ public class NtmItems {
     public static final RegistrySupplier<Item> SELF_CHARGING_GOLD_198_BATTERY = register("self_charging_gold_198_battery", settings -> new SelfChargingBatteryItem(settings, 2_500L));
     public static final RegistrySupplier<Item> SELF_CHARGING_LEAD_209_BATTERY = register("self_charging_lead_209_battery", settings -> new SelfChargingBatteryItem(settings, 5_000L));
     public static final RegistrySupplier<Item> SELF_CHARGING_AMERICIUM_241_BATTERY = register("self_charging_americium_241_battery", settings -> new SelfChargingBatteryItem(settings, 10_000L));
+    public static final RegistrySupplier<Item> INFINITE_BATTERY = register("infinite_battery", InfiniteBatteryItem::new);
+     */
 
     // Consumables
     public static final RegistrySupplier<Item> EMPTY_SYRINGE = register("empty_syringe", Item::new);
@@ -730,7 +736,7 @@ public class NtmItems {
         (serverWorld, entity) -> {
             entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 150, 4, false, false, true));
             entity.addEffect(new MobEffectInstance(MobEffects.SPEED, 700, 6, false, false, true));
-            entity.addEffect(new MobEffectInstance(NtmStatusEffects.RAD_X, 700, 9, false, false, true));
+            entity.addEffect(new MobEffectInstance(NtmMobEffects.RAD_X, 700, 9, false, false, true));
             entity.addEffect(new MobEffectInstance(MobEffects.HASTE, 700, 9, false, false, true));
             entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 700, 24, false, false, true));
             entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 700, 9, false, false, true));
@@ -773,13 +779,13 @@ public class NtmItems {
     public static final RegistrySupplier<Item> EMPTY_EXPERIENCE_BAG = register("empty_experience_bag", EmptyExperienceBagItem::new);
     public static final RegistrySupplier<Item> EXPERIENCE_BAG = register("experience_bag", ExperienceBagItem::new);
     public static final RegistrySupplier<Item> RAD_AWAY = register("rad_away", settings -> new InjectionItem(settings, NtmSounds.IV_BAG_INJECTS, IV_BAG,
-      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 140)
+      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmMobEffects.RAD_AWAY, 140)
     ));
     public static final RegistrySupplier<Item> STRONG_RAD_AWAY = register("strong_rad_away", settings -> new InjectionItem(settings, NtmSounds.IV_BAG_INJECTS, IV_BAG,
-      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 350)
+      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmMobEffects.RAD_AWAY, 350)
     ));
     public static final RegistrySupplier<Item> ELITE_RAD_AWAY = register("elite_rad_away", settings -> new InjectionItem(settings, NtmSounds.IV_BAG_INJECTS, IV_BAG,
-      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmStatusEffects.RAD_AWAY, 500)
+      (serverWorld, entity) -> NtmEntityUtil.addEffectDuration(entity, NtmMobEffects.RAD_AWAY, 500)
     ));
     public static final RegistrySupplier<Item> RAD_X = register("rad_x", TooltipItem::new, () -> new Item.Properties()
       .food(NtmFoodComponents.ALWAYS_EDIBLE, NtmConsumableComponents.RAD_X)
@@ -790,6 +796,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> PLAN_C = register("plan_c", PlanC::new, () -> new Item.Properties()
       .food(NtmFoodComponents.ALWAYS_EDIBLE)
     );
+
     public static final RegistrySupplier<Item> EMPTY_CAN = register("empty_can", Item::new);
     public static final RegistrySupplier<Item> RING_PULL = register("ring_pull", Item::new);
     public static final RegistrySupplier<Item> SMART_ENERGY_DRINK = register("smart_energy_drink", settings -> new DrinkCanItem(settings,
@@ -874,7 +881,7 @@ public class NtmItems {
       .food(NtmFoodComponents.GLOWING_MUSHROOM_STEW).usingConvertsTo(Items.BOWL));
     public static final RegistrySupplier<Item> SCRAMBLED_BALEFIRE_EGG = register("scrambled_balefire_egg", Item::new, () -> new Item.Properties()
       .food(NtmFoodComponents.GLOWING_MUSHROOM_STEW).usingConvertsTo(Items.BOWL));
-    public static final RegistrySupplier<Item> SCRAMBLED_BALEFIRE_EGG_AND_HAM = register("scrambled_balefire_egg_and_ham", Item::new, () -> new Item.Properties()
+    public static final RegistrySupplier<Item> HAM_AND_BALEFIRE_EGGS = register("ham_and_balefire_eggs", Item::new, () -> new Item.Properties()
       .food(NtmFoodComponents.GLOWING_MUSHROOM_STEW).usingConvertsTo(Items.BOWL));
     public static final RegistrySupplier<Item> LEMON = register("lemon", TooltipItem::new, () -> new Item.Properties()
       .food(NtmFoodComponents.LEMON));
@@ -911,6 +918,7 @@ public class NtmItems {
     public static final RegistrySupplier<Item> GRILLED_GLYPHID_MEAT = register("grilled_glyphid_meat", Item::new, () -> new Item.Properties()
       .food(NtmFoodComponents.GRILLED_GLYPHID_MEAT));
     public static final RegistrySupplier<Item> GLYPHID_EGG = register("glyphid_egg", Item::new);
+
     public static final RegistrySupplier<Item> IPECAC_SYRUP = register("ipecac_syrup", settings -> new TooltipItem(settings, 2), () -> new Item.Properties()
       .food(NtmFoodComponents.ALWAYS_EDIBLE, NtmConsumableComponents.IPECAC_SYRUP)
     );
@@ -1020,7 +1028,7 @@ public class NtmItems {
         List.of(METAL_SYRINGE, EMPTY_BOTTLE),
         (serverWorld, entity) -> {
             entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, 0, false, false, true));
-            entity.addEffect(new MobEffectInstance(NtmStatusEffects.TAINT, 1200, 0, false, false, true));
+            entity.addEffect(new MobEffectInstance(NtmMobEffects.TAINT, 1200, 0, false, false, true));
         }
       ));
 

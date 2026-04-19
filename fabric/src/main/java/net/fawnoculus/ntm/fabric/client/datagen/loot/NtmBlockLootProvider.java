@@ -2,7 +2,6 @@ package net.fawnoculus.ntm.fabric.client.datagen.loot;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.blocks.NtmBlocks;
 import net.fawnoculus.ntm.items.NtmItems;
 import net.minecraft.core.HolderLookup;
@@ -81,11 +80,12 @@ public class NtmBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(NtmBlocks.DEAD_DIRT.get());
         dropSelf(NtmBlocks.OILY_DIRT.get());
         dropSelf(NtmBlocks.OILY_SAND.get());
+        dropSelf(NtmBlocks.RED_OILY_SAND.get());
 
         dropSelf(NtmBlocks.DEPTH_ROCK.get());
         add(NtmBlocks.DEPTH_CINNABAR_ORE.get(), createOreDrop(NtmBlocks.DEPTH_CINNABAR_ORE.get(), NtmItems.CINNABAR.get()));
         add(NtmBlocks.DEPTH_ZIRCONIUM_ORE.get(), multiDrops(NtmBlocks.DEPTH_CINNABAR_ORE.get(), NtmItems.CINNABAR.get(), 2, 3));
-        add(NtmBlocks.DEPTH_BORAX_ORE.get(), createOreDrop(NtmBlocks.DEPTH_BORAX_ORE.get(), NtmItems.BORAX_POWDER.get()));
+        add(NtmBlocks.DEPTH_BORAX_ORE.get(), createOreDrop(NtmBlocks.DEPTH_BORAX_ORE.get(), NtmItems.BORAX.get()));
         add(NtmBlocks.DEPTH_IRON_ORE_CLUSTER.get(), createOreDrop(NtmBlocks.DEPTH_IRON_ORE_CLUSTER.get(), NtmItems.IRON_CRYSTALS.get()));
         add(NtmBlocks.DEPTH_TITANIUM_ORE_CLUSTER.get(), createOreDrop(NtmBlocks.DEPTH_TITANIUM_ORE_CLUSTER.get(), NtmItems.TITANIUM_CRYSTALS.get()));
         add(NtmBlocks.DEPTH_TUNGSTEN_ORE_CLUSTER.get(), createOreDrop(NtmBlocks.DEPTH_TUNGSTEN_ORE_CLUSTER.get(), NtmItems.TUNGSTEN_CRYSTALS.get()));
@@ -152,12 +152,6 @@ public class NtmBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(NtmBlocks.ALLOY_FURNACE.get());
         dropSelf(NtmBlocks.ALLOY_FURNACE_EXTENSION.get());
         dropSelf(NtmBlocks.ELECTRIC_FURNACE.get());
-
-        dropSelf(NtmBlocks.POTATO_BATTERY_BLOCK.get());
-        dropSelf(NtmBlocks.ENERGY_STORAGE_BLOCK.get());
-        dropSelf(NtmBlocks.LITHIUM_ION_ENERGY_STORAGE_BLOCK.get());
-        dropSelf(NtmBlocks.SCHRABIDIUM_ENERGY_STORAGE_BLOCK.get());
-        dropSelf(NtmBlocks.SPARK_ENERGY_STORAGE_BLOCK.get());
     }
 
     public LootTable.Builder multiDrops(Block block, ItemLike item, float minDrops, float maxDrops) {
@@ -192,6 +186,6 @@ public class NtmBlockLootProvider extends FabricBlockLootTableProvider {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Block-Loot Provider";
+        return "Block-Loot Provider";
     }
 }

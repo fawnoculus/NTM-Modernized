@@ -1,6 +1,7 @@
 package net.fawnoculus.ntm.items.custom.container.energy;
 
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -74,11 +75,11 @@ public class SimpleBatteryItem extends Item implements EnergyContainingItem {
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
         Component energy = NtmTextUtil.unit(getEnergy(stack));
-        Component maxEnergy = NtmTextUtil.unit(getMaxEnergy(stack), "generic.ntm.energy");
-        Component chargeRate = NtmTextUtil.unit(getChargeRate(stack), "generic.ntm.energy_t");
-        Component dischargeRate = NtmTextUtil.unit(getDischargeRate(stack), "generic.ntm.energy_t");
-        tooltip.accept(Component.translatable("tooltip.ntm.energy.stored", energy, maxEnergy).withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.energy.charge", chargeRate).withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.energy.discharge", dischargeRate).withStyle(ChatFormatting.GRAY));
+        Component maxEnergy = NtmTextUtil.unit(getMaxEnergy(stack), NtmTranslations.GENERIC_ENERGY);
+        Component chargeRate = NtmTextUtil.unit(getChargeRate(stack), NtmTranslations.GENERIC_ENERGY_PER_TICK);
+        Component dischargeRate = NtmTextUtil.unit(getDischargeRate(stack), NtmTranslations.GENERIC_ENERGY_PER_TICK);
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ENERGY_STORED, energy, maxEnergy).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ENERGY_CHARGE, chargeRate).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_ENERGY_DISCHARGE, dischargeRate).withStyle(ChatFormatting.GRAY));
     }
 }

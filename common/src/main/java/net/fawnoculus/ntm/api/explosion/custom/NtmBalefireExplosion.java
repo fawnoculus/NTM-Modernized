@@ -11,6 +11,9 @@ import net.minecraft.world.level.block.Blocks;
 public class NtmBalefireExplosion extends NtmNuclearExplosion {
     private static final NtmBalefireExplosion INSTANCE = new NtmBalefireExplosion();
 
+    protected NtmBalefireExplosion() {
+    }
+
     public static void addExplosion(ServerLevel level, BlockPos pos, int radius) {
         if (radius < 1) {
             radius = 25;
@@ -25,9 +28,6 @@ public class NtmBalefireExplosion extends NtmNuclearExplosion {
 
     public static void addExplosion(NtmExplosionData explosionData, NtmNuclearExplosion.ExtraData extraData) {
         NtmExplosionSystem.addExplosion(INSTANCE, explosionData, extraData);
-    }
-
-    protected NtmBalefireExplosion() {
     }
 
     @Override

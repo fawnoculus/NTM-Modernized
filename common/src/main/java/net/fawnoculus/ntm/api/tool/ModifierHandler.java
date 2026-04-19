@@ -1,5 +1,6 @@
 package net.fawnoculus.ntm.api.tool;
 
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Tuple;
@@ -18,7 +19,7 @@ public record ModifierHandler(List<Tuple<ItemModifier, @NotNull Integer>> MODIFI
 
     public void appendTooltip(Consumer<Component> tooltip) {
         if (!MODIFIERS.isEmpty()) {
-            tooltip.accept(Component.translatable("tooltip.ntm.modifier.start").withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_MODIFIER_START).withStyle(ChatFormatting.GRAY));
             for (Tuple<ItemModifier, @NotNull Integer> pair : MODIFIERS) {
                 tooltip.accept(Component.literal("  ").append(pair.getA().getFullName(pair.getB()).withStyle(ChatFormatting.RED)));
             }

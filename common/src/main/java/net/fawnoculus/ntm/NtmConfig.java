@@ -7,20 +7,27 @@ import net.fawnoculus.ntm.api.config.ConfigOption;
 import net.fawnoculus.ntm.api.config.PerWorldConfigFile;
 import net.fawnoculus.ntm.api.config.PerWorldConfigOption;
 import net.fawnoculus.ntm.api.config.encoder.JsonConfigEncoder;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmCodecUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.Range;
 
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 
 public class NtmConfig {
     public static final ConfigFile COMMON_CONFIG_FILE = new ConfigFile(
       JsonConfigEncoder.getInstance(),
       "ntm/common.json"
+    );
+    public static final ConfigOption<Integer> POLAROID_OVERRIDE = COMMON_CONFIG_FILE.newOption(
+      "polaroid_override", Codec.intRange(0, 18), 0,
+      "Override to the Polaroid id, use 0 to keep default behaviour of randomising on startup (from 0, to 18) (requires restart) [default: 0]"
     );
     public static final ConfigOption<Integer> MAX_EXPLOSIONS = COMMON_CONFIG_FILE.newOption(
       "max_explosions", Codec.INT, 10_000,
@@ -57,7 +64,6 @@ public class NtmConfig {
     public static final ConfigOption<TempUnit> TEMP_UNIT = COMMON_CONFIG_FILE.newOption(
       "temp_unit", TempUnit.CODEC, TempUnit.Celsius, "Temperature Unit to be displayed (Celsius, Fahrenheit, Kelvin) [default: Celsius]"
     );
-
     public static final ConfigOption<Boolean> DEV_MODE = COMMON_CONFIG_FILE.newOption(
       "dev_mode", Codec.BOOL, Platform.isDevelopmentEnvironment(),
       "Activates a bunch of dev features and makes more errors print into the log (like /ntm dev)"
@@ -70,7 +76,6 @@ public class NtmConfig {
       "max_node_scan_depth", Codec.INT, 100_000,
       "The maximum amount of nodes (cables and pipes) to scan when reconstructing node-networks (use anything lower that 1 to disable) [default: 100000]"
     );
-
     public static final PerWorldConfigFile WORLD_CONFIG = new PerWorldConfigFile(
       JsonConfigEncoder.getInstance(),
       "ntm/world_default.json",
@@ -84,16 +89,28 @@ public class NtmConfig {
       "disable_chunk_radiation", Codec.BOOL, false,
       "Disables Chunks having Radioactivity (Requires restating the level or server) [default: false]"
     );
+    public static @Range(from = 1, to = 18) int polaroidID = 1;
 
     public static void init() {
         COMMON_CONFIG_FILE.init();
         WORLD_CONFIG.init();
+
+        if (POLAROID_OVERRIDE.getValue() > 0 && POLAROID_OVERRIDE.getValue() < 19) {
+            polaroidID = POLAROID_OVERRIDE.getValue();
+        } else {
+            Random rand = new Random();
+            do {
+                polaroidID = rand.nextInt(18) + 1;
+                // I have no idea why the Polaroid is not allowed to have id 4 or 9,
+                // i just copied this from the original
+            } while (polaroidID == 4 || polaroidID == 9);
+        }
     }
 
     public enum TempUnit {
-        Celsius(celsius -> Component.literal(String.format("%,.1f", celsius)).append(Component.translatable("generic.ntm.temp.c"))),
-        Fahrenheit(celsius -> Component.literal(String.format("%,.1f", (celsius * 9 / 5) + 32)).append(Component.translatable("generic.ntm.temp.f"))),
-        Kelvin(celsius -> Component.literal(String.format("%,.1f", celsius - 273.15)).append(Component.translatable("generic.ntm.temp.k")));
+        Celsius(celsius -> Component.literal(String.format("%,.1f", celsius)).append(Component.translatable(NtmTranslations.GENERIC_TEMP_CELSIUS))),
+        Fahrenheit(celsius -> Component.literal(String.format("%,.1f", (celsius * 9 / 5) + 32)).append(Component.translatable(NtmTranslations.GENERIC_TEMP_FAHRENHEIT))),
+        Kelvin(celsius -> Component.literal(String.format("%,.1f", celsius - 273.15)).append(Component.translatable(NtmTranslations.GENERIC_TEMP_KELVIN)));
 
         public static final Codec<TempUnit> CODEC = NtmCodecUtil.getEnumCodec(TempUnit.class);
         public final Function<Double, MutableComponent> CELSIUS_TO_TEXT;

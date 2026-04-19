@@ -3,7 +3,6 @@ package net.fawnoculus.ntm.fabric.client.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
-import net.fawnoculus.ntm.Ntm;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -48,6 +47,6 @@ public class NtmEnchantmentProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Enchantment Provider";
+        return "Enchantment Provider";
     }
 }

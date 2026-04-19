@@ -54,17 +54,34 @@ repositories {
 
 dependencies {
     neoForge "net.neoforged:neoforge:${neoforge_version}"
-
     modImplementation "dev.architectury:architectury-neoforge:${architectury_api_version}"
 
-    /*
+    // Compatibility Tests & better Dev Environment
+    modLocalRuntime "maven.modrinth:jade:${neoforge_jade_version}"      // Jade
+    modLocalRuntime "maven.modrinth:sodium:${neoforge_sodium_version}"  // Sodium
+    // Neoforge is unhappy about iris, because they didn't upload a dev jar to modrinth, so it is in intermediary and not mojang src mappings
+    // If you don't understand what that means, don't worry about it.
+    // Use fabric for testing iris compatibility for now
+    //modLocalRuntime "maven.modrinth:iris:${neoforge_iris_version}"      // Iris
+    switch (recipe_viewer.toLowerCase()) {
+        case "rei":
+            modLocalRuntime "me.shedaniel.cloth:cloth-config-neoforge:${neoforge_cloth_config_version}"
+            modLocalRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:${neoforge_rei_version}"
+            break
+        case "jei":
+            modLocalRuntime "mezz.jei:jei-${neoforge_jei_mc_version}-neoforge:${neoforge_jei_version}"
+            break
+        case "emi":
+            modLocalRuntime "dev.emi:emi-neoforge:${neoforge_emi_version}+${neoforge_emi_mc_version}"
+            break
+    }
+
     // Compile Time Stuff
     modCompileOnly "maven.modrinth:jade:${neoforge_jade_version}"                                  // Jade
     modCompileOnly "mezz.jei:jei-${neoforge_jei_mc_version}-neoforge-api:${neoforge_jei_version}"      // JEI
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${neoforge_rei_version}"            // REI
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${neoforge_rei_version}" // REI default Plugins
     modCompileOnly "dev.emi:emi-neoforge:${neoforge_emi_version}+${neoforge_emi_mc_version}:api"       // EMI
-     */
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
@@ -80,7 +97,7 @@ processResources {
     filteringCharset "UTF-8"
 
     filesMatching('META-INF/neoforge.mods.toml') {
-        expand version: project.version,
+        expand "version": inputs.properties.mod_version,
             "minecraft_version": inputs.properties.minecraft_version,
             "neoforge_version": inputs.properties.neoforge_version,
             "architectury_version": inputs.properties.architectury_version

@@ -1,6 +1,7 @@
 package net.fawnoculus.ntm.items.custom;
 
 import net.fawnoculus.ntm.api.radiation.RadiationManager;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -22,40 +23,40 @@ public class GeigerCounterItem extends Item {
 
     private Component getRadsText(double milliRads) {
         if (milliRads > 1_000_000) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.DARK_GRAY);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.DARK_GRAY);
         }
         if (milliRads > 100_000) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.DARK_RED);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.DARK_RED);
         }
         if (milliRads > 10_000) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.RED);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.RED);
         }
         if (milliRads > 1_000) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.GOLD);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.GOLD);
         }
         if (milliRads > 0) {
-            return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.YELLOW);
+            return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.YELLOW);
         }
-        return Component.translatable("generic.ntm.radiation.rad_s", String.format("%.1f", milliRads / 1000)).withStyle(ChatFormatting.GREEN);
+        return Component.literal("%.1f ".formatted(milliRads / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD_PER_SEC)).withStyle(ChatFormatting.GREEN);
     }
 
     private Component getRadText(double milliRad) {
         if (milliRad > 900_000) {
-            return Component.translatable("generic.ntm.radiation.rad", String.format("%.1f", milliRad / 1000)).withStyle(ChatFormatting.DARK_GRAY);
+            return Component.literal("%.1f ".formatted(milliRad / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD)).withStyle(ChatFormatting.DARK_GRAY);
         }
         if (milliRad > 800_000) {
-            return Component.translatable("generic.ntm.radiation.rad", String.format("%.1f", milliRad / 1000)).withStyle(ChatFormatting.DARK_RED);
+            return Component.literal("%.1f ".formatted(milliRad / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD)).withStyle(ChatFormatting.DARK_RED);
         }
         if (milliRad > 600_000) {
-            return Component.translatable("generic.ntm.radiation.rad", String.format("%.1f", milliRad / 1000)).withStyle(ChatFormatting.RED);
+            return Component.literal("%.1f ".formatted(milliRad / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD)).withStyle(ChatFormatting.RED);
         }
         if (milliRad > 400_000) {
-            return Component.translatable("generic.ntm.radiation.rad", String.format("%.1f", milliRad / 1000)).withStyle(ChatFormatting.GOLD);
+            return Component.literal("%.1f ".formatted(milliRad / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD)).withStyle(ChatFormatting.GOLD);
         }
         if (milliRad > 200_000) {
-            return Component.translatable("generic.ntm.radiation.rad", String.format("%.1f", milliRad / 1000)).withStyle(ChatFormatting.YELLOW);
+            return Component.literal("%.1f ".formatted(milliRad / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD)).withStyle(ChatFormatting.YELLOW);
         }
-        return Component.translatable("generic.ntm.radiation.rad", String.format("%.1f", milliRad / 1000)).withStyle(ChatFormatting.GREEN);
+        return Component.literal("%.1f ".formatted(milliRad / 1000)).append(Component.translatable(NtmTranslations.GENERIC_RAD)).withStyle(ChatFormatting.GREEN);
     }
 
     @Override
@@ -72,11 +73,11 @@ public class GeigerCounterItem extends Item {
 
         Component player_resistance = Component.literal(String.format("%.1f%% (%.1f)", playerResistancePercentage, playerResistance)).withStyle(ChatFormatting.WHITE);
 
-        user.displayClientMessage(Component.translatable("message.ntm.geiger_counter").withStyle(ChatFormatting.GOLD), false);
-        user.displayClientMessage(Component.translatable("message.ntm.radiation.chunk_radiation").append(getRadsText(chunkRadiation)).withStyle(ChatFormatting.YELLOW), false);
-        user.displayClientMessage(Component.translatable("message.ntm.radiation.environmental_radiation").append(getRadsText(totalRadiation)).withStyle(ChatFormatting.YELLOW), false);
-        user.displayClientMessage(Component.translatable("message.ntm.radiation.player_contamination").append(getRadText(playerContamination)).withStyle(ChatFormatting.YELLOW), false);
-        user.displayClientMessage(Component.translatable("message.ntm.radiation.player_resistance").append(player_resistance).withStyle(ChatFormatting.YELLOW), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_GEIGER_COUNTER).withStyle(ChatFormatting.GOLD), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_CHUNK_RADIATION).append(getRadsText(chunkRadiation)).withStyle(ChatFormatting.YELLOW), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_ENVIRONMENTAL_RADIATION).append(getRadsText(totalRadiation)).withStyle(ChatFormatting.YELLOW), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_PLAYER_CONTAMINATION).append(getRadText(playerContamination)).withStyle(ChatFormatting.YELLOW), false);
+        user.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_PLAYER_RESISTANCE).append(player_resistance).withStyle(ChatFormatting.YELLOW), false);
         return InteractionResult.SUCCESS_SERVER;
     }
 

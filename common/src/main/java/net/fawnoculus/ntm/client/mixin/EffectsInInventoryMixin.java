@@ -1,7 +1,6 @@
 package net.fawnoculus.ntm.client.mixin;
 
 import net.fawnoculus.ntm.client.NtmClientConfig;
-import net.fawnoculus.ntm.client.NtmClientConfig.EffectLevelFix;
 import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import net.minecraft.network.chat.CommonComponents;
@@ -15,31 +14,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EffectsInInventory.class)
 public class EffectsInInventoryMixin {
-
-    @Inject(at = @At("RETURN"), method = "getEffectName", cancellable = true)
-    private void fixHighAmplifiers(MobEffectInstance statusEffect, CallbackInfoReturnable<Component> cir) {
-        if (NtmClientConfig.FIX_EFFECT_LEVEL.getValue() == EffectLevelFix.NONE) {
-            return;
-        }
-
-        if (NtmClientConfig.FIX_EFFECT_LEVEL.getValue() == EffectLevelFix.ALWAYS_DECIMAL) {
-            cir.setReturnValue(statusEffect.getEffect().value().getDisplayName().copy()
+    @Inject(method = "getEffectName", at = @At(value = "RETURN"), cancellable = true)
+    private void fixHighAmplifiers(MobEffectInstance effect, CallbackInfoReturnable<Component> cir) {
+        switch (NtmClientConfig.FIX_EFFECT_LEVEL.getValue()) {
+            case LARGE_ROMAN_NUMERALS -> {
+                if (effect.getAmplifier() > 9 && effect.getAmplifier() < 4000 && cir.getReturnValue() instanceof MutableComponent returned) {
+                    returned.append(CommonComponents.SPACE).append(NtmTextUtil.romanNumeral(effect.getAmplifier()));
+                }
+            }
+            case DECIMAL_IF_TO_BIG -> {
+                if (effect.getAmplifier() > 9 && cir.getReturnValue() instanceof MutableComponent returned) {
+                    returned.append(CommonComponents.SPACE).append(Integer.toString(effect.getAmplifier()));
+                }
+            }
+            case ALWAYS_DECIMAL -> cir.setReturnValue(effect.getEffect().value().getDisplayName().copy()
               .append(CommonComponents.SPACE)
-              .append(Integer.toString(statusEffect.getAmplifier())));
-            return;
-        }
-
-        if(statusEffect.getAmplifier() <= 9 || !(cir.getReturnValue() instanceof MutableComponent returned)) {
-            return;
-        }
-
-        if (NtmClientConfig.FIX_EFFECT_LEVEL.getValue() == EffectLevelFix.DECIMAL_IF_TO_BIG) {
-            returned.append(CommonComponents.SPACE).append(Integer.toString(statusEffect.getAmplifier()));
-            return;
-        }
-
-        if (NtmClientConfig.FIX_EFFECT_LEVEL.getValue() == EffectLevelFix.LARGE_ROMAN_NUMERALS || statusEffect.getAmplifier() <= 3999) {
-            returned.append(CommonComponents.SPACE).append(NtmTextUtil.romanNumeral(statusEffect.getAmplifier()));
+              .append(Integer.toString(effect.getAmplifier())));
         }
     }
 }

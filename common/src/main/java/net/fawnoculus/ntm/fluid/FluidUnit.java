@@ -1,6 +1,7 @@
 package net.fawnoculus.ntm.fluid;
 
 import net.fawnoculus.ntm.NtmConfig;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -53,10 +54,10 @@ public enum FluidUnit {
     }
 
     public static MutableComponent textMB(long droplets) {
-        return Component.translatable("generic.ntm.fluid.mb", String.format("%,d", droplets));
+        return Component.translatable(NtmTranslations.GENERIC_FLUID_MB, String.format("%,d", droplets));
     }
 
     public static MutableComponent textDroplets(long droplets) {
-        return Component.translatable("generic.ntm.fluid.droplets", String.format("%,d", droplets));
+        return Component.translatable(NtmTranslations.GENERIC_FLUID_DROPLETS, String.format("%,d", droplets));
     }
 }

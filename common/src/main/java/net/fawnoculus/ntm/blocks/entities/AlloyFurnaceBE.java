@@ -4,6 +4,7 @@ import net.fawnoculus.ntm.blocks.NtmBlockEntities;
 import net.fawnoculus.ntm.blocks.custom.AlloyFurnaceBlock;
 import net.fawnoculus.ntm.gui.NtmMenuProvider;
 import net.fawnoculus.ntm.gui.menus.AlloyFurnaceMenu;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.recipe.NtmRecipes;
 import net.fawnoculus.ntm.recipe.custom.AlloyFurnaceRecipe;
 import net.fawnoculus.ntm.recipe.custom.AlloyFurnaceRecipeInput;
@@ -39,7 +40,6 @@ public class AlloyFurnaceBE extends AbstractInventoryBE implements NtmMenuProvid
     private static final int MAX_FUEL = 102400;
     private static final int FUEL_PER_TICK = 8;
     private static final int MAX_PROGRESS = 400;
-    private static final Component DISPLAY_NAME = Component.translatable("container.ntm.alloy_furnace");
     private int fuel = 0;
     private int progress = 0;
 
@@ -177,7 +177,7 @@ public class AlloyFurnaceBE extends AbstractInventoryBE implements NtmMenuProvid
 
     @Override
     public @NonNull Component getDisplayName() {
-        return DISPLAY_NAME;
+        return Component.literal(NtmTranslations.CONTAINER_ALLOY_FURNACE);
     }
 
     @Override

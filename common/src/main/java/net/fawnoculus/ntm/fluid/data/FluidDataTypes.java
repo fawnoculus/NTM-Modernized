@@ -5,6 +5,7 @@ import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.NtmConfig;
 import net.fawnoculus.ntm.fluid.FluidUnit;
 import net.fawnoculus.ntm.fluid.data.custom.*;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -60,15 +61,15 @@ public class FluidDataTypes {
         private static Component thermalCapacity(Double tuPerDroplet) {
             return switch (NtmConfig.FLUID_UNIT.getValue()) {
                 case NtmConfig.FluidUnit.MilliBuckets ->
-                  Component.translatable("fluid_tooltip.ntm.thermal_capacity", FluidUnit.dropletsToMB(tuPerDroplet), Component.translatable("generic.ntm.fluid.mb")).withStyle(ChatFormatting.RED);
+                  Component.translatable(NtmTranslations.FLUID_THERMAL_CAPACITY, FluidUnit.dropletsToMB(tuPerDroplet), Component.translatable(NtmTranslations.GENERIC_FLUID_MB)).withStyle(ChatFormatting.RED);
                 case NtmConfig.FluidUnit.Droplets ->
-                  Component.translatable("fluid_tooltip.ntm.thermal_capacity", tuPerDroplet, Component.translatable("generic.ntm.fluid.droplets")).withStyle(ChatFormatting.RED);
+                  Component.translatable(NtmTranslations.FLUID_THERMAL_CAPACITY, tuPerDroplet, Component.translatable(NtmTranslations.GENERIC_FLUID_DROPLETS)).withStyle(ChatFormatting.RED);
             };
         }
 
         // Helper
         private static Component efficiency(Double multiplier) {
-            return Component.translatable("fluid_tooltip.ntm.efficiency", String.format("%1$.0f", multiplier * 100)).withStyle(ChatFormatting.AQUA);
+            return Component.translatable(NtmTranslations.FLUID_EFFICIENCY, String.format("%1$.0f", multiplier * 100)).withStyle(ChatFormatting.AQUA);
         }
 
         private static void boilable(HeatingData data, boolean showExtraInfo, Consumer<Component> tooltip) {
@@ -76,27 +77,27 @@ public class FluidDataTypes {
             tooltip.accept(thermalCapacity(data.tuPerDroplet()));
             if (data.isBoilable()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.boilable", efficiency(data.boilingMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_BOILABLE, efficiency(data.boilingMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
             if (data.isHeatable()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.heatable", efficiency(data.heatingMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_HEATABLE, efficiency(data.heatingMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
             if (data.isPwrCoolant()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.pwr_coolant", efficiency(data.pwrCoolantMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_PWR_COOLANT, efficiency(data.pwrCoolantMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
             if (data.isIcfCoolant()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.icf_coolant", efficiency(data.icfCoolantMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_ICF_COOLANT, efficiency(data.icfCoolantMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
             if (data.isParticleAcceleratorCoolant()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.particle_accelerator_coolant", efficiency(data.particleAcceleratorCoolantMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_PARTICLE_ACCELERATOR_COOLANT, efficiency(data.particleAcceleratorCoolantMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
         }
@@ -106,74 +107,74 @@ public class FluidDataTypes {
             tooltip.accept(thermalCapacity(data.tuPerDroplet()));
             if (data.isTurbineable()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.turbine_steam", efficiency(data.turbineMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_TURBINE_STEAM, efficiency(data.turbineMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
             if (data.isCoolable()) {
                 tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.coolable", efficiency(data.coolingMultiplier())).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_COOLABLE, efficiency(data.coolingMultiplier())).withStyle(ChatFormatting.YELLOW)
                 );
             }
         }
 
         private static void pwrFluxMultiplier(Double multiplier, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (multiplier < 0.001 && multiplier > -0.001) return; // No Multipliers under 1%
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.pwr_flux_multiplier").withStyle(ChatFormatting.BLUE));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_PWR_FLUX_MULTIPLIER).withStyle(ChatFormatting.BLUE));
 
             if (!showExtraInfo) return;
             if (multiplier < 0) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.pwr_flux_multiplier.val", String.format("%1$.0f", multiplier * 100)).withStyle(ChatFormatting.BLUE));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_PWR_FLUX_MULTIPLIER_VALUE, String.format("%1$.0f", multiplier * 100)).withStyle(ChatFormatting.BLUE));
             } else {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.pwr_flux_multiplier.val", String.format("+%1$.0f", multiplier * 100)).withStyle(ChatFormatting.BLUE));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_PWR_FLUX_MULTIPLIER_VALUE, String.format("+%1$.0f", multiplier * 100)).withStyle(ChatFormatting.BLUE));
             }
         }
 
         private static void flammable(Double tuPerDroplet, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (tuPerDroplet <= 0) return;
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.flammable").withStyle(ChatFormatting.YELLOW));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_FLAMMABLE).withStyle(ChatFormatting.YELLOW));
             switch (NtmConfig.FLUID_UNIT.getValue()) {
                 case NtmConfig.FluidUnit.MilliBuckets -> tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.provides", NtmTextUtil.unit(FluidUnit.dropletsToMB(tuPerDroplet)), Component.translatable("generic.ntm.fluid.mb")).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_PROVIDES, NtmTextUtil.unit(FluidUnit.dropletsToMB(tuPerDroplet)), Component.translatable(NtmTranslations.GENERIC_FLUID_MB)).withStyle(ChatFormatting.YELLOW)
                 );
                 case NtmConfig.FluidUnit.Droplets -> tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.provides", NtmTextUtil.unit(tuPerDroplet), Component.translatable("generic.ntm.fluid.droplet")).withStyle(ChatFormatting.YELLOW)
+                  Component.translatable(NtmTranslations.FLUID_PROVIDES, NtmTextUtil.unit(tuPerDroplet), Component.translatable(NtmTranslations.GENERIC_FLUID_DROPLET)).withStyle(ChatFormatting.YELLOW)
                 );
             }
         }
 
         private static void combustible(Combustible data, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (!data.isCombustible()) return;
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.combustible"));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_COMBUSTIBLE));
             switch (NtmConfig.FLUID_UNIT.getValue()) {
                 case NtmConfig.FluidUnit.MilliBuckets -> tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.provides",
-                    NtmTextUtil.unit(FluidUnit.dropletsToMB(data.ntePerDroplet()), "generic.ntm.delta_kelvin"),
-                    Component.translatable("generic.ntm.fluid.mb")
+                  Component.translatable(NtmTranslations.FLUID_PROVIDES,
+                    NtmTextUtil.unit(FluidUnit.dropletsToMB(data.ntePerDroplet()), NtmTranslations.GENERIC_DELTA_KELVIN),
+                    Component.translatable(NtmTranslations.GENERIC_FLUID_MB)
                   ).withStyle(ChatFormatting.GOLD)
                 );
                 case NtmConfig.FluidUnit.Droplets -> tooltip.accept(
-                  Component.translatable("fluid_tooltip.ntm.provides",
-                    NtmTextUtil.unit(data.ntePerDroplet(), "generic.ntm.delta_kelvin").withStyle(ChatFormatting.RED),
-                    Component.translatable("generic.ntm.fluid.droplets")
+                  Component.translatable(NtmTranslations.FLUID_PROVIDES,
+                    NtmTextUtil.unit(data.ntePerDroplet(), NtmTranslations.GENERIC_DELTA_KELVIN).withStyle(ChatFormatting.RED),
+                    Component.translatable(NtmTranslations.GENERIC_FLUID_DROPLETS)
                   ).withStyle(ChatFormatting.GOLD)
                 );
             }
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.combustible.fuel_grade", data.fuelGrade().NAME).withStyle(ChatFormatting.GOLD));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_COMBUSTIBLE_FUEL_GRADE, data.fuelGrade().NAME).withStyle(ChatFormatting.GOLD));
         }
 
         private static void polluting(Polluting data, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (!data.isPolluting()) return;
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.polluting"));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_POLLUTING));
 
             if (!showExtraInfo) return;
             if (!data.whenSpilled().isEmpty()) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.polluting.spilled").withStyle(ChatFormatting.GREEN));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_POLLUTING_SPILLED).withStyle(ChatFormatting.GREEN));
                 for (PollutionData spilled : data.whenSpilled()) {
                     tooltip.accept(spilled.getTooltip().withStyle(ChatFormatting.GREEN));
                 }
             }
             if (!data.whenBurned().isEmpty()) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.polluting.burned").withStyle(ChatFormatting.RED));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_POLLUTING_BURNED).withStyle(ChatFormatting.RED));
                 for (PollutionData spilled : data.whenBurned()) {
                     tooltip.accept(spilled.getTooltip().withStyle(ChatFormatting.RED));
                 }
@@ -182,25 +183,25 @@ public class FluidDataTypes {
 
         private static void radioactive(Boolean isRadioactive, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (isRadioactive) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.radioactive").withStyle(ChatFormatting.YELLOW));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_RADIOACTIVE).withStyle(ChatFormatting.YELLOW));
             }
         }
 
         private static void toxicFumes(Boolean isModifiedPheromone, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (showExtraInfo && isModifiedPheromone) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.toxic_fumes").withStyle(ChatFormatting.GREEN));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_TOXIC_FUMES).withStyle(ChatFormatting.GREEN));
             }
         }
 
         private static void toxin(ToxinData data, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (!(showExtraInfo && data.isToxic())) return;
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.toxin").withStyle(ChatFormatting.LIGHT_PURPLE));
-            tooltip.accept(Component.translatable("fluid_tooltip.ntm.toxin.type", data.type().NAME).withStyle(ChatFormatting.YELLOW));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_TOXIN).withStyle(ChatFormatting.LIGHT_PURPLE));
+            tooltip.accept(Component.translatable(NtmTranslations.FLUID_TOXIN_TYPE, data.type().NAME).withStyle(ChatFormatting.YELLOW));
             if (data.damagePerSec() > 0) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.toxin.dps", data.damagePerSec()).withStyle(ChatFormatting.YELLOW));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_TOXIN_DPS, data.damagePerSec()).withStyle(ChatFormatting.YELLOW));
             }
             if (!data.effects().isEmpty()) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.toxin.effects").withStyle(ChatFormatting.YELLOW));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_TOXIN_EFFECTS).withStyle(ChatFormatting.YELLOW));
             }
             for (MobEffectInstance effect : data.effects()) {
                 tooltip.accept(
@@ -216,19 +217,19 @@ public class FluidDataTypes {
 
         private static void glyphidPheromones(Boolean isGlyphidPheromone, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (isGlyphidPheromone) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.glyphid_pheromones").withStyle(ChatFormatting.AQUA));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_GLYPHID_PHEROMONES).withStyle(ChatFormatting.AQUA));
             }
         }
 
         private static void modifiedPheromones(Boolean isModifiedPheromone, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (isModifiedPheromone) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.modified_pheromones").withStyle(ChatFormatting.BLUE));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_MODIFIED_PHEROMONES).withStyle(ChatFormatting.BLUE));
             }
         }
 
         private static void gaseousAtRoomTemperature(Boolean isModifiedPheromone, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (showExtraInfo && isModifiedPheromone) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.gaseous_at_room_temperature").withStyle(ChatFormatting.BLUE));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_GASEOUS_AT_ROOM_TEMP).withStyle(ChatFormatting.BLUE));
             }
         }
 
@@ -240,31 +241,31 @@ public class FluidDataTypes {
 
         private static void ignoredBySiphon(Boolean isIgnored, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (showExtraInfo && isIgnored) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.ignored_by_siphon").withStyle(ChatFormatting.BLUE));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_IGNORED_BY_SIPHON).withStyle(ChatFormatting.BLUE));
             }
         }
 
         private static void breathable(Boolean isViscous, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (showExtraInfo && isViscous) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.breathable").withStyle(ChatFormatting.AQUA));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_BREATHABLE).withStyle(ChatFormatting.AQUA));
             }
         }
 
         private static void viscous(Boolean isViscous, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (showExtraInfo && isViscous) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.viscous").withStyle(ChatFormatting.BLUE));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_VISCOUS).withStyle(ChatFormatting.BLUE));
             }
         }
 
         private static void delicious(Boolean isDelicious, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (showExtraInfo && isDelicious) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.delicious").withStyle(ChatFormatting.DARK_GREEN));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_DELICIOUS).withStyle(ChatFormatting.DARK_GREEN));
             }
         }
 
         private static void antimatter(Boolean isAntimatter, boolean showExtraInfo, Consumer<Component> tooltip) {
             if (isAntimatter) {
-                tooltip.accept(Component.translatable("fluid_tooltip.ntm.antimatter").withStyle(ChatFormatting.DARK_RED));
+                tooltip.accept(Component.translatable(NtmTranslations.FLUID_ANTIMATTER).withStyle(ChatFormatting.DARK_RED));
             }
         }
     }

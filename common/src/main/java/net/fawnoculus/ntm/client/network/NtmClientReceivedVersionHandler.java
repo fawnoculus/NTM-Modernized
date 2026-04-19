@@ -3,6 +3,7 @@ package net.fawnoculus.ntm.client.network;
 import dev.architectury.networking.NetworkManager;
 import net.fawnoculus.ntm.Ntm;
 import net.fawnoculus.ntm.client.NtmClient;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.network.s2c.NtmVersionPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl;
@@ -24,8 +25,8 @@ public class NtmClientReceivedVersionHandler {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
         if (!hasReceivedVersion) {
-            player.displayClientMessage(Component.translatable("message.ntm.version.not_installed1"), false);
-            player.displayClientMessage(Component.translatable("message.ntm.version.not_installed2"), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_VERSION_NOT_INSTALLED_1), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_VERSION_NOT_INSTALLED_2), false);
             NtmClient.LOGGER.info("Connected Server doesn't of {} installed", Ntm.MOD_NAME);
             return;
         }
@@ -33,10 +34,10 @@ public class NtmClientReceivedVersionHandler {
         NtmClient.LOGGER.info("Connected Server has Version {} of {} installed", serverVersion, Ntm.MOD_NAME);
         if (!serverVersion.equals(clientVersion)) {
             NtmClient.LOGGER.warn("Version Mismatch, Client has Version {} of {}", clientVersion, Ntm.MOD_NAME);
-            player.displayClientMessage(Component.translatable("message.ntm.version.mismatch1"), false);
-            player.displayClientMessage(Component.translatable("message.ntm.version.mismatch2"), false);
-            player.displayClientMessage(Component.translatable("message.ntm.version.server", serverVersion), false);
-            player.displayClientMessage(Component.translatable("message.ntm.version.client", clientVersion), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_VERSION_MISMATCH_1), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_VERSION_MISMATCH_2), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_VERSION_SERVER, serverVersion), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_VERSION_CLIENT, clientVersion), false);
         }
     }
 

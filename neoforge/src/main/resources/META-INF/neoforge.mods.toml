@@ -8,7 +8,7 @@ modId = "ntm"
 version = "${version}"
 displayName = "NTM-Modernized"
 authors = "fawnoculus"
-credits = "Elo3000, Random_Player_MC, OrdenEnderman"
+credits = "Elo3000, Randomspear, OrdenEnderman"
 description = '''
 A port of "HBM's Nuclear Tech Mod" for modern versions of Minecraft
 '''

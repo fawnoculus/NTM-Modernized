@@ -1,9 +1,11 @@
 package net.fawnoculus.ntm.client.gui.area;
 
 import net.fawnoculus.ntm.Ntm;
+import net.fawnoculus.ntm.misc.NtmTranslations;
 import net.fawnoculus.ntm.misc.stack.EnergyStack;
 import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 
 import java.util.function.Consumer;
@@ -91,10 +93,10 @@ public class EnergyBar implements InfoBar {
 
     @Override
     public void appendTooltip(Consumer<Component> tooltip) {
-        Component energyStored = NtmTextUtil.unit(this.STACK.getValue());
-        Component maxEnergy = NtmTextUtil.unit(this.STACK.getMaxValue(), "generic.ntm.energy");
+        MutableComponent energyStored = NtmTextUtil.unit(this.STACK.getValue());
+        MutableComponent maxEnergy = NtmTextUtil.unit(this.STACK.getMaxValue(), NtmTranslations.GENERIC_ENERGY);
 
-        tooltip.accept(Component.translatable("generic.ntm.amount_stored", energyStored, maxEnergy));
+        tooltip.accept(energyStored.append("/").append(maxEnergy));
 
         for (Supplier<Component> supplier : EXTRA_TEXT) {
             tooltip.accept(supplier.get());

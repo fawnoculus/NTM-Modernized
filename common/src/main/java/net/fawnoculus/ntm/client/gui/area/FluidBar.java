@@ -8,6 +8,7 @@ import net.fawnoculus.ntm.fluid.FluidUnit;
 import net.fawnoculus.ntm.misc.NtmDataComponentTypes;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -102,10 +103,10 @@ public class FluidBar implements InfoBar {
 
     @Override
     public void appendTooltip(Consumer<Component> tooltip) {
-        Component amount = Component.literal(String.format("%,d", this.FLUID_STACK.getAmount()));
-        Component capacity = FluidUnit.text(this.FLUID_STACK.getOrDefault(NtmDataComponentTypes.MAX_FLUID.get(), 0L));
+        MutableComponent amount = Component.literal(String.format("%,d", this.FLUID_STACK.getAmount()));
+        MutableComponent capacity = FluidUnit.text(this.FLUID_STACK.getOrDefault(NtmDataComponentTypes.MAX_FLUID.get(), 0L));
 
-        tooltip.accept(Component.translatable("generic.ntm.amount_stored", amount, capacity));
+        tooltip.accept(amount.append("/").append(capacity));
 
         ClientFluidDataRegistry.getOrCreate(this.FLUID_STACK.getFluid()).appendTooltip(NtmKeybinds.DISPLAY_EXTRA_INFO.isDown(), tooltip);
     }

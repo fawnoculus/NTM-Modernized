@@ -3,6 +3,8 @@ package net.fawnoculus.ntm.items.custom;
 import net.fawnoculus.ntm.api.node.Node;
 import net.fawnoculus.ntm.api.node.NodeValueContainer;
 import net.fawnoculus.ntm.api.node.network.NodeNetwork;
+import net.fawnoculus.ntm.misc.NtmTranslations;
+import net.fawnoculus.ntm.util.NtmTextUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -55,22 +57,22 @@ public class NetworkDebuggingToolItem extends Item {
         }
 
         if (!(world.getBlockEntity(pos) instanceof Node clickedNode)) {
-            player.displayClientMessage(Component.translatable("message.ntm.network_debug.not_node").withStyle(ChatFormatting.RED), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NOT_NODE).withStyle(ChatFormatting.RED), false);
             return InteractionResult.SUCCESS_SERVER;
         }
         NodeNetwork network = clickedNode.getNetwork();
         if (network == null) {
-            player.displayClientMessage(Component.translatable("message.ntm.network_debug.node_no_network").withStyle(ChatFormatting.RED), false);
+            player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NODE_NO_NETWORK).withStyle(ChatFormatting.RED), false);
             return InteractionResult.SUCCESS_SERVER;
         }
 
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.network_name", Component.literal(network.ID.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GOLD), false);
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.network_type", network.TYPE.getName().withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.node_count", Component.literal(String.valueOf(network.LOADED_NODES.size())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.provider_count", Component.literal(String.valueOf(getProviderCount(network))).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.provider_priorities", Component.literal(network.REVERSED_PROVIDER_PRIORITIES.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.consumer_count", Component.literal(String.valueOf(getConsumerCount(network))).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
-        player.displayClientMessage(Component.translatable("message.ntm.network_debug.consumer_priorities", Component.literal(network.REVERSED_CONSUMER_PRIORITIES.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NETWORK_NAME, Component.literal(network.ID.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GOLD), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NETWORK_TYPE, network.TYPE.getName().withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_NODE_COUNT, Component.literal(String.valueOf(network.LOADED_NODES.size())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_PROVIDER_COUNT, Component.literal(String.valueOf(getProviderCount(network))).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_PROVIDER_PRIORITIES, Component.literal(network.REVERSED_PROVIDER_PRIORITIES.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_CONSUMER_COUNT, Component.literal(String.valueOf(getConsumerCount(network))).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
+        player.displayClientMessage(Component.translatable(NtmTranslations.MESSAGE_NETWORK_DEBUG_CONSUMER_PRIORITIES, Component.literal(network.REVERSED_CONSUMER_PRIORITIES.toString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.YELLOW), false);
 
         return InteractionResult.SUCCESS_SERVER;
     }
@@ -78,8 +80,8 @@ public class NetworkDebuggingToolItem extends Item {
     @Override
     @SuppressWarnings("deprecation")
     public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay displayComponent, Consumer<Component> tooltip, @NonNull TooltipFlag type) {
-        tooltip.accept(Component.translatable("tooltip.ntm.creative_only").withStyle(ChatFormatting.GRAY));
-        tooltip.accept(Component.translatable("tooltip.ntm.network_debug_tool1").withStyle(ChatFormatting.RED));
-        tooltip.accept(Component.translatable("tooltip.ntm.network_debug_tool2").withStyle(ChatFormatting.RED));
+        tooltip.accept(Component.translatable(NtmTranslations.TOOLTIP_CREATIVE_ONLY).withStyle(ChatFormatting.GRAY));
+        tooltip.accept(NtmTextUtil.tooltip(this, 1).withStyle(ChatFormatting.RED));
+        tooltip.accept(NtmTextUtil.tooltip(this, 2).withStyle(ChatFormatting.RED));
     }
 }

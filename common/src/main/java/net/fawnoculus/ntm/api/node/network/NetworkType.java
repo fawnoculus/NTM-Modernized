@@ -46,7 +46,11 @@ public class NetworkType {
     }
 
     public MutableComponent getName() {
-        return Component.translatable("network_type." + this.getId().getNamespace() + "." + this.getId().getPath());
+        return Component.translatable(this.getTranslationKey());
+    }
+
+    public String getTranslationKey() {
+        return "network_type." + this.getId().getNamespace() + "." + this.getId().getPath();
     }
 
     public NodeNetwork makeNewNetwork() {

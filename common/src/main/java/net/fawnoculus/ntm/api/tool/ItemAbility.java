@@ -128,7 +128,11 @@ public abstract class ItemAbility {
     }
 
     public MutableComponent getName() {
-        return Component.translatable("tooltip." + this.ID.getNamespace() + ".ability." + this.ID.getPath());
+        return Component.translatable(this.getTranslationKey());
+    }
+
+    public String getTranslationKey() {
+        return "tooltip." + this.ID.getNamespace() + ".ability." + this.ID.getPath();
     }
 
     public MutableComponent getLevelText(@Range(from = 0, to = 10) int level) {

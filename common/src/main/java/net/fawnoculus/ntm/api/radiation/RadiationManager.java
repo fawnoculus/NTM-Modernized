@@ -7,7 +7,7 @@ import net.fawnoculus.ntm.api.radiation.processor.RadiationProcessor;
 import net.fawnoculus.ntm.api.radiation.processor.RadiationProcessorMultiHolder;
 import net.fawnoculus.ntm.api.radiation.processor.SimpleRadiationProcessor;
 import net.fawnoculus.ntm.entity.NtmDamageTypes;
-import net.fawnoculus.ntm.entity.NtmStatusEffects;
+import net.fawnoculus.ntm.entity.NtmMobEffects;
 import net.fawnoculus.ntm.misc.data.CustomDataHolder;
 import net.fawnoculus.ntm.network.s2c.RadiationInformationPayload;
 import net.fawnoculus.ntm.util.NtmEntityUtil;
@@ -61,10 +61,10 @@ public class RadiationManager {
 
     public static double getRadiationResistance(LivingEntity entity) {
         double resistance = HazmatRegistry.getResistance(entity);
-        if (entity.hasEffect(NtmStatusEffects.RAD_X)) {
+        if (entity.hasEffect(NtmMobEffects.RAD_X)) {
             resistance += 0.2;
         }
-        if (entity.hasEffect(NtmStatusEffects.TAINTED_HEART)) {
+        if (entity.hasEffect(NtmMobEffects.TAINTED_HEART)) {
             // Gives 100% resistance to all radiation
             resistance += 1000;
         }
@@ -166,7 +166,6 @@ public class RadiationManager {
         });
 
         world.players().forEach(RadiationManager::sendPacket);
-        ;
     }
 
     public static void processEntityRadiation(LivingEntity entity) {

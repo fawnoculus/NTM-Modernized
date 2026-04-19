@@ -2,7 +2,6 @@ package net.fawnoculus.ntm.fabric.client.datagen.loot;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.fawnoculus.ntm.Ntm;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -24,6 +23,6 @@ public class NtmChestLootProvider extends SimpleFabricLootTableProvider {
 
     @Override
     public @NonNull String getName() {
-        return Ntm.MOD_NAME + " Chest-Loot Provider";
+        return "Chest-Loot Provider";
     }
 }
