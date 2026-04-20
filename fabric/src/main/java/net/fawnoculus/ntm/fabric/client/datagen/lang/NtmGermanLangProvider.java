@@ -25,25 +25,25 @@ public class NtmGermanLangProvider extends NtmCommonLangProvider {
     public void generateTranslations(HolderLookup.@NonNull Provider registryLookup, @NonNull TranslationBuilder builder) {
         // Translation that are not present in the original
         // TODO translate this
-        builder.add(NtmItems.NULL.get(), "NULL (Item noch nicht implimentiert)");
-        builder.add(NtmItems.RAW_METEORIC_ALUMINIUM.get(), "Raw Meteoric Aluminium");
+        builder.add(NtmItems.NULL.get(), "NULL (Item noch nicht implementiert)");
+        builder.add(NtmItems.RAW_METEORIC_ALUMINIUM.get(), "Rohes meteorisches Aluminium");
         builder.add(NtmItems.RAW_AUSTRALIUM.get(), "Raw Australium");
         builder.add(NtmItems.RAW_BERYLLIUM.get(), "Raw Beryllium");
         builder.add(NtmItems.RAW_METEORIC_COBALT.get(), "Raw Meteoric Cobalt");
         builder.add(NtmItems.RAW_METEORIC_COPPER.get(), "Raw Meteoric Copper");
         builder.add(NtmItems.RAW_CRYOLITE.get(), "Raw Cryolite");
         builder.add(NtmItems.RAW_METEORIC_IRON.get(), "Raw Meteoric Iron");
-        builder.add(NtmItems.RAW_LEAD.get(), "Raw Lead");
+        builder.add(NtmItems.RAW_LEAD.get(), "Rohes Blei");
         builder.add(NtmItems.RAW_OSMIRIDIUM_INFUSED_TEKTITE.get(), "Raw Osmiridium-Infused Tektite");
-        builder.add(NtmItems.RAW_PLUTONIUM.get(), "Raw Plutonium");
-        builder.add(NtmItems.RAW_METEORIC_RARE_EARTH.get(), "Raw Meteoric Rare Earth");
-        builder.add(NtmItems.RAW_SCHRABIDIUM.get(), "Raw Schrabidium");
-        builder.add(NtmItems.RAW_THORIUM.get(), "Raw Thorium");
-        builder.add(NtmItems.RAW_TITANIUM.get(), "Raw Titanium");
-        builder.add(NtmItems.RAW_TRIXITE.get(), "Raw Trixite");
-        builder.add(NtmItems.RAW_TUNGSTEN.get(), "Raw Tungsten");
-        builder.add(NtmItems.RAW_URANIUM.get(), "Raw Uranium");
-        builder.add(NtmItems.RAW_SCORCHED_URANIUM.get(), "Raw Scorched Uranium");
+        builder.add(NtmItems.RAW_PLUTONIUM.get(), "Rohes Plutonium");
+        builder.add(NtmItems.RAW_METEORIC_RARE_EARTH.get(), "Rohe meteorische seltene Erde");
+        builder.add(NtmItems.RAW_SCHRABIDIUM.get(), "Rohes Schrabidium");
+        builder.add(NtmItems.RAW_THORIUM.get(), "Rohes Thorium");
+        builder.add(NtmItems.RAW_TITANIUM.get(), "Rohes Titanium");
+        builder.add(NtmItems.RAW_TRIXITE.get(), "Rohes Trixit");
+        builder.add(NtmItems.RAW_TUNGSTEN.get(), "Rohes Wolfram");
+        builder.add(NtmItems.RAW_URANIUM.get(), "Rohes Uranium");
+        builder.add(NtmItems.RAW_SCORCHED_URANIUM.get(), "Rohes verschmortes Uranium");
 
         builder.add(tooltip(NtmItems.DEBUG_WAND), "Used for 'Debugging' >:3");
         builder.add(tooltip(NtmItems.CONSTRUCTION_WAND, 1), "'Destruction brings creation'");
